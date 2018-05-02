@@ -1,5 +1,5 @@
 {
-  "userName"        : "mytestuser",
+  "userName"        : "mycoachuser",
   "password"        : "Password123$",    
   "contact"         : {
                         "email": "myaccount@hotmail.com",
@@ -7,8 +7,8 @@
                         "url"  : "www.youtube.com"
                       },
   "name"            : {
-  	                    "first" : "My",
-  	                    "middle": "Test",
+  	                    "first" : "My   ",
+  	                    "middle": "   Test",
   	                    "last"  : "User"
                       },
   "address"         : {

@@ -1,5 +1,5 @@
 {
-  "userName"        : "mytestuser2",
+  "userName"        : "mycoach",
   "password"        : "password123",    
   "contact"         : {
                         "email": "myaccount#hotmail.com",
@@ -7,15 +7,15 @@
                         "url"  : "$"
                       },
   "name"            : {
-  	                    "first" : "My",
-  	                    "middle": "Test",
+  	                    "first" : "My   ",
+  	                    "middle": "   Test",
   	                    "last"  : "User"
                       },
   "address"         : {
                         "street1": "Street 1",
                         "street2": "Street 2",
                         "city"   : "My City",
-                        "state"  : "Ga",
+                        "state"  : "Zz",
                         "zip"    : "123456",
                         "zip4"   : "6789A" 	
                       },

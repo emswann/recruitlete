@@ -26,7 +26,7 @@ const coachesSchema = new Schema({
   name            : Name.schema,
   address         : Address.schema,
   position        : { type: String, trim: true },
-  accomplishments : [{type: String, trim: true }],
+  accomplishments : [{ type: String, trim: true }],
   createDate      : { type: Date, default: Date.now },
   modifyDate      : { type: Date, default: Date.now }
 });

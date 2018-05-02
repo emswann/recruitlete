@@ -57,7 +57,7 @@ const athletesSchema = new Schema({
   statistics      : {
     height        : { type: String, trim: true },
     weight        : { type: Number },
-    handed        : { type: String, enum: ["right", "left"] }, // or R, L?
+    handed        : { type: String, lowercase: true, enum: ["right", "left"] },
     standReach    : { type: String, trim: true }, 
     approachTouch : { type: String, trim: true }, 
     blockJump     : { type: String, trim: true }, 

@@ -1,0 +1,24 @@
+{
+  "userName"        : "mytestuser2",
+  "password"        : "password123",    
+  "contact"         : {
+                        "email": "myaccount#hotmail.com",
+                        "phone": "1A34567890123",
+                        "url"  : "$"
+                      },
+  "name"            : {
+  	                    "first" : "My",
+  	                    "middle": "Test",
+  	                    "last"  : "User"
+                      },
+  "address"         : {
+                        "street1": "Street 1",
+                        "street2": "Street 2",
+                        "city"   : "My City",
+                        "state"  : "Ga",
+                        "zip"    : "123456",
+                        "zip4"   : "6789A" 	
+                      },
+  "position"        : "head coach",
+  "accomplishment"  : ["USAV 17s Open Champions", "USAV 16s Open Runner-Up"]
+  }

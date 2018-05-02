@@ -4,11 +4,14 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "@material-ui/icons": "^1.0.0-beta.43",
+    "axios": "^0.16.2",
+    "material-ui": "^1.0.0-beta.44",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-scripts": "1.0.14",
     "react-router-dom": "^4.1.2",
-    "axios": "^0.16.2"
+    "react-scripts": "1.0.14",
+    "react-slideshow-image": "^0.2.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,8 +1,4 @@
-const express = require("express");
-const app = express();
 const cheerio = require("cheerio");
-const fs = require("fs");
-const request = require("request");
 const rp = require("request-promise");
 
 module.exports = {

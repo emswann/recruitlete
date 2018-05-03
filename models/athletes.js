@@ -4,6 +4,8 @@ const Schema   = mongoose.Schema;
 const Contact = require("./contact");
 const Name    = require("./name");
 const Address = require("./address");
+const College = require("./college");
+const Recruit = require("./recruit");
 
 const athletesSchema = new Schema({
   userName        : { type: String, required: true, unique: true, 
@@ -66,6 +68,11 @@ const athletesSchema = new Schema({
   schoolAccomps   : [{ type: String, trim: true }],
   videoLinks      : [{ type: String, trim: true }],
   profileImg      : { data: Buffer, contentType: String },
+  colleges        : [{
+    info          : College.schema,
+    progress      : Recruit.schema,
+    saveDate      : { type: Date, default: Date.now }
+  }],
   createDate      : { type: Date, default: Date.now },
   modifyDate      : { type: Date, default: Date.now }
 });

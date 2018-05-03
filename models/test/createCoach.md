@@ -21,5 +21,29 @@
   	
                       },
   "position"        : "head coach",
-  "accomplishments" : ["USAV 17s Open Champions", "USAV 16s Open Runner-Up"]
-  }
+  "accomplishments" : ["USAV 17s Open Champions", "USAV 16s Open Runner-Up"],
+  "colleges"        : [
+    {
+      "info": {
+        "name"          : "My College USA",  
+        "conference"    : "My Conference",
+        "division"      : "i",
+        "state"         : "sc",
+        "region"        : "Northeast Region",
+        "collegeLink"   : "www.mycollege.com",
+        "conferenceLink": "www.myconference.com"
+      }
+    },
+    {
+      "info": {
+        "name"          : "My Second College USA",  
+        "conference"    : "My Conference2",
+        "division"      : "ii",
+        "state"         : "Ga",
+        "region"        : "Northeast Region",
+        "collegeLink"   : "www.mycollege.com",
+        "conferenceLink": "www.myconference.com"
+      }
+    }    
+  ]
+}

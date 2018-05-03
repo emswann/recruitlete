@@ -20,5 +20,18 @@
                         "zip4"   : "6789A" 	
                       },
   "position"        : "head coach",
-  "accomplishment"  : ["USAV 17s Open Champions", "USAV 16s Open Runner-Up"]
-  }
+  "accomplishment"  : ["USAV 17s Open Champions", "USAV 16s Open Runner-Up"],
+  "colleges"        : [
+    {
+      "info": {
+        "name"          : "My College USA",  
+        "conference"    : "My Conference",
+        "division"      : "2",
+        "state"         : "Xx",
+        "region"        : "Northeast Region",
+        "collegeLink"   : "www.mycollege$",
+        "conferenceLink": "$myconference.com"
+      }
+    }  
+  ]
+}

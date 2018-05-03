@@ -92,5 +92,31 @@
                     },
   "athleteAccomps" : ["All Everything", "Great Athlete Award"], 
   "schoolAccomps"  : ["National Honor Society", "FBLA"],
-  "videoLinks"     : ["www.youtube1.com", "www.youtube2.com"]
+  "videoLinks"     : ["www.youtube1.com", "www.youtube2.com"],
+  "colleges"        : [
+    {
+      "info": {
+        "name"          : "My College USA",  
+        "conference"    : "My Conference",
+        "division"      : "i",
+        "state"         : "sc",
+        "region"        : "Northeast Region",
+        "collegeLink"   : "www.mycollege.com",
+        "conferenceLink": "www.myconference.com"
+      },
+      "progress": {}
+    },
+    {
+      "info": {
+        "name"          : "My Second College USA",  
+        "conference"    : "My Conference2",
+        "division"      : "ii",
+        "state"         : "Ga",
+        "region"        : "Northeast Region",
+        "collegeLink"   : "www.mycollege.com",
+        "conferenceLink": "www.myconference.com"
+      },
+      "progress": {}
+    }
+  ]
 }

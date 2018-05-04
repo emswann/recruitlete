@@ -16,8 +16,7 @@ module.exports = new PassportLocalStrategy({
     role: req.body.role.trim().toLowerCase()
   };
 
-  const newUser = new db.Users(userData);
-  newUser.save((err) => {
+  db.Users.create(userData, (err, user) => {
     if (err) { return done(err); }
 
     return done(null);

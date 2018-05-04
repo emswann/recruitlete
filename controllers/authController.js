@@ -1,23 +1,30 @@
 const validator = require("validator");
 const passport = require("passport");
 
-const validateSignupForm = payload => {
+const validateSignupForm = form => {
   const errors = {};
   let isFormValid = true;
   let message = "";
 
-  if (!payload 
-      || typeof payload.email !== "string" 
-      || !validator.isEmail(payload.email)) {
+  if (!form 
+      || typeof form.email !== "string" 
+      || !validator.isEmail(form.email)) {
     isFormValid = false;
     errors.email = "Please provide a correct email address.";
   }
 
-  if (!payload 
-      || typeof payload.password !== "string" 
-      || /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(payload.password.trim())) {
+  if (!form 
+      || typeof form.password !== "string" 
+      || !(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(form.password.trim()))) {
     isFormValid = false;
-    errors.password = "Password must have at least 8 characters.";
+      // Password criteria :
+  // ^	          The password string will start this way
+  // (?=.*[a-z])	The string must contain at least 1 lowercase alphabetical character
+  // (?=.*[A-Z])	The string must contain at least 1 uppercase alphabetical character
+  // (?=.*[0-9])	The string must contain at least 1 numeric character
+  // (?=.[!@#\$%\^&])	The string must contain at least one special character, but we are escaping reserved RegEx characters to avoid conflict
+  // (?=.{8,})	The string must be eight characters or longer
+    errors.password = "Password must be at least 8 characters long and contain each of the following: lowercase letter, uppercase letter, numeric character and special character.";
   }
 
   if (!isFormValid) {
@@ -31,21 +38,21 @@ const validateSignupForm = payload => {
   };
 }
 
-const validateLoginForm = payload => {
+const validateLoginForm = form => {
   const errors = {};
   let isFormValid = true;
   let message = "";
 
-  if (!payload 
-      || typeof payload.email !== "string" 
-      || payload.email.trim().length === 0) {
+  if (!form 
+      || typeof form.email !== "string" 
+      || form.email.trim().length === 0) {
     isFormValid = false;
     errors.email = "Please provide your email address.";
   }
 
-  if (!payload 
-      || typeof payload.password !== "string" 
-      || payload.password.trim().length === 0) {
+  if (!form 
+      || typeof form.password !== "string" 
+      || form.password.trim().length === 0) {
     isFormValid = false;
     errors.password = "Please provide your password.";
   }

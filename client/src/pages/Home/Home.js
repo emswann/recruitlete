@@ -1,33 +1,31 @@
 import React from "react";
-import Nav from "../../components/Nav"
-import Slideshow from "../../components/Slideshow"
-import Card from "../../components/Card"
-import Login from "../../components/Login"
-import Grid from 'material-ui/Grid';
-import Newsfeed from '../../components/NewsFeed';
+import Nav from "../../components/Nav";
+import Slideshow from "../../components/Slideshow";
+import Card from "../../components/Card";
+import Login from "../../components/Login";
+//import Newsfeed from '../../components/NewsFeed';
 
-
-const App = () => (
-  <div >
-    <Nav />
-    <div style={{ paddingLeft: 100, paddingRight: 100 }}>
-      <Slideshow />
-      <div>
-        <Grid container spacing={24} alignItems="center">
-          <Grid item xs={6}>
-            <Card>
+const Home = () => (
+  <div className="container">
+    <div className="row">
+      <Nav />
+    </div>
+    <div className="row">
+      <div className="col">
+        <Slideshow />
+        <div className="row">
+          <div className="col-md-6">
+            <Card style={{ padding: 20 }}>
               <Login />
             </Card>
-          </Grid>
-          <Grid item xs={6}>
-            <Card>
-              <Newsfeed />
-            </Card>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <Card>{/* <Newsfeed /> */}</Card>
+        </div>
       </div>
     </div>
   </div>
 );
 
-export default App
+export default Home;

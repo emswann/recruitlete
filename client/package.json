@@ -6,12 +6,13 @@
   "dependencies": {
     "@material-ui/icons": "^1.0.0-beta.43",
     "axios": "^0.16.2",
-    "material-ui": "^1.0.0-beta.44",
+    "material-ui": "^0.20.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.14",
-    "react-slideshow-image": "^0.2.2"
+    "react-slideshow-image": "^0.2.2",
+    "react-tap-event-plugin": "^3.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

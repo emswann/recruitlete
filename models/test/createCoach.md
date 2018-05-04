@@ -1,8 +1,7 @@
 {
-  "userName"        : "mycoachuser",
-  "password"        : "Password123$",    
+  "email"           : "mycoachuser@hotmail.com", 
   "contact"         : {
-                        "email": "myaccount@hotmail.com",
+                        "email": "mycoachuser@hotmail.com",
                         "phone": "1234567890",
                         "url"  : "www.youtube.com"
                       },

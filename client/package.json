@@ -4,9 +4,12 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.7",
+    "@fortawesome/fontawesome-free-solid": "^5.0.12",
+    "@fortawesome/react-fontawesome": "^0.0.19",
     "@material-ui/icons": "^1.0.0-beta.43",
     "axios": "^0.16.2",
-    "material-ui": "^1.0.0-beta.44",
+    "mdbreact": "^4.3.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.1.2",

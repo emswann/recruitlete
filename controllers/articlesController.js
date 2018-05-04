@@ -17,8 +17,10 @@ module.exports = {
                 $(".item").each(function (i, elem) {
                     let title = $(this).children().children("a").text().trim();
                     let link = $(this).children().children("a").attr("href").trim();
+                    let img = $(this).children().children().children("img").attr("src").trim();
+                    let summary = $(this).children("p").text().trim();
                     
-                    articles.push({ title, link });
+                    articles.push({ title, link, img, summary });
                 })
 
                 res.json(articles);

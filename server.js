@@ -22,11 +22,7 @@ passport.use("local-login", localLoginStrategy);
 
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require("./middleware/auth-check");
-app.use((req, res, next) => 
-  (req.originalUrl === '/api/articles') 
-    ? next() 
-    : authCheckMiddleware(req, res, next)
-);
+app.use("/api", authCheckMiddleware);
 
 // Serve up static assets
 app.use(express.static("client/build"));

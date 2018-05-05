@@ -16,12 +16,8 @@ class Home extends Component {
         <div className="row">
           <div className="col">
             <Slideshow />
-            <div className="col-md-6">
-              <SimpleCard>
-                <Newsfeed />
-              </SimpleCard>
+            <Newsfeed />
             </div>
-          </div>
         </div>
       </div>
     )

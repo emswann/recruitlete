@@ -48,7 +48,8 @@ class App extends Component {
             )}
           </div> */}
 
-          <Nav />
+          <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
+
           <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 
           <PrivateRoute path="/athlete" component={Athlete} />

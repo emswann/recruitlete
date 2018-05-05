@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Slideshow from "../../components/Slideshow";
 import SimpleCard from "../../components/SimpleCard";
-//import Newsfeed from "../../components/NewsFeed";
+import Newsfeed from "../../components/NewsFeed";
 
 class Home extends Component {
 
@@ -17,7 +17,9 @@ class Home extends Component {
           <div className="col">
             <Slideshow />
             <div className="col-md-6">
-              <SimpleCard>{/* <Newsfeed /> */}</SimpleCard>
+              <SimpleCard>
+                <Newsfeed />
+              </SimpleCard>
             </div>
           </div>
         </div>

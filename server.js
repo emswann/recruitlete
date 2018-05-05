@@ -21,13 +21,12 @@ passport.use("local-signup", localSignupStrategy);
 passport.use("local-login", localLoginStrategy);
 
 // pass the authenticaion checker middleware
-
-// const authCheckMiddleware = require("./middleware/auth-check");
-// app.use((req, res, next) => 
-//   (req.originalUrl === '/api/articles') 
-//     ? next() 
-//     : authCheckMiddleware(req, res, next)
-// );
+const authCheckMiddleware = require("./middleware/auth-check");
+app.use("/api", (req, res, next) => 
+  (req.originalUrl === '/api/articles') 
+    ? next() 
+    : authCheckMiddleware(req, res, next)
+);
 
 // Serve up static assets
 app.use(express.static("client/build"));

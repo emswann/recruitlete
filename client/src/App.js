@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import PrivateRoute from "./components/PrivateRoute";
 import PropsRoute from "./components/PropsRoute";
@@ -33,21 +33,6 @@ class App extends Component {
     return (
       <Router className="container">
         <div>
-          {/* <div className="top-bar">
-            <div className="top-bar-left">
-              <Link to="/">React App</Link>
-            </div>
-            {this.state.authenticated ? (
-              <div className="top-bar-right">
-                <Link to="/logout">Log out</Link>
-              </div>
-            ) : (
-              <div className="top-bar-right">
-                <Link to="/login">Log in</Link>
-              </div>
-            )}
-          </div> */}
-
           <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
 
           <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />

@@ -109,7 +109,9 @@ module.exports = {
   },
   login: (req, res, next) => {
     const validationResult = validateLoginForm(req.body);
+    
     if (!validationResult.success) {
+      console.log(validationResult);
       return res.status(400).json({
         success: false,
         message: validationResult.message,

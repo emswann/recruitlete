@@ -45,7 +45,7 @@ class Login extends Component {
       this.setState({
         errors: {}
       });
-    }).catch(response => {
+    }).catch( ({ response }) => {
       const errors = response.data.errors ? response.data.errors : {};
       errors.summary = response.data.message;
 

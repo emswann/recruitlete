@@ -20,9 +20,9 @@ const localLoginStrategy = require("./passport/local-login");
 passport.use("local-signup", localSignupStrategy);
 passport.use("local-login", localLoginStrategy);
 
-// pass the authenticaion checker middleware
-const authCheckMiddleware = require("./middleware/auth-check");
-app.use("/api", authCheckMiddleware);
+// pass the authenticaion checker middleware   ---comment back in for auth, out for postman
+// const authCheckMiddleware = require("./middleware/auth-check");
+// app.use("/api", authCheckMiddleware);
 
 // Serve up static assets
 app.use(express.static("client/build"));

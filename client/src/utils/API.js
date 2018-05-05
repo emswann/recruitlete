@@ -3,6 +3,8 @@ import axios from "axios";
 export default {
   getArticles: token => axios.get("/api/articles", {headers: {Authorization: `bearer ${token}`}}),
 
+  getSchools: token => axios.get("/api/schools", {headers: {Authorization: `bearer ${token}`}}),
+
   login: userData => axios.post("/auth/login",  userData),
 
   signup: userData => axios.post("/auth/signup", userData),

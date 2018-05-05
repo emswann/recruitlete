@@ -1,31 +1,29 @@
-import React from "react";
-import Nav from "../../components/Nav";
+import React, { Component } from "react";
 import Slideshow from "../../components/Slideshow";
-import Card from "../../components/Card";
-import Login from "../../components/Login";
-//import Newsfeed from '../../components/NewsFeed';
+import SimpleCard from "../../components/SimpleCard";
+//import Newsfeed from "../../components/NewsFeed";
 
-const Home = () => (
-  <div className="container">
-    <div className="row">
-      <Nav />
-    </div>
-    <div className="row">
-      <div className="col">
-        <Slideshow />
+class Home extends Component {
+
+  componentDidMount() {
+    // update authenticated state on logout
+    this.props.toggleAuthenticateStatus();
+  }
+
+  render() {
+    return (
+      <div className="container">
         <div className="row">
-          <div className="col-md-6">
-            <Card style={{ padding: 20 }}>
-              <Login />
-            </Card>
+          <div className="col">
+            <Slideshow />
+            <div className="col-md-6">
+              <SimpleCard>{/* <Newsfeed /> */}</SimpleCard>
+            </div>
           </div>
         </div>
-        <div className="col-md-6">
-          <Card>{/* <Newsfeed /> */}</Card>
-        </div>
       </div>
-    </div>
-  </div>
-);
+    )
+  }
+};
 
 export default Home;

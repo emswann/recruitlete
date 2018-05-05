@@ -5,7 +5,9 @@ export default {
 
   login: userData => axios.post("/auth/login",  userData),
 
-  signUp: userData => axios.post('/auth/signup', userData),
+  signup: userData => axios.post('/auth/signup', userData),
 
-  dashboard: token => axios.get('/api/dashboard', {headers: {Authorization: `bearer ${token}`}})
+  athletes: token => axios.get('/api/athletes', {headers: {Authorization: `bearer ${token}`}}),
+
+  coaches: token => axios.get('/api/coaches', {headers: {Authorization: `bearer ${token}`}})
 };

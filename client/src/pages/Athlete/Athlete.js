@@ -1,14 +1,12 @@
 import React from "react";
-import Nav from "../../components/Nav"
-//import Card from "../../components/Card"
-//import Grid from 'material-ui/Grid';
-
-
+import SimpleCard from "../../components/SimpleCard"
 
 const Athlete = () => (
   <div >
-<Nav />
+    <SimpleCard>
+      <p>This is the athlete page!</p>
+    </SimpleCard>
   </div>
 );
 
-export default Athlete
+export default Athlete;

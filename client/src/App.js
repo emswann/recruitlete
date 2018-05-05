@@ -1,78 +1,65 @@
-import React, { Component } from 'react';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import HomePage from './components/HomePage.jsx';
-import { 
-  PrivateRoute, 
-  PropsRoute, 
-  LoggedOutRoute 
-} from './components/Routes';
+import PrivateRoute from "./components/PrivateRoute";
+import PropsRoute from "./components/PropsRoute";
+import LoggedOutRoute from "./components/LoggedOutRoute";
+import Nav from "./components/Nav";
 
-import LoginPage from './pages/LoginPage.jsx';
-import LogoutFunction from './pages/LogoutFunction.jsx';
-import SignUpPage from './pages/SignUpPage.jsx';
-import DashboardPage from './pages/DashboardPage.jsx';
-
-import Auth from './utils/Auth';
-
-// remove tap delay, essential for MaterialUI to work properly
-injectTapEventPlugin();
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Logout from "./pages/Logout";
+import Athlete from "./pages/Athlete";
+import Coach from "./pages/Coach";
+import Auth from "./utils/Auth";
 
 class App extends Component {
 
   state = {
     authenticated: false
-  }
+  };
 
   componentDidMount() {
     // check if user is logged in on refresh
-    this.toggleAuthenticateStatus()
-  }
+    this.toggleAuthenticateStatus();
+  };
 
   toggleAuthenticateStatus = () => {
     // check authenticated status and toggle state based on that
-    this.setState({ authenticated: Auth.isUserAuthenticated() })
-  }
+    this.setState({ authenticated: Auth.isUserAuthenticated() });
+  };
 
   render() {
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <Router>
-          <div>
-            <div className="top-bar">
-              <div className="top-bar-left">
-                <Link to="/">React App</Link>
-              </div>
-              {this.state.authenticated ? (
-                <div className="top-bar-right">
-                  <Link to="/dashboard">Dashboard</Link>
-                  <Link to="/logout">Log out</Link>
-                </div>
-              ) : (
-                <div className="top-bar-right">
-                  <Link to="/login">Log in</Link>
-                  <Link to="/signup">Sign up</Link>
-                </div>
-              )}
-
+      <Router className="container">
+        <div>
+          <div className="top-bar">
+            <div className="top-bar-left">
+              <Link to="/">React App</Link>
             </div>
-
-            <PropsRoute exact path="/" component={HomePage} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
-            <PrivateRoute path="/dashboard" component={DashboardPage}/>
-            <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
-            <LoggedOutRoute path="/signup" component={SignUpPage}/>
-            <Route path="/logout" component={LogoutFunction}/>
+            {this.state.authenticated ? (
+              <div className="top-bar-right">
+                <Link to="/logout">Log out</Link>
+              </div>
+            ) : (
+              <div className="top-bar-right">
+                <Link to="/login">Log in</Link>
+              </div>
+            )}
           </div>
 
-        </Router>
-      </MuiThemeProvider>
+          <Nav />
+          <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
+
+          <PrivateRoute path="/athlete" component={Athlete} />
+
+          <PrivateRoute path="/coach" component={Coach} />
+
+          <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
+
+          <Route path="/logout" component={Logout}/>
+        </div>
+      </Router>
     )
   }
 }

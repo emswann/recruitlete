@@ -1,13 +1,12 @@
 import React from "react";
-import Nav from "../../components/Nav"
-//import Card from "../../components/Card"
-
-
+import SimpleCard from "../../components/SimpleCard"
 
 const Coach = () => (
   <div >
-<Nav />
+    <SimpleCard>
+      <p>This is the coach page!</p>
+    </SimpleCard>
   </div>
 );
 
-export default Coach
+export default Coach;

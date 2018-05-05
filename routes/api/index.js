@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const articleRoutes = require("./articles");
+const articlesRoutes = require("./articles");
 const coachesRoutes = require("./coaches");
 const athletesRoutes = require("./athletes");
 
-// Articles routes
-router.use("/articles", articleRoutes);
+// All API subroutes
+router.use("/articles", articlesRoutes);
 router.use("/coaches", coachesRoutes);
 router.use("/athletes", athletesRoutes);
 

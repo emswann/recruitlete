@@ -8,8 +8,7 @@ const Address = require("./address");
 const validator = require("validator");
 
 const collegeSchema = new Schema({
-  name          : { type: String, required: true, unique: true, 
-                    trim: true },  
+  name          : { type: String, required: true, trim: true },  
   conference    : { type: String, trim: true },
   division      : { type: String, trim: true, uppercase: true,
                     enum: ["I", "II", "III"] },

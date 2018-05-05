@@ -1,6 +1,5 @@
 import React from 'react';
 import { Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import {faUser, faComments, faSearch, faSave} from '@fortawesome/fontawesome-free-solid';
 
@@ -33,7 +32,7 @@ class Nav extends React.Component {
         return (
                 <Navbar color="white" light expand="md" scrolling sticky="top"style={{width:"100%"}}>
                     <NavbarBrand href="/">
-                    <img src="assets/images/logo.png" height="90px"></img>
+                    <img src="assets/images/logo.png" alt="Recruitlete Brand" height="90px"></img>
                     </NavbarBrand>
                     { !this.state.isWideEnough && <NavbarToggler onClick = { this.onClick } />}
                     <Collapse isOpen = { this.state.collapse } navbar>

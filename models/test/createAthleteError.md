@@ -1,8 +1,7 @@
 {
-  "userName"        : "myath",
-  "password"        : "password123",    
+  "email"         : "myathleteuser2@hotmail.com",   
   "contact"       : {
-                      "email": "myaccount@hotmail.com",
+                      "email": "myathleteuser2@hotmail.com",
                       "phone": "1234567890",
                       "url"  : "www.youtube.com"
                     },

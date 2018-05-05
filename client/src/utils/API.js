@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default {
-  getArticles: token => axios.get("/api/articles", {headers: {Authorization: `bearer ${token}`}}),
+  getArticles: () => axios.get("/api/articles"),
 
   login: userData => axios.post("/auth/login",  userData),
 

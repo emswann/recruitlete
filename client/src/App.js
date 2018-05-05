@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import PrivateRoute from "./components/PrivateRoute";
 import PropsRoute from "./components/PropsRoute";
@@ -48,7 +48,8 @@ class App extends Component {
             )}
           </div> */}
 
-          <Nav />
+          <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
+
           <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 
           <PrivateRoute path="/athlete" component={Athlete} />

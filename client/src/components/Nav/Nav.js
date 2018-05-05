@@ -21,6 +21,7 @@ import {
   faLock
 } from "@fortawesome/fontawesome-free-solid";
 import { BrowserRouter as Link } from "react-router-dom";
+import Auth from "../../utils/Auth";
 
 class Nav extends React.Component {
   constructor(props) {
@@ -28,8 +29,7 @@ class Nav extends React.Component {
     this.state = {
       collapse: false,
       isWideEnough: false,
-      dropdownOpen: false,
-      authenticated: false
+      dropdownOpen: false
     };
     this.onClick = this.onClick.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -39,6 +39,10 @@ class Nav extends React.Component {
     this.setState({
       collapse: !this.state.collapse
     });
+  }
+
+  componentDidMount() {
+    this.props.toggleAuthenticateStatus();
   }
 
   toggle() {
@@ -66,51 +70,46 @@ class Nav extends React.Component {
         </NavbarBrand>
         {!this.state.isWideEnough && <NavbarToggler onClick={this.onClick} />}
         <Collapse isOpen={this.state.collapse} navbar>
-          <NavbarNav right>
-            {this.state.authenticated ? (
-              <div>
+          {Auth.isUserAuthenticated() ? (
+            <NavbarNav right>
+              <NavItem>
+                <NavLink to="/">
+                  <FontAwesomeIcon icon={faSearch} size={"2x"} />
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="#">
+                  <FontAwesomeIcon icon={faSave} size={"2x"} />
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="#">
+                  <FontAwesomeIcon icon={faComments} size={"2x"} />
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                  <DropdownToggle nav>
+                    <FontAwesomeIcon icon={faUser} size={"2x"} />
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem>Account Info</DropdownItem>
+                    <DropdownItem>
+                      <NavLink to="/logout">Log out</NavLink>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </NavItem>
+            </NavbarNav>
+          ) : (
+              <NavbarNav right>
                 <NavItem>
-                  <NavLink to="/">
-                    <FontAwesomeIcon icon={faSearch} size={"2x"} />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="#">
-                    <FontAwesomeIcon icon={faSave} size={"2x"} />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink to="#">
-                    <FontAwesomeIcon icon={faComments} size={"2x"} />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <Dropdown
-                    isOpen={this.state.dropdownOpen}
-                    toggle={this.toggle}
-                  >
-                    <DropdownToggle nav>
-                      <FontAwesomeIcon icon={faUser} size={"2x"} />
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem>Account Info</DropdownItem>
-                      <DropdownItem>
-                        <Link to="/logout">Log out</Link>
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
-                </NavItem>
-              </div>
-            ) : (
-              <div>
-                <NavItem>
-                    <NavLink to="/login">
+                  <NavLink to="/login">
                     <FontAwesomeIcon icon={faLock} size={"2x"} />
-                    </NavLink>
+                  </NavLink>
                 </NavItem>
-              </div>
-            )}
-          </NavbarNav>
+              </NavbarNav>
+          )}
         </Collapse>
       </Navbar>
     );

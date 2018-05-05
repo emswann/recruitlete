@@ -33,7 +33,7 @@ class App extends Component {
     return (
       <Router className="container">
         <div>
-          <div className="top-bar">
+          {/* <div className="top-bar">
             <div className="top-bar-left">
               <Link to="/">React App</Link>
             </div>
@@ -46,7 +46,7 @@ class App extends Component {
                 <Link to="/login">Log in</Link>
               </div>
             )}
-          </div>
+          </div> */}
 
           <Nav />
           <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />

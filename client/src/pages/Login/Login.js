@@ -26,12 +26,15 @@ class Login extends Component {
     this.setState({ successMessage });
   }
 
-  handleFormLogin = event => {
+  handleFormSubmit = event => {
     event.preventDefault();
 
     const userObj = this.state.user;
 
-    API.login(userObj).then(res => {
+    const APIfunction = 
+      event.target.value === "login" ? API.login : API.signup;
+
+    APIfunction(userObj).then(res => {
       Auth.authenticateUser(res.data.token);
 
       this.props.toggleAuthenticateStatus()
@@ -52,33 +55,7 @@ class Login extends Component {
     });   
   };
 
-  handleFormSignup = event => {
-    event.preventDefault();
-
-    const userObj = this.state.user;
-
-    API.signup(userObj).then(res => {
-      Auth.authenticateUser(res.data.token);
-
-      this.props.toggleAuthenticateStatus()
-
-      this.props.history.push(
-        userObj.role === "athlete" ? "/athlete" : "/coach");
-        
-      this.setState({
-        errors: {}
-      });
-    }).catch(response => {
-      const errors = response.data.errors ? response.data.errors : {};
-      errors.summary = response.data.message;
-
-      this.setState({
-        errors
-      });
-    });   
-  };
-
-  changeUser = event => {
+  handleInputChange = event => {
     const field = event.target.name;
     const user = this.state.user;
     user[field] = event.target.value;
@@ -92,9 +69,8 @@ class Login extends Component {
     return (
       <div className="container">
         <LoginForm
-          handleFormLogin={this.handleFormLogin}
-          handleFormSignup={this.handleFormSignup}
-          onChange={this.changeUser}
+          handleFormSubmit={this.handleFormSubmit}
+          handleInputChange={this.handleInputChange}
           errors={this.state.errors}
           successMessage={this.state.successMessage}
           user={this.state.user}

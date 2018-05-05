@@ -3,9 +3,8 @@ import { Button, Input } from "mdbreact";
 import SimpleCard from "../../components/SimpleCard";
 
 const LoginForm = ({
-  handleFormLogin,
-  handleFormSignup,
-  onChange,
+  handleFormSubmit,
+  handleInputChange,
   errors,
   successMessage,
   user,
@@ -22,13 +21,21 @@ const LoginForm = ({
 
           <div className="radio">
             <label>
-              <input type="radio" value="athlete" defaultChecked={true} />
+              <input type="radio" 
+                name="role"
+                value="athlete" 
+                checked={user.role === "athlete"}
+                onChange={handleInputChange}/>
                 Athlete
             </label>
           </div>
           <div className="radio">
             <label>
-              <input type="radio" value="coach" />
+              <input type="radio" 
+                name="role"
+                value="coach"
+                checked={user.role === "coach"} 
+                onChange={handleInputChange}/>
                 Coach
             </label>
           </div>
@@ -39,7 +46,7 @@ const LoginForm = ({
             group type="email"
             name="email"
             errortext={errors.email}
-            onChange={onChange}
+            onChange={handleInputChange}
             value={user.email}
           />
           <Input
@@ -47,21 +54,23 @@ const LoginForm = ({
             icon="lock"
             group type="password"
             name="password"
-            onChange={onChange}
+            onChange={handleInputChange}
             errortext={errors.password}
             value={user.password}
           />
           <div className="text-center">
             <Button block color="danger"
               type="submit" 
-              name="login" 
-              onClick={handleFormLogin}>
+              name="action"
+              value="login" 
+              onClick={handleFormSubmit}>
               Login
             </Button>
             <Button block color="secondary"
               type="submit" 
+              name="action"
               value="signup"
-              onClick={handleFormSignup}>
+              onClick={handleFormSubmit}>
               Register
             </Button>
           </div>

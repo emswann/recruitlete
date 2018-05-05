@@ -1,13 +1,13 @@
 import axios from "axios";
 
 export default {
-  getArticles: () => axios.get("/api/articles"),
+  getArticles: token => axios.get("/api/articles", {headers: {Authorization: `bearer ${token}`}}),
 
   login: userData => axios.post("/auth/login",  userData),
 
   signup: userData => axios.post("/auth/signup", userData),
 
-  athletes: token => axios.get("/api/athletes", {headers: {Authorization: `bearer ${token}`}}),
+  getAthlete: (token, id) => axios.get(`/api/athletes/${id}`, {headers: {Authorization: `bearer ${token}`}}),
 
-  coaches: token => axios.get("/api/coaches", {headers: {Authorization: `bearer ${token}`}})
+  getCoach: (token, id) => axios.get(`/api/coaches/${id}`, {headers: {Authorization: `bearer ${token}`}})
 };

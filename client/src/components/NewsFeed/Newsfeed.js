@@ -15,13 +15,14 @@ class Newsfeed extends Component {
 
   loadArticles = () => {
     API.getArticles()
-      .then(res => this.setState({ ready: true, articles: res.data }))
+      .then(res => this.refs.NewsfeedRef 
+                   && this.setState({ ready: true, articles: res.data }))
       .catch(err => console.log(err));
   };
 
   render() {
     return (
-      <div>
+      <div ref="NewsfeedRef">
         {this.state.articles.length ? (
           <div style={{ overflow: "scroll", height: 400 }}>
             {this.state.articles.map((article, index) => (

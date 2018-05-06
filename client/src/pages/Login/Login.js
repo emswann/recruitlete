@@ -26,6 +26,12 @@ class Login extends Component {
     this.setState({ successMessage });
   }
 
+  componentWillUnmount() {
+    this.setState({
+      errors: {}
+    });
+  }
+
   handleFormSubmit = event => {
     event.preventDefault();
 
@@ -41,10 +47,6 @@ class Login extends Component {
 
       this.props.history.push(
         userObj.role === "athlete" ? "/athlete" : "/coach");
-
-      this.setState({
-        errors: {}
-      });
     }).catch( ({ response }) => {
       const errors = response.data.errors ? response.data.errors : {};
       errors.summary = response.data.message;

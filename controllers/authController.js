@@ -1,21 +1,21 @@
 const validator = require("validator");
 const passport = require("passport");
 
-const validateSignupForm = form => {
+const validateSignupForm = payload => {
   const errors = {};
   let isFormValid = true;
   let message = "";
 
-  if (!form 
-      || typeof form.email !== "string" 
-      || !validator.isEmail(form.email)) {
+  if (!payload 
+      || typeof payload.email !== "string" 
+      || !validator.isEmail(payload.email)) {
     isFormValid = false;
     errors.email = "Please provide a correct email address.";
   }
 
-  if (!form 
-      || typeof form.password !== "string" 
-      || !(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(form.password.trim()))) {
+  if (!payload 
+      || typeof payload.password !== "string" 
+      || !(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(payload.password.trim()))) {
     isFormValid = false;
       // Password criteria :
   // ^	          The password string will start this way
@@ -38,21 +38,21 @@ const validateSignupForm = form => {
   };
 }
 
-const validateLoginForm = form => {
+const validateLoginForm = payload => {
   const errors = {};
   let isFormValid = true;
   let message = "";
 
-  if (!form 
-      || typeof form.email !== "string" 
-      || form.email.trim().length === 0) {
+  if (!payload 
+      || typeof payload.email !== "string" 
+      || payload.email.trim().length === 0) {
     isFormValid = false;
     errors.email = "Please provide your email address.";
   }
 
-  if (!form 
-      || typeof form.password !== "string" 
-      || form.password.trim().length === 0) {
+  if (!payload 
+      || typeof payload.password !== "string" 
+      || payload.password.trim().length === 0) {
     isFormValid = false;
     errors.password = "Please provide your password.";
   }
@@ -81,7 +81,7 @@ module.exports = {
       });
     }
 
-    return passport.authenticate("local-signup", err => {
+    return passport.authenticate("local-signup", (err, token, userData) => {
       if (err) {
         if (err.name === "MongoError" && err.code === 11000) {
           // the 11000 Mongo code is for a duplication email error
@@ -103,7 +103,9 @@ module.exports = {
 
       return res.status(200).json({
         success: true,
-        message: "You have successfully signed up! Now you should be able to log in."
+        message: "You have successfully signed up! Now logging you in!",
+        token,
+        user: userData
       });
     })(req, res, next);
   },
@@ -134,7 +136,7 @@ module.exports = {
         });
       }
 
-      return res.json({
+      return res.status(200).json({
         success: true,
         message: "You have successfully logged in!",
         token,

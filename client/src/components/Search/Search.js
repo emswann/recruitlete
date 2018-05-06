@@ -6,6 +6,7 @@ class Search extends Component {
   state = {
     secretData: "",
     user: {},
+    ready: false,
     schools: []
   };
 
@@ -19,6 +20,7 @@ class Search extends Component {
       this.setState({
           secretData: res.data.message,
           user: res.data.user,
+          ready: true,
           schools: res.data
         }))
     .catch(err => console.log(err));
@@ -38,7 +40,9 @@ class Search extends Component {
             </div>
           </div>
         ) : (
-          <h3>No Results to Display</h3>
+          <div>
+            { this.state.ready && <h3>No Results to Display</h3> }
+          </div>
         )}
       </div>
     );

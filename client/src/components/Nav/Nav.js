@@ -20,7 +20,6 @@ import {
   faSave,
   faLock
 } from "@fortawesome/fontawesome-free-solid";
-import { BrowserRouter as Link } from "react-router-dom";
 import Auth from "../../utils/Auth";
 
 class Nav extends React.Component {

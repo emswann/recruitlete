@@ -12,6 +12,7 @@ module.exports = new PassportLocalStrategy({
   session: false,
   passReqToCallback: true
 }, (req, email, password, done) => {
+
   const userData = {
     email: email.trim().toLowerCase(),
     password: password.trim(),
@@ -21,16 +22,24 @@ module.exports = new PassportLocalStrategy({
   db.Users.create(userData, (err, user) => {
     if (err) { return done(err); }
 
-    const payload = {
-      sub: user._id
-    };
+    const collection = 
+      userData.role === "athlete" ? "Athletes" : "Coaches";
 
-    // create a token string
-    const token = jwt.sign(payload, config.jwtSecret);
-    const data = {
-      name: user.name
-    };
+    db[collection].create({ email: userData.email }, (err, profile) => {
+      if (err) { return done(err); }
 
-    return done(null, token, data);
+      const payload = {
+        sub: user._id // use original user data for payload.
+      };
+
+      // create a token string
+      const token = jwt.sign(payload, config.jwtSecret);
+      const data = {
+        email: user.email, //use original user data.
+        role: user.role
+      };
+
+      return done(null, token, data);
+    });
   });
 });

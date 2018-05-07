@@ -6,8 +6,8 @@ const schoolsRoutes = require("./schools");
 
 // All API subroutes
 router.use("/articles", articlesRoutes);
-router.use("/coaches", coachesRoutes);
-router.use("/athletes", athletesRoutes);
+router.use("/coach", coachesRoutes);
+router.use("/athlete", athletesRoutes);
 router.use("/schools", schoolsRoutes);
 
 module.exports = router;

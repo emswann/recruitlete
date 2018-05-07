@@ -8,57 +8,67 @@ import API from "../../utils/API";
 
 class Athlete extends Component {
   state = {
-    athleteDoc: {}
+    ready: false,
+    athlete: {},
+    schools: []
   };
 
   componentDidMount() {
-    this.loadAthlete();
+    this.loadStateData();
   };
 
-  loadAthlete = () => {
+  loadStateData = () => {
     API.getAthlete(Auth.getToken())
-    .then(res => {
-      this.setState({
-        athleteDoc: res.data
-      })
+    .then(res => res.data)
+    .then(athlete => {
+      API.getSchools(Auth.getToken())
+      .then(res => 
+        this.setState({
+          ready: true,
+          athlete,
+          schools: res.data 
+        })
+      )
     })
     .catch(err => console.log(err));
   };
 
   updateAthlete = () => {
-    let athleteDoc = this.state.athleteDoc;
-    athleteDoc.gradYear = 2018;
-    athleteDoc.ncaaId = "This is a test id";
-    API.updateAthlete(Auth.getToken(), athleteDoc)
-    .then(res => {
-      this.setState({
-        athleteDoc: res.data
-      })
-    })
+    let athlete = this.state.athlete;
+    athlete.gradYear = 2018;
+    athlete.ncaaId = "This is a test id";
+    API.updateAthlete(Auth.getToken(), athlete)
+    .then(res => this.setState({ athlete: res.data }))
     .catch(err => console.log(err));
   };
 
   render() {
-    return (
-      <div >
-        <Button block color="secondary"
-          type="submit" 
-          name="action"
-          value="updateBtn"
-          onClick={this.updateAthlete}>
-          Update
-        </Button>
-        <SimpleCard>
-          <p>This is the athlete page!</p>
-          <Search 
-            athleteDoc={this.state.athleteDoc}
-          />
-          <AthleteProfile 
-            athleteDoc={this.state.athleteDoc}
-          />
-        </SimpleCard>
+    return ( 
+      <div>
+        { this.state.ready &&
+          (
+            <div>
+              <Button block color="secondary"
+                type="submit" 
+                name="action"
+                value="updateBtn"
+                onClick={this.updateAthlete}>
+                Update
+              </Button>
+              <SimpleCard>
+                <p>This is the athlete page!</p>
+                <Search 
+                  schools={this.state.schools}
+                />
+                <AthleteProfile
+                  athlete={this.state.athlete}
+                />
+              </SimpleCard>
+            </div>
+          )
+        }
       </div>
-    );
+    )
   };
 }
 

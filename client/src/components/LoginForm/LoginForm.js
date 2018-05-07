@@ -7,8 +7,7 @@ const LoginForm = ({
   handleInputChange,
   errors,
   successMessage,
-  user,
-  toggleAuthenticateStatus
+  user
 }) => (
   <div className="row">
     <div className="offset-md-4 col-md-4">

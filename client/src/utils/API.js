@@ -9,7 +9,11 @@ export default {
 
   signup: userData => axios.post("/auth/signup", userData),
 
-  getAthlete: (token, id) => axios.get(`/api/athletes/${id}`, {headers: {Authorization: `bearer ${token}`}}),
+  getAthlete: token => axios.get(`/api/athlete`, {headers: {Authorization: `bearer ${token}`}}),
 
-  getCoach: (token, id) => axios.get(`/api/coaches/${id}`, {headers: {Authorization: `bearer ${token}`}})
+  updateAthlete: (token, athleteDoc) => axios.put(`/api/athlete`, athleteDoc, {headers: {Authorization: `bearer ${token}`}}),
+
+  getCoach: token => axios.get(`/api/coach`, {headers: {Authorization: `bearer ${token}`}}),
+
+  updateCoach: (token, coachDoc) => axios.put(`/api/coach`, coachDoc, {headers: {Authorization: `bearer ${token}`}})
 };

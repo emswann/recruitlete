@@ -14,7 +14,8 @@ module.exports = new PassportLocalStrategy({
 }, (req, email, password, done) => {
   const userData = {
     email: email.trim().toLowerCase(),
-    password: password.trim()
+    password: password.trim(),
+    role: req.body.role.trim().toLowerCase()
   };
 
   // find a user by email address
@@ -22,7 +23,14 @@ module.exports = new PassportLocalStrategy({
     if (err) { return done(err); }
 
     if (!user) {
-      const error = new Error("Incorrect email or password");
+      const error = new Error("Email cannot be found");
+      error.name = "IncorrectCredentialsError";
+
+      return done(error);
+    }
+
+    if (user.role !== userData.role) {
+      const error = new Error("Role does not match email");
       error.name = "IncorrectCredentialsError";
 
       return done(error);
@@ -33,7 +41,7 @@ module.exports = new PassportLocalStrategy({
       if (err) { return done(err); }
 
       if (!isMatch) {
-        const error = new Error("Incorrect email or password");
+        const error = new Error("Invalid password");
         error.name = "IncorrectCredentialsError";
 
         return done(error);
@@ -46,7 +54,8 @@ module.exports = new PassportLocalStrategy({
       // create a token string
       const token = jwt.sign(payload, config.jwtSecret);
       const data = {
-        name: user.name
+        email: user.email,
+        role: user.role
       };
 
       return done(null, token, data);

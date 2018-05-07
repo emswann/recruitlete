@@ -4,8 +4,6 @@ import API from "../../utils/API";
 
 class Search extends Component {
   state = {
-    secretData: "",
-    user: {},
     ready: false,
     schools: []
   };
@@ -18,11 +16,9 @@ class Search extends Component {
     API.getSchools(Auth.getToken())
     .then(res =>
       this.setState({
-          secretData: res.data.message,
-          user: res.data.user,
-          ready: true,
-          schools: res.data
-        }))
+        ready: true,
+        schools: res.data
+      }))
     .catch(err => console.log(err));
   };
 

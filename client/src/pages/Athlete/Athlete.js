@@ -57,7 +57,7 @@ class Athlete extends Component {
       school => school[this.state.searchField] === searchChoice)
     this.setState({ searchSchools: searchSchools.sort() })   
   }
-
+  
   render() {
     return ( 
       <div>

@@ -58,7 +58,7 @@ class Nav extends React.Component {
         expand="md"
         scrolling
         sticky="top"
-        style={{ width: "100%" }}
+        style={{ width: "100%", backgroundColor: "#ffffff" }}
       >
         <NavbarBrand href="/">
           <img

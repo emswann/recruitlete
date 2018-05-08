@@ -57,9 +57,9 @@ class Athlete extends Component {
               </Button>
               <SimpleCard>
                 <p>This is the athlete page!</p>
-                <Search 
+                {/* <Search 
                   schools={this.state.schools}
-                />
+                /> */}
                 <AthleteProfile
                   athlete={this.state.athlete}
                 />

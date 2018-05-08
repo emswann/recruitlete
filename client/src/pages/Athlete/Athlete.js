@@ -39,8 +39,7 @@ class Athlete extends Component {
     .catch(err => console.log(err));
   };
 
-  updateAthlete = () => {
-    let athlete = this.state.athlete;
+  updateAthlete = athlete => {
     API.updateAthlete(Auth.getToken(), athlete)
     .then(res => this.setState({ athlete: res.data }))
     .catch(err => console.log(err));
@@ -96,7 +95,13 @@ class Athlete extends Component {
 
     this.setState({ searchField, searchSchools });  
   }
-  
+
+  handleSaveSchool = school => {
+    let athlete = this.state.athlete;
+    athlete.colleges.push({info: school, progress: {}});
+    this.updateAthlete(athlete);
+  }
+
   render() {
     return ( 
       <div>
@@ -119,6 +124,7 @@ class Athlete extends Component {
                 />
                 <Search 
                   searchSchools={this.state.searchSchools}
+                  handleSaveSchool={this.handleSaveSchool}
                 />
                 <AthleteProfile
                   athlete={this.state.athlete}

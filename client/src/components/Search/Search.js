@@ -2,10 +2,10 @@ import React from "react";
 
 const Search = props => (
   <div className="container">
-    {props.schools.length ? (
+    {props.searchSchools.length ? (
       <div className="row">
         <div className="offset-md-4 col-md-4">
-          {props.schools.map((school, index) => (
+          {props.searchSchools.map((school, index) => (
             <div className="row" key={index}>
               <h3>school {index}</h3>
             </div>

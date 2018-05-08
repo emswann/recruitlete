@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "mdbreact";
 import SimpleCard from "../../components/SimpleCard"
 import Search from "../../components/Search"
+import SearchBox from "../../components/SearchBox"
 import AthleteProfile from "../../components/AthleteProfile"
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
@@ -10,7 +11,10 @@ class Athlete extends Component {
   state = {
     ready: false,
     athlete: {},
-    schools: []
+    schools: [],
+    searchChoice: "",
+    searchSchools: [],
+    searchField: "region"
   };
 
   componentDidMount() {
@@ -42,6 +46,20 @@ class Athlete extends Component {
     .catch(err => console.log(err));
   };
 
+  handleSearchChoice = event => {
+    console.log("got here")
+    this.setState({ searchChoice:event.target.value })
+  }
+
+  handleFormSubmit = event => {
+    event.preventDefault()
+    const searchChoice = this.state.searchChoice
+    let searchSchools = this.state.schools.map(school => school[this.searchField] === searchChoice)
+    
+    this.setState({ searchSchools })
+    
+  }
+
   render() {
     return ( 
       <div>
@@ -57,8 +75,13 @@ class Athlete extends Component {
               </Button>
               <SimpleCard>
                 <p>This is the athlete page!</p>
-                <Search 
+                <SearchBox
                   schools={this.state.schools}
+                  handleSearchChoice = {this.handleSearchChoice}
+                  handleFormSumbit = {this.handleFormSubmit}
+                />
+                <Search 
+                  searchSchools = {this.state.searchSchools}
                 />
                 <AthleteProfile
                   athlete={this.state.athlete}

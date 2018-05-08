@@ -90,7 +90,7 @@ class Athlete extends Component {
     console.log(searchSchools);
     this.setState({ searchField, searchSchools: searchSchools.sort() })   
   }
-
+  
   render() {
     return ( 
       <div>

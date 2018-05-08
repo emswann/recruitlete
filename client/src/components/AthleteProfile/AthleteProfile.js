@@ -3,70 +3,89 @@ import { Col, Row, Container } from "../Grid";
 
 const AthleteProfile = props => (
   // <div className="container">
-  //   <h3>We have a value from props: {props.athlete.email}</h3>
+  //   <p>We have a value from props: {props.athlete.email}</p>
   // </div>
   <Container fluid>
     <Row>
       <Col size="md=12">
-        <h3>Player Profile</h3>
+        <p>Player Profile</p>
       </Col>
     </Row>
-    <Row>{props.athlete.name.first}{props.athlete.name.middle}{props.athlete.name.last}</Row>
+    <Row>
+      <Col size="md-12">
+        <p>{props.athlete.name.first}{props.athlete.name.middle} {props.athlete.name.last}</p>
+      </Col>
+    </Row>
     <Row>
       <Col size="md-4">
-        <h3>Address: 
+        <p>Address: 
           {props.athlete.address.street1}
-          {props.athlete.address.city},{props.athlete.address.state},{props.athlete.address.zip}
-        </h3>
-        <h3>Phone: {props.athlete.contact.phone}</h3>
-        <h3>Email: {props.athlete.contact.email}</h3>
+          {props.athlete.address.city}, {props.athlete.address.state}, {props.athlete.address.zip}
+        </p>
+        <p>Phone: {props.athlete.contact.phone}</p>
+        <p>Email: {props.athlete.contact.email}</p>
         <br></br>
-        <h3>High School Contact Info:</h3>
-        <h3>Coach Name: 
+        <p>High School Contact Info:</p>
+        <p>Coach Name: 
           {props.athlete.highSchool.coach.first}
           {props.athlete.highSchool.coach.middle}
           {props.athlete.highSchool.coach.last}
-        </h3>
-        <h3>Address: 
+        </p>
+        <p>Address: 
           {props.athlete.highSchool.address.street1}
           {props.athlete.highSchool.address.city}, {props.athlete.highSchool.address.state}, {props.athlete.highSchool.address.zip}
-        </h3>
-        <h3>Phone: {props.athlete.highSchool.contact.phone}</h3>
-        <h3>Email: {props.athlete.highSchool.contact.email}</h3>
+        </p>
+        <p>Phone: {props.athlete.highSchool.contact.phone}</p>
+        <p>Email: {props.athlete.highSchool.contact.email}</p>
       </Col>
       <Col size="md-4">
-        <h3>PROFILE PICTURE HERE</h3>
-        <h3>Class of {props.athlete.gradyear}</h3>
-        <h3>Positions: {props.athlete.positions}</h3>
-        <h3>NCAA ID: {props.athlete.ncaaId}</h3>
-        <h3>Club Name: {props.athlete.club.name}</h3>
-        <h3>Club Team: {props.athlete.club.team}</h3>
+        <p>PROFILE PICTURE HERE</p>
+        <p>Class of {props.athlete.gradYear}</p>
+        <p>Positions: {props.athlete.positions}</p>
+        <p>NCAA ID: {props.athlete.ncaaId}</p>
+        <p>Club Name: {props.athlete.club.name}</p>
+        <p>Club Team: {props.athlete.club.team}</p>
         <br></br>
-        <h3>Club Director: {props.athlete.club.director.first}{props.athlete.club.director.middle}{props.athlete.club.director.last}</h3>
-        <h3>Club Coach: {props.athlete.club.coach.first}{props.athlete.club.coach.middle}{props.athlete.club.coach.last}</h3>
-        <h3>Address: 
+        <p>Club Director: {props.athlete.club.director.first}{props.athlete.club.director.middle}{props.athlete.club.director.last}</p>
+        <p>Club Coach: {props.athlete.club.coach.first}{props.athlete.club.coach.middle}{props.athlete.club.coach.last}</p>
+        <p>Address: 
           {props.athlete.club.address.street1}
-          {props.athlete.club.address.city},{props.athlete.club.address.state},{props.athlete.club.address.zip}
-        </h3>
-        <h3>Phone: {props.athlete.club.contact.phone}</h3>
-        <h3>Email: {props.athlete.club.contact.email}</h3>
-        <h3>Website: {props.athlete.club.contact.url}</h3>
+          {props.athlete.club.address.city}, {props.athlete.club.address.state}, {props.athlete.club.address.zip}
+        </p>
+        <p>Phone: {props.athlete.club.contact.phone}</p>
+        <p>Email: {props.athlete.club.contact.email}</p>
+        <p>Website: {props.athlete.club.contact.url}</p>
       </Col>
       <Col size="md-4">
-        <h3>DOB: {props.athlete.birthDate}</h3>
-        <h3>Height: {props.athlete.statistics.height}</h3>
-        <h3>Weight: {props.athlete.statistics.weight}</h3>
-        <h3>Handed: {props.athlete.statistics.handed}</h3>
-        <h3>Standing Reach: {props.athlete.statistics.standReach}</h3>
-        <h3>Approach Touch: {props.athlete.statistics.approachTouch}</h3>
-        <h3>Block Jump: {props.athlete.statistics.blockJump}</h3>
+        <p>DOB: {props.athlete.birthDate}</p>
+        <p>Height: {props.athlete.statistics.height}</p>
+        <p>Weight: {props.athlete.statistics.weight}</p>
+        <p>Handed: {props.athlete.statistics.handed}</p>
+        <p>Standing Reach: {props.athlete.statistics.standReach}</p>
+        <p>Approach Touch: {props.athlete.statistics.approachTouch}</p>
+        <p>Block Jump: {props.athlete.statistics.blockJump}</p>
         <br></br>
-        <h3>Weighted GPA: {props.athlete.scholastic.weightGPA}</h3>
-        <h3>Unweighted GPA:: {props.athlete.scholastic.unweightGPA}</h3>
-        <h3>Class Rank: {props.athlete.scholastic.classRank} out of {props.athlete.scholastic.classSize}</h3>
-        <h3>SAT: {props.athlete.scholastic.scoreSAT}</h3>
-        <h3>ACT: {props.athlete.scholastic.scoreACT}</h3>
-        <h3>Major: {props.athlete.scholastic.major}</h3>
+        <p>Weighted GPA: {props.athlete.scholastic.weightGPA}</p>
+        <p>Unweighted GPA: {props.athlete.scholastic.unweightGPA}</p>
+        <p>Class Rank: {props.athlete.scholastic.classRank} out of {props.athlete.scholastic.classSize}</p>
+        <p>SAT: {props.athlete.scholastic.scoreSAT}</p>
+        <p>ACT: {props.athlete.scholastic.scoreACT}</p>
+        <p>Major: {props.athlete.scholastic.major}</p>
+      </Col>
+    </Row>
+    <Row>
+      <Col size="md-12">
+      <p>Athletic Accomplishments: {props.athlete.athleteAccomps}</p>
+      </Col>
+    </Row>
+    <Row>
+      <Col size="md-12">
+      <p>Academic/Community Accomplishments: {props.athlete.schoolAccomps}</p>
+      </Col>
+    </Row>
+    <Row>
+      <Col size="md-12">
+      <p>Video Highlights: {props.athlete.videoLinks}</p>
       </Col>
     </Row>
   </Container>

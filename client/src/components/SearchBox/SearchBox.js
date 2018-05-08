@@ -25,8 +25,10 @@ class SearchBox extends Component {
   }
 
   handleOption = event => {
+    console.log(event.target);
     const option = event.target.value;
     let choiceArr = [];
+    console.log(option);
     switch (option) {
       case "state":
         choiceArr = this.schoolState;
@@ -47,15 +49,12 @@ class SearchBox extends Component {
     this.setState({ choiceArr: choiceArr.sort() });
   };
 
-
-
   render() {
     return (
       <div className="container">
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
             <h1 className="display-4">SEARCH</h1>
-            <form>
             <div className="input-group">
               <select
                 className="custom-select"
@@ -71,27 +70,30 @@ class SearchBox extends Component {
               </select>
 
               <div className="input-group">
-                <select className="custom-select" id="searchOption">
+                <select 
+                  className="custom-select" 
+                  id="searchOption"
+                  onChange={this.props.handleSearchChoice}
+                >
                   <option defaultValue>Search By...</option>
                   {this.state.choiceArr.map((choice, index) => (
                     <option 
-                      value="choice" 
+                      value={choice} 
                       key={index}
-                      onChange={this.props.handleSearchChoice}>
+                    >
                       {choice}
                     </option>
                   ))}
                 </select>
+                <Button block color="danger"
+                  type="button" 
+                  name="action"
+                  value="searchBtn"
+                  onClick={this.props.handleSearch}>
+                  Search
+                </Button>
               </div>
-              <Button block color="danger"
-                type="submit" 
-                name="action"
-                value="searchBtn"
-                onClick={this.props.handleFormSubmit}>
-                Search
-              </Button>
             </div>
-            </form>
           </div>
         </div>
       </div>

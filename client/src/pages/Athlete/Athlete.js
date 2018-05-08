@@ -30,7 +30,8 @@ class Athlete extends Component {
         this.setState({
           ready: true,
           athlete,
-          schools: res.data 
+          schools: res.data, 
+          searchSchools: res.data
         })
       )
     })
@@ -47,17 +48,14 @@ class Athlete extends Component {
   };
 
   handleSearchChoice = event => {
-    console.log("got here")
-    this.setState({ searchChoice:event.target.value })
+    this.setState({ searchChoice: event.target.value })
   }
 
-  handleFormSubmit = event => {
-    event.preventDefault()
+  handleSearch = event => {
     const searchChoice = this.state.searchChoice
-    let searchSchools = this.state.schools.map(school => school[this.searchField] === searchChoice)
-    
-    this.setState({ searchSchools })
-    
+    let searchSchools = this.state.schools.filter(
+      school => school[this.state.searchField] === searchChoice)
+    this.setState({ searchSchools: searchSchools.sort() })   
   }
 
   render() {
@@ -78,7 +76,7 @@ class Athlete extends Component {
                 <SearchBox
                   schools={this.state.schools}
                   handleSearchChoice = {this.handleSearchChoice}
-                  handleFormSumbit = {this.handleFormSubmit}
+                  handleSearch = {this.handleSearch}
                 />
                 <Search 
                   searchSchools = {this.state.searchSchools}

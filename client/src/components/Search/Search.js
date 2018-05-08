@@ -7,7 +7,7 @@ const Search = props => (
         <div className="offset-md-4 col-md-4">
           {props.searchSchools.map((school, index) => (
             <div className="row" key={index}>
-              <h3>school {index}</h3>
+              <h3>{school.name}</h3>
             </div>
           ))}
         </div>

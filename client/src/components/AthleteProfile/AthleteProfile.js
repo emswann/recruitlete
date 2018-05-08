@@ -13,64 +13,102 @@ const AthleteProfile = props => (
     </Row>
     <Row>
       <Col size="md-12">
+        {props.athlete.name ? (
         <p>{props.athlete.name.first}{props.athlete.name.middle} {props.athlete.name.last}</p>
+      ) : (
+      <p>No Results to Display</p>
+      )}
       </Col>
     </Row>
     <Row>
       <Col size="md-4">
-        <p>Address: 
+        {props.athlete.address ? ( 
+        <p>
+          Address: 
           {props.athlete.address.street1}
           {props.athlete.address.city}, {props.athlete.address.state}, {props.athlete.address.zip}
         </p>
-        <p>Phone: {props.athlete.contact.phone}</p>
-        <p>Email: {props.athlete.contact.email}</p>
+        ) : (
+        <p>No Results to Display</p>
+        )}
+        {props.athlete.contact ? (
+        <p>
+          Phone: {props.athlete.contact.phone}
+          Email: {props.athlete.contact.email}
+        </p>
+        ) : (
+        <p>No Results to Display</p>
+        )}
         <br></br>
         <p>High School Contact Info:</p>
-        <p>Coach Name: 
-          {props.athlete.highSchool.coach.first}
-          {props.athlete.highSchool.coach.middle}
-          {props.athlete.highSchool.coach.last}
-        </p>
-        <p>Address: 
-          {props.athlete.highSchool.address.street1}
-          {props.athlete.highSchool.address.city}, {props.athlete.highSchool.address.state}, {props.athlete.highSchool.address.zip}
-        </p>
-        <p>Phone: {props.athlete.highSchool.contact.phone}</p>
-        <p>Email: {props.athlete.highSchool.contact.email}</p>
+        {props.athlete.highSchool ? (
+        <p>
+          Coach Name: 
+            {props.athlete.highSchool.coach.first}
+            {props.athlete.highSchool.coach.middle}
+            {props.athlete.highSchool.coach.last}
+        
+
+          Address: 
+            {props.athlete.highSchool.address.street1}
+            {props.athlete.highSchool.address.city}, {props.athlete.highSchool.address.state}, {props.athlete.highSchool.address.zip}
+        
+          Phone: {props.athlete.highSchool.contact.phone}
+          Email: {props.athlete.highSchool.contact.email}</p>
+        ) : (
+        <p>No Results to Display</p>
+        )}
       </Col>
       <Col size="md-4">
         <p>PROFILE PICTURE HERE</p>
         <p>Class of {props.athlete.gradYear}</p>
         <p>Positions: {props.athlete.positions}</p>
         <p>NCAA ID: {props.athlete.ncaaId}</p>
-        <p>Club Name: {props.athlete.club.name}</p>
-        <p>Club Team: {props.athlete.club.team}</p>
+        {props.athlete.club ? (
+        <p>
+          Club Name: {props.athlete.club.name}
+          Club Team: {props.athlete.club.team}
         <br></br>
-        <p>Club Director: {props.athlete.club.director.first}{props.athlete.club.director.middle}{props.athlete.club.director.last}</p>
-        <p>Club Coach: {props.athlete.club.coach.first}{props.athlete.club.coach.middle}{props.athlete.club.coach.last}</p>
-        <p>Address: 
+          Club Director: {props.athlete.club.director.first}{props.athlete.club.director.middle}{props.athlete.club.director.last}
+          Club Coach: {props.athlete.club.coach.first}{props.athlete.club.coach.middle}{props.athlete.club.coach.last}
+          Address: 
           {props.athlete.club.address.street1}
           {props.athlete.club.address.city}, {props.athlete.club.address.state}, {props.athlete.club.address.zip}
+          Phone: {props.athlete.club.contact.phone}
+          Email: {props.athlete.club.contact.email}
+          Website: {props.athlete.club.contact.url}
         </p>
-        <p>Phone: {props.athlete.club.contact.phone}</p>
-        <p>Email: {props.athlete.club.contact.email}</p>
-        <p>Website: {props.athlete.club.contact.url}</p>
+        ) : (
+          <p>No Results to Display</p>
+        )}
       </Col>
       <Col size="md-4">
         <p>DOB: {props.athlete.birthDate}</p>
-        <p>Height: {props.athlete.statistics.height}</p>
-        <p>Weight: {props.athlete.statistics.weight}</p>
-        <p>Handed: {props.athlete.statistics.handed}</p>
-        <p>Standing Reach: {props.athlete.statistics.standReach}</p>
-        <p>Approach Touch: {props.athlete.statistics.approachTouch}</p>
-        <p>Block Jump: {props.athlete.statistics.blockJump}</p>
+        {props.athlete.statistics ? (
+        <p>
+          Height: {props.athlete.statistics.height}
+          Weight: {props.athlete.statistics.weight}
+          Handed: {props.athlete.statistics.handed}
+          Standing Reach: {props.athlete.statistics.standReach}
+          Approach Touch: {props.athlete.statistics.approachTouch}
+          Block Jump: {props.athlete.statistics.blockJump}
+        </p>
+        ) : (
+          <p>No Results to Display</p>
+        )}
         <br></br>
-        <p>Weighted GPA: {props.athlete.scholastic.weightGPA}</p>
-        <p>Unweighted GPA: {props.athlete.scholastic.unweightGPA}</p>
-        <p>Class Rank: {props.athlete.scholastic.classRank} out of {props.athlete.scholastic.classSize}</p>
-        <p>SAT: {props.athlete.scholastic.scoreSAT}</p>
-        <p>ACT: {props.athlete.scholastic.scoreACT}</p>
-        <p>Major: {props.athlete.scholastic.major}</p>
+        {props.athlete.scholastic ? (
+        <p>
+          Weighted GPA: {props.athlete.scholastic.weightGPA}
+          Unweighted GPA: {props.athlete.scholastic.unweightGPA}
+          Class Rank: {props.athlete.scholastic.classRank} out of {props.athlete.scholastic.classSize}
+          SAT: {props.athlete.scholastic.scoreSAT}
+          ACT: {props.athlete.scholastic.scoreACT}
+          Major: {props.athlete.scholastic.major}
+          </p>
+        ) : (
+          <p>No Results to Display</p>
+        )}
       </Col>
     </Row>
     <Row>

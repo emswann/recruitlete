@@ -12,9 +12,10 @@ class Athlete extends Component {
     ready: false,
     athlete: {},
     schools: [],
-    searchChoice: "",
-    searchSchools: [],
-    searchField: "region"
+    searchOption: "",    
+    searchOptionArr: [],
+    searchField: "",
+    searchSchools: []
   };
 
   componentDidMount() {
@@ -40,22 +41,54 @@ class Athlete extends Component {
 
   updateAthlete = () => {
     let athlete = this.state.athlete;
-    athlete.gradYear = 2018;
-    athlete.ncaaId = "This is a test id";
     API.updateAthlete(Auth.getToken(), athlete)
     .then(res => this.setState({ athlete: res.data }))
     .catch(err => console.log(err));
   };
 
-  handleSearchChoice = event => {
-    this.setState({ searchChoice: event.target.value })
-  }
+  handleSearchOption = event => {
+    const searchOption = event.target.value;
+    let searchOptionArr = [];
 
-  handleSearch = event => {
-    const searchChoice = this.state.searchChoice
+    switch (searchOption) {
+      case "state":
+        searchOptionArr = [
+          ...new Set(this.state.schools.map(school => school.state))
+        ];;
+        break;
+      case "division":
+        searchOptionArr = [
+          ...new Set(this.state.schools.map(school => school.division))
+        ];;
+        break;
+      case "conference":
+        searchOptionArr = [
+          ...new Set(this.state.schools.map(school => school.conference))
+        ];;
+        break;
+      case "region":
+        searchOptionArr = [
+          ...new Set(this.state.schools.map(school => school.region))
+        ];;
+        break;
+      default:
+        searchOptionArr = [
+          ...new Set(this.schools.map(school => school.name))
+        ];;
+    }
+
+    this.setState({ searchOption, searchOptionArr: searchOptionArr.sort() });
+  };
+
+  handleSearchField = event => {
+    const searchOption = this.state.searchOption;
+    const searchField = event.target.value;
+    console.log(searchOption);
+    console.log(searchField);
     let searchSchools = this.state.schools.filter(
-      school => school[this.state.searchField] === searchChoice)
-    this.setState({ searchSchools: searchSchools.sort() })   
+      school => school[searchOption] === searchField)
+    console.log(searchSchools);
+    this.setState({ searchField, searchSchools: searchSchools.sort() })   
   }
 
   render() {
@@ -74,12 +107,12 @@ class Athlete extends Component {
               <SimpleCard>
                 <p>This is the athlete page!</p>
                 <SearchBox
-                  schools={this.state.schools}
-                  handleSearchChoice = {this.handleSearchChoice}
-                  handleSearch = {this.handleSearch}
+                  searchOptionArr={this.state.searchOptionArr}
+                  handleSearchOption={this.handleSearchOption}
+                  handleSearchField={this.handleSearchField}
                 />
                 <Search 
-                  searchSchools = {this.state.searchSchools}
+                  searchSchools={this.state.searchSchools}
                 />
                 <AthleteProfile
                   athlete={this.state.athlete}

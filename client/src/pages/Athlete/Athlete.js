@@ -54,27 +54,27 @@ class Athlete extends Component {
       case "state":
         searchOptionArr = [
           ...new Set(this.state.schools.map(school => school.state))
-        ];;
+        ];
         break;
       case "division":
         searchOptionArr = [
           ...new Set(this.state.schools.map(school => school.division))
-        ];;
+        ];
         break;
       case "conference":
         searchOptionArr = [
           ...new Set(this.state.schools.map(school => school.conference))
-        ];;
+        ];
         break;
       case "region":
         searchOptionArr = [
           ...new Set(this.state.schools.map(school => school.region))
-        ];;
+        ];
         break;
       default:
         searchOptionArr = [
           ...new Set(this.schools.map(school => school.name))
-        ];;
+        ];
     }
 
     this.setState({ searchOption, searchOptionArr: searchOptionArr.sort() });
@@ -83,12 +83,18 @@ class Athlete extends Component {
   handleSearchField = event => {
     const searchOption = this.state.searchOption;
     const searchField = event.target.value;
-    console.log(searchOption);
-    console.log(searchField);
+
     let searchSchools = this.state.schools.filter(
-      school => school[searchOption] === searchField)
-    console.log(searchSchools);
-    this.setState({ searchField, searchSchools: searchSchools.sort() })   
+      school => school[searchOption] === searchField);
+
+    searchSchools.sort((a,b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+
+      return (nameA > nameB ? 1 : (nameB > nameA ? -1 : 0));
+    })
+
+    this.setState({ searchField, searchSchools });  
   }
   
   render() {

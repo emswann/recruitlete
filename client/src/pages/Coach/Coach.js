@@ -96,6 +96,12 @@ class Coach extends Component {
 
     this.setState({ searchField, searchSchools });  
   }
+
+  handleSaveSchool = school => {
+    let coach = this.state.coach;
+    coach.colleges.push({info: school, progress: {}});
+    this.updateCoach(coach);
+  }
   
   render() {
     return ( 
@@ -119,6 +125,7 @@ class Coach extends Component {
                 />
                 <Search 
                   searchSchools={this.state.searchSchools}
+                  handleSaveSchool={this.handleSaveSchool}
                 />
                 <CoachProfile
                   coach={this.state.coach}

@@ -32,7 +32,6 @@ class Nav extends React.Component {
     };
     this.onClick = this.onClick.bind(this);
     this.toggle = this.toggle.bind(this);
-    console.log(props);
   }
 
   onClick() {
@@ -74,13 +73,13 @@ class Nav extends React.Component {
             <NavbarNav right>
               <NavItem>
                 <NavLink 
-                  to={this.props.role === "athlete" ? "/athlete" : "/coach"}>
+                  to={Auth.isUserAnAthlete() ? "/athlete" : "/coach"}>
                   <FontAwesomeIcon icon={faSearch} size={"2x"} />
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink 
-                  to={this.props.role === "athlete" ? "/athlete" : "/coach"}>>
+                  to={Auth.isUserAnAthlete() ?  "/athlete" : "/coach"}>>
                   <FontAwesomeIcon icon={faSave} size={"2x"} />
                 </NavLink>
               </NavItem>

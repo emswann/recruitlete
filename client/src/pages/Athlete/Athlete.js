@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Button } from "mdbreact";
 import SimpleCard from "../../components/SimpleCard"
 import Search from "../../components/Search"
 import SearchBox from "../../components/SearchBox"
-import AthleteProfile from "../../components/AthleteProfile"
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
@@ -108,15 +106,7 @@ class Athlete extends Component {
         { this.state.ready &&
           (
             <div>
-              <Button block color="secondary"
-                type="submit" 
-                name="action"
-                value="updateBtn"
-                onClick={this.updateAthlete}>
-                Update
-              </Button>
               <SimpleCard>
-                <p>This is the athlete page!</p>
                 <SearchBox
                   searchOptionArr={this.state.searchOptionArr}
                   handleSearchOption={this.handleSearchOption}
@@ -125,9 +115,6 @@ class Athlete extends Component {
                 <Search 
                   searchSchools={this.state.searchSchools}
                   handleSaveSchool={this.handleSaveSchool}
-                />
-                <AthleteProfile
-                  athlete={this.state.athlete}
                 />
               </SimpleCard>
             </div>

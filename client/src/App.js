@@ -11,12 +11,14 @@ import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Athlete from "./pages/Athlete";
 import Coach from "./pages/Coach";
+import Profile from "./pages/Profile";
 import Auth from "./utils/Auth";
 
 class App extends Component {
 
   state = {
-    authenticated: false
+    authenticated: false,
+    role: ""
   };
 
   componentDidMount() {
@@ -29,19 +31,35 @@ class App extends Component {
     this.setState({ authenticated: Auth.isUserAuthenticated() });
   };
 
+  handleRoleChange = role => {
+    this.setState({ role });
+  }
+
   render() {
     return (
       <Router className="container">
         <div>
-          <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus}/>
+          <Nav 
+            toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
+            role={this.state.role}
+          />
 
-          <PropsRoute exact path="/" component={Home} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
+          <PropsRoute exact path="/" component={Home} 
+            toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
+          />
 
           <PrivateRoute path="/athlete" component={Athlete} />
 
           <PrivateRoute path="/coach" component={Coach} />
 
-          <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
+          <PrivateRoute path="/profile" component={Profile} 
+            role={this.state.role} 
+          />
+
+          <LoggedOutRoute path="/login" component={Login} 
+            toggleAuthenticateStatus={this.toggleAuthenticateStatus}
+            handleRoleChange={this.handleRoleChange} 
+          />
 
           <Route path="/logout" component={Logout}/>
         </div>

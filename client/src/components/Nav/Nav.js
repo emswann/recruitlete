@@ -72,7 +72,7 @@ class Nav extends React.Component {
           {Auth.isUserAuthenticated() ? (
             <NavbarNav right>
               <NavItem>
-                <NavLink to="/">
+                <NavLink to={this.props.role === "athlete" ? "/athlete" : "/coach"}>
                   <FontAwesomeIcon icon={faSearch} size={"2x"} />
                 </NavLink>
               </NavItem>
@@ -92,7 +92,9 @@ class Nav extends React.Component {
                     <FontAwesomeIcon icon={faUser} size={"2x"} />
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem>Account Info</DropdownItem>
+                    <DropdownItem>
+                      <NavLink to="/profile">Profile</NavLink>
+                    </DropdownItem>
                     <DropdownItem>
                       <NavLink to="/logout">Log out</NavLink>
                     </DropdownItem>

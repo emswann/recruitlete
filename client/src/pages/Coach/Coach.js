@@ -30,31 +30,37 @@ class Coach extends Component {
       API.getSchools(Auth.getToken())
       .then(res => {
         const schools = res.data;
-        const savedSchoolNames = 
-          coach.colleges.map(college => college.info.name);
-
-        let schoolsWithSave = schools.map(school => {
-          savedSchoolNames.includes(school.name) 
-            ? school.saved = true 
-            : school.saved = false;
-          return school;
-        });
 
         this.setState({
           ready: true,
           coach,
           schools,
-          searchSchools: schoolsWithSave
+          searchSchools: this.createSchoolsWithSave(
+                           schools, 
+                           coach.colleges.map(college => college.info.name))
         })
       })
     })
     .catch(err => console.log(err));
   };
 
-  updateCoach = () => {
-    let coach = this.state.coach;
+  createSchoolsWithSave = (schools, savedSchoolNames) =>  
+    schools.map(school => {
+      savedSchoolNames.includes(school.name) 
+        ? school.saved = true 
+        : school.saved = false;
+      return school;
+    });
+
+  updateCoach = coach => {
     API.updateCoach(Auth.getToken(), coach)
-    .then(res => this.setState({ coach: res.data }))
+    .then(res => this.setState({ 
+            coach: res.data,
+            searchSchools: this.createSchoolsWithSave(
+                             this.state.schools, 
+                             res.data.colleges.map(college => college.info.name)
+                           )
+            }))
     .catch(err => console.log(err));
   };
 

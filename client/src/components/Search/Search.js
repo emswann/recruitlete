@@ -19,7 +19,7 @@ const Search = props => (
             </thead>
             <tbody>
               {props.searchSchools.map((school, index) => (
-                <tr scope="row" key={index}>
+                <tr key={index}>
                   <th>
                     <a target="_blank" href={school.collegeLink}>
                       {school.name}

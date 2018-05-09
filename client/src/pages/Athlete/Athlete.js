@@ -30,30 +30,37 @@ class Athlete extends Component {
       API.getSchools(Auth.getToken())
       .then(res => {
         const schools = res.data;
-        const savedSchoolNames = 
-          athlete.colleges.map(college => college.info.name);
-
-        let schoolsWithSave = schools.map(school => {
-          savedSchoolNames.includes(school.name) 
-            ? school.saved = true 
-            : school.saved = false;
-          return school;
-        });
 
         this.setState({
           ready: true,
           athlete,
           schools,
-          searchSchools: schoolsWithSave
+          searchSchools: this.createSchoolsWithSave(
+                           schools, 
+                           athlete.colleges.map(college => college.info.name))
         })
       })
     })
     .catch(err => console.log(err));
   };
 
+  createSchoolsWithSave = (schools, savedSchoolNames) =>  
+    schools.map(school => {
+      savedSchoolNames.includes(school.name) 
+        ? school.saved = true 
+        : school.saved = false;
+      return school;
+    });
+
   updateAthlete = athlete => {
     API.updateAthlete(Auth.getToken(), athlete)
-    .then(res => this.setState({ athlete: res.data }))
+    .then(res => this.setState({ 
+            athlete: res.data,
+            searchSchools: this.createSchoolsWithSave(
+                             this.state.schools, 
+                             res.data.colleges.map(college => college.info.name)
+                           )
+            }))
     .catch(err => console.log(err));
   };
 

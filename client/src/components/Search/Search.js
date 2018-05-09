@@ -6,18 +6,20 @@ const Search = props => (
     {props.searchSchools.length ? (
       <div className="row">
         <div className="col-md-12">
-          <table className="table table-hover table-bordered">
-            <thead className="header-fixed">
-                <th scope="col">Name</th>
-                <th scope="col">Conference</th>
-                <th scope="col">Division</th>
-                <th scope="col">State</th>
-                <th scope="col">Region</th>
-                <th scope="col">Save</th>
+          <table className="table table-hover table-bordered header-fixed">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Conference</th>
+                <th>Division</th>
+                <th>State</th>
+                <th>Region</th>
+                <th>Save</th>
+              </tr>
             </thead>
             {props.searchSchools.map((school, index) => (
-              <tbody>
-                  <tr scope="row" key={index}>
+              <tbody key={index}>
+                  <tr>
                     <th>
                       <a target="_blank" href={school.collegeLink}>
                         {school.name}

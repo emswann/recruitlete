@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import SimpleCard from "../../components/SimpleCard"
-import Search from "../../components/Search"
-import SearchBox from "../../components/SearchBox"
-import Saved from "../../components/Saved"
+import Search from "../../components/Search";
+import SearchBox from "../../components/SearchBox";
+import Saved from "../../components/Saved";
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
@@ -11,7 +10,7 @@ class Athlete extends Component {
     ready: false,
     athlete: {},
     schools: [],
-    searchOption: "",    
+    searchOption: "",
     searchOptionArr: [],
     searchField: "",
     searchSchools: []
@@ -19,29 +18,28 @@ class Athlete extends Component {
 
   componentDidMount() {
     this.loadStateData();
-  };
+  }
 
   loadStateData = () => {
     API.getAthlete(Auth.getToken())
-    .then(res => res.data)
-    .then(athlete => {
-      API.getSchools(Auth.getToken())
-      .then(res => 
-        this.setState({
-          ready: true,
-          athlete,
-          schools: res.data, 
-          searchSchools: res.data
-        })
-      )
-    })
-    .catch(err => console.log(err));
+      .then(res => res.data)
+      .then(athlete => {
+        API.getSchools(Auth.getToken()).then(res =>
+          this.setState({
+            ready: true,
+            athlete,
+            schools: res.data,
+            searchSchools: res.data
+          })
+        );
+      })
+      .catch(err => console.log(err));
   };
 
   updateAthlete = athlete => {
     API.updateAthlete(Auth.getToken(), athlete)
-    .then(res => this.setState({ athlete: res.data }))
-    .catch(err => console.log(err));
+      .then(res => this.setState({ athlete: res.data }))
+      .catch(err => console.log(err));
   };
 
   handleSearchOption = event => {
@@ -70,9 +68,7 @@ class Athlete extends Component {
         ];
         break;
       default:
-        searchOptionArr = [
-          ...new Set(this.schools.map(school => school.name))
-        ];
+        searchOptionArr = [...new Set(this.schools.map(school => school.name))];
     }
 
     this.setState({ searchOption, searchOptionArr: searchOptionArr.sort() });
@@ -83,50 +79,45 @@ class Athlete extends Component {
     const searchField = event.target.value;
 
     let searchSchools = this.state.schools.filter(
-      school => school[searchOption] === searchField);
+      school => school[searchOption] === searchField
+    );
 
-    searchSchools.sort((a,b) => {
+    searchSchools.sort((a, b) => {
       const nameA = a.name.toLowerCase();
       const nameB = b.name.toLowerCase();
 
-      return (nameA > nameB ? 1 : (nameB > nameA ? -1 : 0));
-    })
+      return nameA > nameB ? 1 : nameB > nameA ? -1 : 0;
+    });
 
-    this.setState({ searchField, searchSchools });  
-  }
+    this.setState({ searchField, searchSchools });
+  };
 
   handleSaveSchool = school => {
     let athlete = this.state.athlete;
-    athlete.colleges.push({info: school, progress: {}});
+    athlete.colleges.push({ info: school, progress: {} });
     this.updateAthlete(athlete);
-  }
+  };
 
   render() {
-    return ( 
+    return (
       <div>
-        { this.state.ready &&
-          (
-            <div>
-              <SimpleCard>
-                <SearchBox
-                  searchOptionArr={this.state.searchOptionArr}
-                  handleSearchOption={this.handleSearchOption}
-                  handleSearchField={this.handleSearchField}
-                />
-                <Search 
-                  searchSchools={this.state.searchSchools}
-                  handleSaveSchool={this.handleSaveSchool}
-                />
-                <Saved
-                  savedSchools={this.state.athlete.colleges}
-                />
-              </SimpleCard>
-            </div>
-          )
-        }
+        {this.state.ready && (
+          <div className="container">
+            <SearchBox
+              searchOptionArr={this.state.searchOptionArr}
+              handleSearchOption={this.handleSearchOption}
+              handleSearchField={this.handleSearchField}
+            />
+            <Search
+              searchSchools={this.state.searchSchools}
+              handleSaveSchool={this.handleSaveSchool}
+            />
+            <Saved savedSchools={this.state.athlete.colleges} />
+          </div>
+        )}
       </div>
-    )
-  };
+    );
+  }
 }
 
 export default Athlete;

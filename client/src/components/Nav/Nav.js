@@ -72,12 +72,14 @@ class Nav extends React.Component {
           {Auth.isUserAuthenticated() ? (
             <NavbarNav right>
               <NavItem>
-                <NavLink to={this.props.role === "athlete" ? "/athlete" : "/coach"}>
+                <NavLink 
+                  to={Auth.isUserAnAthlete() ? "/athlete" : "/coach"}>
                   <FontAwesomeIcon icon={faSearch} size={"2x"} />
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="#">
+                <NavLink 
+                  to={Auth.isUserAnAthlete() ?  "/athlete" : "/coach"}>>
                   <FontAwesomeIcon icon={faSave} size={"2x"} />
                 </NavLink>
               </NavItem>

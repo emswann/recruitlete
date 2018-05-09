@@ -41,10 +41,9 @@ class Login extends Component {
       event.target.value === "login" ? API.login : API.signup;
 
     APIfunction(userObj).then(res => {
-      Auth.authenticateUser(res.data.token);
+      Auth.authenticateUser(res.data.token, userObj.role);
 
       this.props.toggleAuthenticateStatus();
-      this.props.handleRoleChange(userObj.role);
 
       this.props.history.push(
         userObj.role === "athlete" ? "/athlete" : "/coach");

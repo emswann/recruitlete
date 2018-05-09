@@ -17,7 +17,7 @@ class Profile extends Component {
 
   loadUser = () => {
     const APIfunction = 
-      this.props.role === "athlete" ? API.getAthlete : API.getCoach;
+      Auth.getRole() === "athlete" ? API.getAthlete : API.getCoach;
 
     APIfunction(Auth.getToken())
     .then(res =>
@@ -31,7 +31,7 @@ class Profile extends Component {
 
   updateUser = user => {
     const APIfunction = 
-      this.props.role === "athlete" ? API.updateAthlete : API.updateCoach;
+      Auth.getRole() === "athlete" ? API.updateAthlete : API.updateCoach;
 
     APIfunction(Auth.getToken(), user)
     .then(res => this.setState({ user: res.data }))
@@ -44,7 +44,7 @@ class Profile extends Component {
         { this.state.ready &&
           (
             <SimpleCard>
-              {this.props.role === "athlete" ? (
+              {Auth.isUserAnAthlete() ? (
                 <AthleteProfile
                   athlete={this.state.user}
                   updateAthlete={this.updateUser}

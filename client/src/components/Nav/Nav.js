@@ -79,7 +79,7 @@ class Nav extends React.Component {
               </NavItem>
               <NavItem>
                 <NavLink 
-                  to={Auth.isUserAnAthlete() ?  "/athlete" : "/coach"}>>
+                  to={Auth.isUserAnAthlete() ?  "/athlete" : "/coach"}>
                   <FontAwesomeIcon icon={faSave} size={"2x"} />
                 </NavLink>
               </NavItem>

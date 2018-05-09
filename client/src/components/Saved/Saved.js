@@ -1,5 +1,6 @@
 import React from "react";
 import { Card } from "mdbreact";
+import { Button } from "mdbreact";
 
 const Saved = props => (
   <div className="container">
@@ -10,6 +11,18 @@ const Saved = props => (
             <div key={index}>
               <Card>
                 <p>{school.info.name}</p>
+                <Button
+                        block
+                        color="danger"
+                        type="button"
+                        name="action"
+                        value="deleteBtn"
+                        onClick={() =>
+                          props.handleDeleteSchool( school.info.name )
+                        }
+                      >
+                        Delete
+                      </Button>
               </Card>
             </div>
           ))}

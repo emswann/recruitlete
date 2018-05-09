@@ -98,6 +98,17 @@ class Athlete extends Component {
     this.updateAthlete(athlete);
   };
 
+  handleDeleteSchool = schoolName => {
+    let athlete = this.state.athlete;
+    athlete.colleges.filter(college => 
+      // console.log("college name " + college.info.name)
+      // console.log("school name " + schoolName )
+      college.info.name !== schoolName   
+    ); 
+   console.log(athlete.colleges)
+    this.updateAthlete(athlete);
+  };
+
   render() {
     return (
       <div>
@@ -112,7 +123,9 @@ class Athlete extends Component {
               searchSchools={this.state.searchSchools}
               handleSaveSchool={this.handleSaveSchool}
             />
-            <Saved savedSchools={this.state.athlete.colleges} />
+            <Saved 
+            savedSchools={this.state.athlete.colleges}
+            handleDeleteSchool={this.handleDeleteSchool} />
           </div>
         )}
       </div>

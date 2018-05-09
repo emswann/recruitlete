@@ -28,14 +28,25 @@ class Coach extends Component {
     .then(res => res.data)
     .then(coach => {
       API.getSchools(Auth.getToken())
-      .then(res => 
+      .then(res => {
+        const schools = res.data;
+        const savedSchoolNames = 
+          coach.colleges.map(college => college.info.name);
+
+        let schoolsWithSave = schools.map(school => {
+          savedSchoolNames.includes(school.name) 
+            ? school.saved = true 
+            : school.saved = false;
+          return school;
+        });
+
         this.setState({
           ready: true,
           coach,
-          schools: res.data, 
-          searchSchools: res.data
+          schools,
+          searchSchools: schoolsWithSave
         })
-      )
+      })
     })
     .catch(err => console.log(err));
   };

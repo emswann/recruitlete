@@ -77,6 +77,15 @@ class Nav extends React.Component {
                 </NavLink>
               </NavItem>
               <NavItem>
+<<<<<<< HEAD
+=======
+                <NavLink 
+                  to={Auth.isUserAnAthlete() ?  "/athlete" : "/coach"}>
+                  <FontAwesomeIcon icon={faSave} size={"2x"} />
+                </NavLink>
+              </NavItem>
+              <NavItem>
+>>>>>>> master
                 <NavLink to="#">
                   <FontAwesomeIcon icon={faComments} size={"2x"} />
                 </NavLink>

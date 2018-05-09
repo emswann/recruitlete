@@ -40,6 +40,10 @@ const Search = props => (
                       type="button"
                       name="action"
                       value="saveBtn"
+<<<<<<< HEAD
+=======
+                      disabled={school.saved} 
+>>>>>>> master
                       onClick={() =>
                         props.handleSaveSchool({
                           name: school.name,
@@ -55,8 +59,13 @@ const Search = props => (
                       Save
                     </Button>
                   </th>
+<<<<<<< HEAD
                 </tr> 
                ))}
+=======
+                </tr>
+              ))}
+>>>>>>> master
             </tbody>
           </table>
         </div>

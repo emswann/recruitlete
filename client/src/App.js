@@ -17,8 +17,7 @@ import Auth from "./utils/Auth";
 class App extends Component {
 
   state = {
-    authenticated: false,
-    role: ""
+    authenticated: false
   };
 
   componentDidMount() {
@@ -31,18 +30,11 @@ class App extends Component {
     this.setState({ authenticated: Auth.isUserAuthenticated() });
   };
 
-  handleRoleChange = role => {
-    this.setState({ role });
-  }
-
   render() {
     return (
       <Router className="container">
         <div>
-          <Nav 
-            toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
-            role={this.state.role}
-          />
+          <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 
           <PropsRoute exact path="/" component={Home} 
             toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
@@ -52,16 +44,11 @@ class App extends Component {
 
           <PrivateRoute path="/coach" component={Coach} />
 
-          <PrivateRoute path="/profile" component={Profile} 
-            role={this.state.role} 
-          />
+          <PrivateRoute path="/profile" component={Profile} />
 
-          <LoggedOutRoute path="/login" component={Login} 
-            toggleAuthenticateStatus={this.toggleAuthenticateStatus}
-            handleRoleChange={this.handleRoleChange} 
-          />
+          <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 
-          <Route path="/logout" component={Logout}/>
+          <Route path="/logout" component={Logout} />
         </div>
       </Router>
     )

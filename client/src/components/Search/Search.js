@@ -1,54 +1,62 @@
 import React from "react";
-import { ListGroup, ListGroupItem, Button } from "mdbreact";
+import { Button } from "mdbreact";
 
 const Search = props => (
-  <div className="container">
+  <div className="container" style={{ overflow: "scroll", height: 420 }}>
     {props.searchSchools.length ? (
       <div className="row">
         <div className="col-md-12">
-          {props.searchSchools.map((school, index) => (
-            <ListGroup key={index}>
-              <ListGroupItem>
-                <div className="row">
-                  <div className="col-md-9">
-                    <p> 
-                      <a 
-                      target="_blank"
-                      href={school.collegeLink}>{school.name}
+          <table className="table table-hover table-bordered">
+            <thead className="header-fixed">
+                <th scope="col">Name</th>
+                <th scope="col">Conference</th>
+                <th scope="col">Division</th>
+                <th scope="col">State</th>
+                <th scope="col">Region</th>
+                <th scope="col">Save</th>
+            </thead>
+            {props.searchSchools.map((school, index) => (
+              <tbody>
+                  <tr scope="row" key={index}>
+                    <th>
+                      <a target="_blank" href={school.collegeLink}>
+                        {school.name}
                       </a>
-                    </p>
-                    <p>
-                      <a 
-                        target="_blank"
-                        href={school.conferenceLink}>{school.conference}
-                      </a> 
-                    </p>
-                    <p>{school.division}</p>  
-                    <p>{school.state}</p>
-                    <p>{school.region}</p>
-                  </div>               
-                  <div className="col-md-3">
-                    <Button block color="danger"
-                      type="button" 
-                      name="action"
-                      value="saveBtn"
-                      onClick={() => props.handleSaveSchool({
-                        name          : school.name,
-                        conference    : school.conference,
-                        division      : school.division,
-                        state         : school.state,
-                        region        : school.region,
-                        collegeLink   : school.collegeLink,
-                        conferenceLink: school.conferenceLink
-                      })}
-                    >
-                      Save
-                    </Button>                  
-                  </div>
-                </div>
-              </ListGroupItem>
-            </ListGroup>
-          ))}
+                    </th>
+                    <th>
+                      <a target="_blank" href={school.conferenceLink}>
+                        {school.conference}
+                      </a>
+                    </th>
+                    <th>{school.division}</th>
+                    <th>{school.state}</th>
+                    <th>{school.region}</th>
+                    <th>
+                      <Button
+                        block
+                        color="danger"
+                        type="button"
+                        name="action"
+                        value="saveBtn"
+                        onClick={() =>
+                          props.handleSaveSchool({
+                            name: school.name,
+                            conference: school.conference,
+                            division: school.division,
+                            state: school.state,
+                            region: school.region,
+                            collegeLink: school.collegeLink,
+                            conferenceLink: school.conferenceLink
+                          })
+                        }
+                      >
+                        Save
+                      </Button>
+                    </th>
+                  </tr> 
+              </tbody>
+            ))}
+          </table>
         </div>
       </div>
     ) : (
@@ -60,4 +68,3 @@ const Search = props => (
 );
 
 export default Search;
-

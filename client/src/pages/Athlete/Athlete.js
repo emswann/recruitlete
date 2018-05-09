@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Search from "../../components/Search";
+import SimpleCard from "../../components/SimpleCard";
 import SearchBox from "../../components/SearchBox";
 import Saved from "../../components/Saved";
 import Auth from "../../utils/Auth";
@@ -100,11 +101,8 @@ class Athlete extends Component {
 
   handleDeleteSchool = schoolName => {
     let athlete = this.state.athlete;
-    athlete.colleges.filter(college => 
-      // console.log("college name " + college.info.name)
-      // console.log("school name " + schoolName )
-      college.info.name !== schoolName   
-    ); 
+    athlete.colleges =
+    athlete.colleges.filter(college => college.info.name !== schoolName);
    console.log(athlete.colleges)
     this.updateAthlete(athlete);
   };
@@ -123,9 +121,11 @@ class Athlete extends Component {
               searchSchools={this.state.searchSchools}
               handleSaveSchool={this.handleSaveSchool}
             />
+            <div className="container" style={{marginTop:50}}>
             <Saved 
             savedSchools={this.state.athlete.colleges}
             handleDeleteSchool={this.handleDeleteSchool} />
+            </div>
           </div>
         )}
       </div>

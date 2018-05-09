@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "mdbreact";
 
 const Search = props => (
-  <div className="container" style={{ overflow: "scroll", height: 420 }}>
+  <div className="container" style={{ overflow: "scroll", height: 420, border: "#000000" }}>
     {props.searchSchools.length ? (
       <div className="row">
         <div className="col-md-12">

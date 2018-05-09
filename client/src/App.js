@@ -5,6 +5,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import PropsRoute from "./components/PropsRoute";
 import LoggedOutRoute from "./components/LoggedOutRoute";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -49,6 +50,8 @@ class App extends Component {
           <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 
           <Route path="/logout" component={Logout} />
+
+          <Footer />
         </div>
       </Router>
     )

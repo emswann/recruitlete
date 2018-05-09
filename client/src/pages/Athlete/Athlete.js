@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import ScrollIntoViewIfNeeded from 'react-scroll-into-view-if-needed';
 import SimpleCard from "../../components/SimpleCard"
 import Search from "../../components/Search"
 import SearchBox from "../../components/SearchBox"
+import Saved from "../../components/Saved";
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
@@ -13,7 +15,8 @@ class Athlete extends Component {
     searchOption: "",    
     searchOptionArr: [],
     searchField: "",
-    searchSchools: []
+    searchSchools: [],
+    scrollActive: false
   };
 
   componentDidMount() {
@@ -27,30 +30,37 @@ class Athlete extends Component {
       API.getSchools(Auth.getToken())
       .then(res => {
         const schools = res.data;
-        const savedSchoolNames = 
-          athlete.colleges.map(college => college.info.name);
-
-        let schoolsWithSave = schools.map(school => {
-          savedSchoolNames.includes(school.name) 
-            ? school.saved = true 
-            : school.saved = false;
-          return school;
-        });
 
         this.setState({
           ready: true,
           athlete,
           schools,
-          searchSchools: schoolsWithSave
+          searchSchools: this.createSchoolsWithSave(
+                           schools, 
+                           athlete.colleges.map(college => college.info.name))
         })
       })
     })
     .catch(err => console.log(err));
   };
 
+  createSchoolsWithSave = (schools, savedSchoolNames) =>  
+    schools.map(school => {
+      savedSchoolNames.includes(school.name) 
+        ? school.saved = true 
+        : school.saved = false;
+      return school;
+    });
+
   updateAthlete = athlete => {
     API.updateAthlete(Auth.getToken(), athlete)
-    .then(res => this.setState({ athlete: res.data }))
+    .then(res => this.setState({ 
+            athlete: res.data,
+            searchSchools: this.createSchoolsWithSave(
+                             this.state.schools, 
+                             res.data.colleges.map(college => college.info.name)
+                           )
+            }))
     .catch(err => console.log(err));
   };
 
@@ -111,6 +121,10 @@ class Athlete extends Component {
     this.updateAthlete(athlete);
   }
 
+  handleScrollToggle = () => {
+    this.setState({ scrollActive: !this.state.scrollActive });
+  }
+
   render() {
     return ( 
       <div>
@@ -118,15 +132,35 @@ class Athlete extends Component {
           (
             <div>
               <SimpleCard>
-                <SearchBox
-                  searchOptionArr={this.state.searchOptionArr}
-                  handleSearchOption={this.handleSearchOption}
-                  handleSearchField={this.handleSearchField}
-                />
+                <ScrollIntoViewIfNeeded 
+                  active={!this.state.scrollActive}
+                  options={{
+                    block: "bottom",
+                    behavior: "smooth"
+                  }} 
+                >
+                  <SearchBox
+                    searchOptionArr={this.state.searchOptionArr}
+                    handleSearchOption={this.handleSearchOption}
+                    handleSearchField={this.handleSearchField}
+                    handleScrollToggle={this.handleScrollToggle}
+                  />
+                </ScrollIntoViewIfNeeded> 
                 <Search 
                   searchSchools={this.state.searchSchools}
                   handleSaveSchool={this.handleSaveSchool}
                 />
+                <ScrollIntoViewIfNeeded 
+                  active={this.state.scrollActive}
+                  options={{
+                    block: "start",
+                    behavior: "smooth"
+                  }} 
+                >
+                  <Saved
+                    handleScrollToggle={this.handleScrollToggle}
+                  />
+                </ScrollIntoViewIfNeeded>   
               </SimpleCard>
             </div>
           )

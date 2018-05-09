@@ -225,28 +225,16 @@ class AthleteProfile extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.ready &&
-          (
-            <div>
-                <p>This is the athlete page!</p>
-                <SimpleCard>
-                <div id="playerProfile">
-                  {/* <AthleteProfile
-                    athlete={this.state.athlete}
-                  /> */}
-                </div>
-                <AthleteForm
-                  handleFormSubmit={this.handleFormSubmit}
-                  handleInputChange={this.handleInputChange}
-                  user={this.state.user}
-                />
-              </SimpleCard>
+        <div>
+            <p>This is the athlete page!</p>
+            <SimpleCard>
+              <AthleteForm
+                handleFormSubmit={this.handleFormSubmit}
+                handleInputChange={this.handleInputChange}
+                user={this.state.user}
               />
-            </div>
-          )
-        }
-      </div>
+          </SimpleCard>
+        </div>
     )
   };
 

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import ScrollIntoViewIfNeeded from 'react-scroll-into-view-if-needed';
 import SimpleCard from "../../components/SimpleCard"
 import Search from "../../components/Search"
 import SearchBox from "../../components/SearchBox"
+import Saved from "../../components/Saved";
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
@@ -13,7 +15,8 @@ class Coach extends Component {
     searchOption: "",    
     searchOptionArr: [],
     searchField: "",
-    searchSchools: []
+    searchSchools: [],
+    scrollActive: false
   };
 
   componentDidMount() {
@@ -27,31 +30,37 @@ class Coach extends Component {
       API.getSchools(Auth.getToken())
       .then(res => {
         const schools = res.data;
-        const savedSchoolNames = 
-          coach.colleges.map(college => college.info.name);
-
-        let schoolsWithSave = schools.map(school => {
-          savedSchoolNames.includes(school.name) 
-            ? school.saved = true 
-            : school.saved = false;
-          return school;
-        });
 
         this.setState({
           ready: true,
           coach,
           schools,
-          searchSchools: schoolsWithSave
+          searchSchools: this.createSchoolsWithSave(
+                           schools, 
+                           coach.colleges.map(college => college.info.name))
         })
       })
     })
     .catch(err => console.log(err));
   };
 
-  updateCoach = () => {
-    let coach = this.state.coach;
+  createSchoolsWithSave = (schools, savedSchoolNames) =>  
+    schools.map(school => {
+      savedSchoolNames.includes(school.name) 
+        ? school.saved = true 
+        : school.saved = false;
+      return school;
+    });
+
+  updateCoach = coach => {
     API.updateCoach(Auth.getToken(), coach)
-    .then(res => this.setState({ coach: res.data }))
+    .then(res => this.setState({ 
+            coach: res.data,
+            searchSchools: this.createSchoolsWithSave(
+                             this.state.schools, 
+                             res.data.colleges.map(college => college.info.name)
+                           )
+            }))
     .catch(err => console.log(err));
   };
 
@@ -111,7 +120,10 @@ class Coach extends Component {
     coach.colleges.push({info: school, progress: {}});
     this.updateCoach(coach);
   }
-  
+
+  handleScrollToggle = () =>
+    this.setState({ scrollActive: !this.state.scrollActive });
+
   render() {
     return ( 
       <div>
@@ -119,15 +131,35 @@ class Coach extends Component {
           (
             <div>
               <SimpleCard>
-                <SearchBox
-                  searchOptionArr={this.state.searchOptionArr}
-                  handleSearchOption={this.handleSearchOption}
-                  handleSearchField={this.handleSearchField}
-                />
+                <ScrollIntoViewIfNeeded 
+                  active={!this.state.scrollActive}
+                  options={{
+                    block: "bottom",
+                    behavior: "smooth"
+                  }} 
+                >
+                  <SearchBox
+                    searchOptionArr={this.state.searchOptionArr}
+                    handleSearchOption={this.handleSearchOption}
+                    handleSearchField={this.handleSearchField}
+                    handleScrollToggle={this.handleScrollToggle}
+                  />
+                </ScrollIntoViewIfNeeded> 
                 <Search 
                   searchSchools={this.state.searchSchools}
                   handleSaveSchool={this.handleSaveSchool}
                 />
+                <ScrollIntoViewIfNeeded 
+                  active={this.state.scrollActive}
+                  options={{
+                    block: "start",
+                    behavior: "smooth"
+                  }} 
+                >
+                  <Saved
+                    handleScrollToggle={this.handleScrollToggle}
+                  />
+                </ScrollIntoViewIfNeeded>   
               </SimpleCard>
             </div>
           )

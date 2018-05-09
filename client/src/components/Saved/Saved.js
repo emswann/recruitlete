@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'mdbreact';
 
 const Saved = props => (
-  <Card>
+  <Card>   
     {props.children}
   </Card>
 );

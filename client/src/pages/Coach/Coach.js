@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SimpleCard from "../../components/SimpleCard"
 import Search from "../../components/Search"
 import SearchBox from "../../components/SearchBox"
+import Saved from "../../components/Saved"
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
@@ -116,6 +117,9 @@ class Coach extends Component {
                 <Search 
                   searchSchools={this.state.searchSchools}
                   handleSaveSchool={this.handleSaveSchool}
+                />
+                <Saved
+                  savedSchools={this.state.coach.colleges}
                 />
               </SimpleCard>
             </div>

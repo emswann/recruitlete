@@ -3,7 +3,7 @@ import { Card } from 'mdbreact';
 
 const Saved = props => (
   <Card>   
-    {props.children}
+    <p>List of saved colleges or No results depending on prop.savedSchools.length</p>
   </Card>
 );
 

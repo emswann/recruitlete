@@ -125,12 +125,20 @@ class Coach extends Component {
           (
             <div>
               <SimpleCard>
-                <SearchBox
-                  searchOptionArr={this.state.searchOptionArr}
-                  handleSearchOption={this.handleSearchOption}
-                  handleSearchField={this.handleSearchField}
-                  handleScrollToggle={this.handleScrollToggle}
-                />
+                <ScrollIntoViewIfNeeded 
+                  active={!this.state.scrollActive}
+                  options={{
+                    block: "bottom",
+                    behavior: "smooth"
+                  }} 
+                >
+                  <SearchBox
+                    searchOptionArr={this.state.searchOptionArr}
+                    handleSearchOption={this.handleSearchOption}
+                    handleSearchField={this.handleSearchField}
+                    handleScrollToggle={this.handleScrollToggle}
+                  />
+                </ScrollIntoViewIfNeeded> 
                 <Search 
                   searchSchools={this.state.searchSchools}
                   handleSaveSchool={this.handleSaveSchool}
@@ -138,7 +146,8 @@ class Coach extends Component {
                 <ScrollIntoViewIfNeeded 
                   active={this.state.scrollActive}
                   options={{
-                    alignToTop: true
+                    block: "start",
+                    behavior: "smooth"
                   }} 
                 >
                   <Saved

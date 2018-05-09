@@ -115,7 +115,6 @@ class Athlete extends Component {
   }
 
   handleScrollToggle = () => {
-    console.log("got here" + !this.state.scrollActive);
     this.setState({ scrollActive: !this.state.scrollActive });
   }
 
@@ -126,12 +125,20 @@ class Athlete extends Component {
           (
             <div>
               <SimpleCard>
-                <SearchBox
-                  searchOptionArr={this.state.searchOptionArr}
-                  handleSearchOption={this.handleSearchOption}
-                  handleSearchField={this.handleSearchField}
-                  handleScrollToggle={this.handleScrollToggle}
-                />
+                <ScrollIntoViewIfNeeded 
+                  active={!this.state.scrollActive}
+                  options={{
+                    block: "bottom",
+                    behavior: "smooth"
+                  }} 
+                >
+                  <SearchBox
+                    searchOptionArr={this.state.searchOptionArr}
+                    handleSearchOption={this.handleSearchOption}
+                    handleSearchField={this.handleSearchField}
+                    handleScrollToggle={this.handleScrollToggle}
+                  />
+                </ScrollIntoViewIfNeeded> 
                 <Search 
                   searchSchools={this.state.searchSchools}
                   handleSaveSchool={this.handleSaveSchool}
@@ -140,7 +147,7 @@ class Athlete extends Component {
                   active={this.state.scrollActive}
                   options={{
                     block: "start",
-                    inline: "nearest"
+                    behavior: "smooth"
                   }} 
                 >
                   <Saved

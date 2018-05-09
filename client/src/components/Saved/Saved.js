@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card } from 'mdbreact';
 
 const Saved = props => (
-  <div className="container">
+  <div className="container" style={{ height: 800 }}>
     <Button
       color="danger"
       type="button"

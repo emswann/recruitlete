@@ -6167,6 +6167,10 @@ react-scripts@1.0.14:
   optionalDependencies:
     fsevents "1.1.2"
 
+react-scroll-into-view-if-needed@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-scroll-into-view-if-needed/-/react-scroll-into-view-if-needed-2.0.0.tgz#87d4555d1efaf7ebe0b124bcc26b499ca9e45186"
+
 react-slideshow-image@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/react-slideshow-image/-/react-slideshow-image-0.2.2.tgz#ed6894f02b6c9efeae5af1c9057ee4623e46506f"

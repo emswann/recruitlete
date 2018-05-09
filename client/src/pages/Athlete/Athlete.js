@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import ScrollIntoViewIfNeeded from 'react-scroll-into-view-if-needed';
 import SimpleCard from "../../components/SimpleCard"
 import Search from "../../components/Search"
 import SearchBox from "../../components/SearchBox"
+import Saved from "../../components/Saved";
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
@@ -13,7 +15,8 @@ class Athlete extends Component {
     searchOption: "",    
     searchOptionArr: [],
     searchField: "",
-    searchSchools: []
+    searchSchools: [],
+    scrollActive: false
   };
 
   componentDidMount() {
@@ -100,6 +103,11 @@ class Athlete extends Component {
     this.updateAthlete(athlete);
   }
 
+  handleScrollToggle = () => {
+    console.log("got here" + !this.state.scrollActive);
+    this.setState({ scrollActive: !this.state.scrollActive });
+  }
+
   render() {
     return ( 
       <div>
@@ -111,11 +119,23 @@ class Athlete extends Component {
                   searchOptionArr={this.state.searchOptionArr}
                   handleSearchOption={this.handleSearchOption}
                   handleSearchField={this.handleSearchField}
+                  handleScrollToggle={this.handleScrollToggle}
                 />
                 <Search 
                   searchSchools={this.state.searchSchools}
                   handleSaveSchool={this.handleSaveSchool}
                 />
+                <ScrollIntoViewIfNeeded 
+                  active={this.state.scrollActive}
+                  options={{
+                    block: "start",
+                    inline: "nearest"
+                  }} 
+                >
+                  <Saved
+                    handleScrollToggle={this.handleScrollToggle}
+                  />
+                </ScrollIntoViewIfNeeded>   
               </SimpleCard>
             </div>
           )

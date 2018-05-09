@@ -129,6 +129,36 @@ class User extends Component {
     this.updateUser(user);
   }
 
+  handleSaveNote = note => {
+    let user = this.state.user;
+    user.colleges.info.push({ notes : note });
+    this.updateUser(user);
+  };
+
+  toggleFavSchool = favSchool => {
+    let user = this.state.user;
+    let position = 
+      user.colleges.findIndex(school => school.info.name === favSchool);
+    user.colleges[position].info.favorite = 
+      !user.colleges[position].info.favorite
+    this.updateUser(user);
+  };
+
+  toggleCheckProgress = checkbox => {
+    let user = this.state.user;
+    let item = 
+      user.colleges.findIndex(school => school.progress === checkbox);
+    user.colleges[item].progress = !user.colleges[item].progress
+    this.updateUser(user);
+  };
+
+  handleDeleteSchool = schoolName => {
+    let user = this.state.user;
+    user.colleges =
+    user.colleges.filter(college => college.info.name !== schoolName);
+    this.updateUser(user);
+  };
+
   handleScrollToggle = () => {
     this.setState({ scrollActive: !this.state.scrollActive });
   }
@@ -136,43 +166,44 @@ class User extends Component {
   render() {
     return ( 
       <div>
-        { this.state.ready &&
-          (
-            <div>
-              <SimpleCard>
-                <ScrollIntoViewIfNeeded 
-                  active={!this.state.scrollActive}
-                  options={{
-                    block: "end",
-                    behavior: "smooth"
-                  }} 
-                >
-                  <SearchBox
-                    searchOptionArr={this.state.searchOptionArr}
-                    handleSearchOption={this.handleSearchOption}
-                    handleSearchField={this.handleSearchField}
-                    handleScrollToggle={this.handleScrollToggle}
-                  />
-                </ScrollIntoViewIfNeeded> 
-                <Search 
-                  searchSchools={this.state.searchSchools}
-                  handleSaveSchool={this.handleSaveSchool}
-                />
-                <ScrollIntoViewIfNeeded 
-                  active={this.state.scrollActive}
-                  options={{
-                    block: "start",
-                    behavior: "smooth"
-                  }} 
-                >
-                  <Saved
-                    handleScrollToggle={this.handleScrollToggle}
-                  />
-                </ScrollIntoViewIfNeeded>   
-              </SimpleCard>
-            </div>
-          )
-        }
+        { this.state.ready && (
+          <div className="container">
+            <ScrollIntoViewIfNeeded 
+              active={!this.state.scrollActive}
+              options={{
+                block: "end",
+                behavior: "smooth"
+              }} 
+            >
+              <SearchBox
+                searchOptionArr={this.state.searchOptionArr}
+                handleSearchOption={this.handleSearchOption}
+                handleSearchField={this.handleSearchField}
+                handleScrollToggle={this.handleScrollToggle}
+              />
+            </ScrollIntoViewIfNeeded> 
+            <Search 
+              searchSchools={this.state.searchSchools}
+              handleSaveSchool={this.handleSaveSchool}
+            />
+            <ScrollIntoViewIfNeeded 
+              active={this.state.scrollActive}
+              options={{
+                block: "start",
+                behavior: "smooth"
+              }} 
+            >
+              <Saved
+                savedSchools={this.state.user.colleges}
+                handleDeleteSchool={this.handleDeleteSchool}
+                toggleFavSchool= {this.toggleFavSchool}
+                handleSaveNote={this.handleSaveNote}
+                handleScrollToggle={this.handleScrollToggle}
+                role={this.state.role}
+              />
+            </ScrollIntoViewIfNeeded>   
+          </div>
+        )}
       </div>
     )
   };

@@ -99,6 +99,28 @@ class Athlete extends Component {
     this.updateAthlete(athlete);
   };
 
+  handleSaveNote = note => {
+    let athlete = this.state.athlete;
+    athlete.colleges.info.push({ notes : note });
+    this.updateAthlete(athlete);
+  };
+
+  toggleFavSchool = favSchool => {
+    let athlete = this.state.athlete;
+    let position = 
+    athlete.colleges.findIndex(school => school.info.name === favSchool);
+    athlete.colleges[position].info.favorite = !athlete.colleges[position].info.favorite
+    this.updateAthlete(athlete);
+  };
+
+  toggleCheckProgress = checkbox => {
+    let athlete = this.state.athlete;
+    let item = 
+    athlete.colleges.findIndex(school => school.progress === checkbox);
+    athlete.colleges[item].progress = !athlete.colleges[item].progress
+    this.updateAthlete(athlete);
+  };
+
   handleDeleteSchool = schoolName => {
     let athlete = this.state.athlete;
     athlete.colleges =
@@ -121,12 +143,12 @@ class Athlete extends Component {
               searchSchools={this.state.searchSchools}
               handleSaveSchool={this.handleSaveSchool}
             />
-            <div className="container" style={{marginTop:50}}>
             <Saved 
             savedSchools={this.state.athlete.colleges}
-            handleDeleteSchool={this.handleDeleteSchool} />
+            handleDeleteSchool={this.handleDeleteSchool}
+            toggleFavSchool= {this.toggleFavSchool}
+            handleSaveNote={this.handleSaveNote} />
             </div>
-          </div>
         )}
       </div>
     );

@@ -79,7 +79,7 @@ class Nav extends React.Component {
               </NavItem>
               <NavItem>
                 <NavLink 
-                  to={Auth.isUserAnAthlete() ?  "/athlete" : "/coach"}>>
+                  to={Auth.isUserAnAthlete() ?  "/athlete" : "/coach"}>
                   <FontAwesomeIcon icon={faSave} size={"2x"} />
                 </NavLink>
               </NavItem>
@@ -93,7 +93,7 @@ class Nav extends React.Component {
                   <DropdownToggle nav>
                     <FontAwesomeIcon icon={faUser} size={"2x"} />
                   </DropdownToggle>
-                  <DropdownMenu>
+                  <DropdownMenu right>
                     <DropdownItem>
                       <NavLink to="/profile">Profile</NavLink>
                     </DropdownItem>

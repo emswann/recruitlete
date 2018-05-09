@@ -45,8 +45,7 @@ class Login extends Component {
 
       this.props.toggleAuthenticateStatus();
 
-      this.props.history.push(
-        userObj.role === "athlete" ? "/athlete" : "/coach");
+      this.props.history.push("/user");
     }).catch( ({ response }) => {
       const errors = response.data.errors ? response.data.errors : {};
       errors.summary = response.data.message;

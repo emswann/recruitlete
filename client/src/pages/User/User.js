@@ -7,10 +7,11 @@ import Saved from "../../components/Saved";
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
-class Athlete extends Component {
+class User extends Component {
   state = {
     ready: false,
-    athlete: {},
+    role: "",
+    user: {},
     schools: [],
     searchOption: "",    
     searchOptionArr: [],
@@ -24,20 +25,24 @@ class Athlete extends Component {
   };
 
   loadStateData = () => {
-    API.getAthlete(Auth.getToken())
+    const APIfunction = 
+      Auth.getRole() === "athlete" ? API.getAthlete : API.getCoach;
+
+    APIfunction(Auth.getToken())
     .then(res => res.data)
-    .then(athlete => {
+    .then(user => {
       API.getSchools(Auth.getToken())
       .then(res => {
         const schools = res.data;
 
         this.setState({
           ready: true,
-          athlete,
+          role: Auth.getRole(),
+          user,
           schools,
           searchSchools: this.createSchoolsWithSave(
                            schools, 
-                           athlete.colleges.map(college => college.info.name))
+                           user.colleges.map(college => college.info.name))
         })
       })
     })
@@ -52,17 +57,20 @@ class Athlete extends Component {
       return school;
     });
 
-  updateAthlete = athlete => {
-    API.updateAthlete(Auth.getToken(), athlete)
+  updateUser = user => {
+    const APIfunction = 
+      Auth.getRole() === "athlete" ? API.updateAthlete : API.updateCoach;
+
+    APIfunction(Auth.getToken(), user)
     .then(res => this.setState({ 
-            athlete: res.data,
+            user: res.data,
             searchSchools: this.createSchoolsWithSave(
                              this.state.schools, 
                              res.data.colleges.map(college => college.info.name)
                            )
             }))
     .catch(err => console.log(err));
-  };
+  };    
 
   handleSearchOption = event => {
     const searchOption = event.target.value;
@@ -116,10 +124,40 @@ class Athlete extends Component {
   }
 
   handleSaveSchool = school => {
-    let athlete = this.state.athlete;
-    athlete.colleges.push({info: school, progress: {}});
-    this.updateAthlete(athlete);
+    let user = this.state.user;
+    user.colleges.push({info: school, progress: {}});
+    this.updateUser(user);
   }
+
+  handleSaveNote = note => {
+    let user = this.state.user;
+    user.colleges.info.push({ notes : note });
+    this.updateUser(user);
+  };
+
+  toggleFavSchool = favSchool => {
+    let user = this.state.user;
+    let position = 
+      user.colleges.findIndex(school => school.info.name === favSchool);
+    user.colleges[position].info.favorite = 
+      !user.colleges[position].info.favorite
+    this.updateUser(user);
+  };
+
+  toggleCheckProgress = checkbox => {
+    let user = this.state.user;
+    let item = 
+      user.colleges.findIndex(school => school.progress === checkbox);
+    user.colleges[item].progress = !user.colleges[item].progress
+    this.updateUser(user);
+  };
+
+  handleDeleteSchool = schoolName => {
+    let user = this.state.user;
+    user.colleges =
+    user.colleges.filter(college => college.info.name !== schoolName);
+    this.updateUser(user);
+  };
 
   handleScrollToggle = () => {
     this.setState({ scrollActive: !this.state.scrollActive });
@@ -128,46 +166,47 @@ class Athlete extends Component {
   render() {
     return ( 
       <div>
-        { this.state.ready &&
-          (
-            <div>
-              <SimpleCard>
-                <ScrollIntoViewIfNeeded 
-                  active={!this.state.scrollActive}
-                  options={{
-                    block: "bottom",
-                    behavior: "smooth"
-                  }} 
-                >
-                  <SearchBox
-                    searchOptionArr={this.state.searchOptionArr}
-                    handleSearchOption={this.handleSearchOption}
-                    handleSearchField={this.handleSearchField}
-                    handleScrollToggle={this.handleScrollToggle}
-                  />
-                </ScrollIntoViewIfNeeded> 
-                <Search 
-                  searchSchools={this.state.searchSchools}
-                  handleSaveSchool={this.handleSaveSchool}
-                />
-                <ScrollIntoViewIfNeeded 
-                  active={this.state.scrollActive}
-                  options={{
-                    block: "start",
-                    behavior: "smooth"
-                  }} 
-                >
-                  <Saved
-                    handleScrollToggle={this.handleScrollToggle}
-                  />
-                </ScrollIntoViewIfNeeded>   
-              </SimpleCard>
-            </div>
-          )
-        }
+        { this.state.ready && (
+          <div className="container">
+            <ScrollIntoViewIfNeeded 
+              active={!this.state.scrollActive}
+              options={{
+                block: "end",
+                behavior: "smooth"
+              }} 
+            >
+              <SearchBox
+                searchOptionArr={this.state.searchOptionArr}
+                handleSearchOption={this.handleSearchOption}
+                handleSearchField={this.handleSearchField}
+                handleScrollToggle={this.handleScrollToggle}
+              />
+            </ScrollIntoViewIfNeeded> 
+            <Search 
+              searchSchools={this.state.searchSchools}
+              handleSaveSchool={this.handleSaveSchool}
+            />
+            <ScrollIntoViewIfNeeded 
+              active={this.state.scrollActive}
+              options={{
+                block: "start",
+                behavior: "smooth"
+              }} 
+            >
+              <Saved
+                savedSchools={this.state.user.colleges}
+                handleDeleteSchool={this.handleDeleteSchool}
+                toggleFavSchool= {this.toggleFavSchool}
+                handleSaveNote={this.handleSaveNote}
+                handleScrollToggle={this.handleScrollToggle}
+                role={this.state.role}
+              />
+            </ScrollIntoViewIfNeeded>   
+          </div>
+        )}
       </div>
     )
   };
 }
 
-export default Athlete;
+export default User;

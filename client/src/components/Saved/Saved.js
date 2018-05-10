@@ -12,40 +12,10 @@ import {
 class Saved extends React.Component {
   constructor(props) {
     super(props);
-    this.toggleNotes = this.toggleNotes.bind(this);
-    this.toggleProgress = this.toggleProgress.bind(this);
 
     this.state = {
-      accordion: false
+      state: ""
     };
-  }
-
-  toggleNotes() {
-    let state = "";
-
-    if (this.state.accordion !== 1) {
-      state = 1;
-    } else {
-      state = false;
-    }
-
-    this.setState({
-      accordion: state
-    });
-  }
-
-  toggleProgress() {
-    let state = "";
-
-    if (this.state.accordion !== 2) {
-      state = 2;
-    } else {
-      state = false;
-    }
-
-    this.setState({
-      accordion: state
-    });
   }
 
   render() {
@@ -93,7 +63,7 @@ class Saved extends React.Component {
                         type="button"
                         name="action"
                         value="notes"
-                        onClick={this.toggleNotes}
+                        onClick={this.props.toggleNotes}
                       >
                         <FontAwesomeIcon icon={faStickyNote} size={"1x"} />
                       </Button>
@@ -132,28 +102,35 @@ class Saved extends React.Component {
                         <FontAwesomeIcon icon={faTrash} size={"1x"} /> Delete
                       </Button>
                     </div>
-                    <Collapse isOpen={this.state.accordion === 1}>
+                    <Collapse isOpen={this.props.collapse}>
                       <Card>
                         <p>{school.info.notes}</p>
                       </Card>
-                      <Input
-                        type="textarea"
-                        name="note"
-                        value={this.props.notes}
-                        className="form-control"
-                        placeholder="Add a note here..."
-                        onChange={this.props.handleInputchange}
-                      />
+                      <div>
+                        <Input
+                          placeholder="notes"
+                          group type="notes"
+                          datatag={index}
+                          name="notes"
+                          onChange={this.props.handleInputChange}
+                          value={this.props.notes}
+                        />
+                      </div>
                       <Button
+                        color="primary"
+                        type="button"
+                        name="action"
+                        value="saveNote"
                         onClick={() =>
-                          this.props.handleSaveNote(this.props.notes)
+                          this.props.handleSaveNote(this.props.notes[index])
                         }
                       >
                         Save
                       </Button>
                     </Collapse>
-                    <Collapse isOpen={this.state.accordion === 2}>
-                      {/* <div className="form-check">
+                    <div>
+                      <Collapse isOpen={this.props.collapse}>
+                        {/* <div className="form-check">
                         <input
                           className="form-check-input"
                           type="checkbox"
@@ -164,7 +141,7 @@ class Saved extends React.Component {
                             <p>Contact E-Mail</p>
                           </label>
                       </div> */}
-                      {/* <div class="form-check">
+                        {/* <div class="form-check">
                         <input
                           class="form-check-input"
                           type="checkbox"
@@ -177,7 +154,8 @@ class Saved extends React.Component {
                           </label>
                         </input>
                       </div> */}
-                    </Collapse>
+                      </Collapse>
+                    </div>
                   </div>
                 </Card>
               </div>
@@ -192,4 +170,5 @@ class Saved extends React.Component {
     );
   }
 }
+
 export default Saved;

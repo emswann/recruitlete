@@ -28,7 +28,7 @@ class User extends Component {
 
   loadStateData = () => {
     const APIfunction = 
-      Auth.getRole() === "user" ? API.getAthlete : API.getCoach;
+      Auth.getRole() === "athlete" ? API.getAthlete : API.getCoach;
 
     APIfunction(Auth.getToken())
     .then(res => res.data)
@@ -61,7 +61,7 @@ class User extends Component {
 
   updateUser = user => {
     const APIfunction = 
-      Auth.getRole() === "user" ? API.updateAthlete : API.updateCoach;
+      Auth.getRole() === "athlete" ? API.updateAthlete : API.updateCoach;
 
     APIfunction(Auth.getToken(), user)
     .then(res => this.setState({ 
@@ -275,16 +275,10 @@ class User extends Component {
                     handleSaveNote={this.handleSaveNote}
                     handleInputChange={this.handleInputChange}
                     notes={this.state.notes}
-                    handleScrollToggle={this.handleScrollToggle}
-                    savedSchools={this.state.user.colleges}
-                    handleDeleteSchool={this.handleDeleteSchool}
-                    toggleFavSchool= {this.toggleFavSchool}
-                    handleSaveNote={this.handleSaveNote}
-                    handleInputChange={this.handleInputChange}
-                    notes={this.state.notes}
                     toggleNotes={this.toggleNotes}
                     toggleProgress={this.toggleProgress}
                     collapse={this.state.collapse}
+                    handleScrollToggle={this.handleScrollToggle}
                   />
                 </ScrollIntoViewIfNeeded>   
               </SimpleCard>

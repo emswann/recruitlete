@@ -16,8 +16,7 @@ class Saved extends React.Component {
     this.toggleProgress = this.toggleProgress.bind(this);
 
     this.state = {
-      accordion: false,
-      value : ""
+      accordion: false
     };
   }
 
@@ -122,21 +121,21 @@ class Saved extends React.Component {
                         <FontAwesomeIcon icon={faTrash} size={"1x"} /> Delete
                       </Button>
                     </div>
-
                     <Collapse isOpen={this.state.accordion === 1}>
                       <Card>
                         <p>{school.info.notes}</p>
                       </Card>
-                      <Input 
-                      type="textarea" 
-                      label="Add a note here..."
-                      onChange={this.props.handleInputchange}
-                      value={this.state.value}
-                       />
-
+                      <Input
+                        type="textarea"
+                        name="note"
+                        value={this.props.notes}
+                        className="form-control"
+                        placeholder="Add a note here..."
+                        onChange={this.props.handleInputchange}
+                      />
                       <Button
                         onClick={() =>
-                          this.props.handleSaveNote(this.state.value)
+                          this.props.handleSaveNote(this.props.notes)
                         }
                       >
                         Save

@@ -15,7 +15,7 @@ class Athlete extends Component {
     searchOptionArr: [],
     searchField: "",
     searchSchools: [],
-    notes: []
+    notes: ""
   };
 
   componentDidMount() {
@@ -101,17 +101,17 @@ class Athlete extends Component {
   };
 
   handleInputChange = event => {
-    const field = event.target.name;
-    const note = this.state.user;
-    note[field] = event.target.value;
-
+    const value = event.target.value;
+    let notes = this.state.notes;
+    notes = notes[value]
+  
     this.setState({
-      note
+      notes
     });
   };
 
   handleSaveNote = note => {
-    console.log("Note " + note )
+    console.log("Note: "+ note)
     let athlete = this.state.athlete;
     athlete.colleges.info.push({ notes : note });
     this.updateAthlete(athlete);
@@ -160,7 +160,8 @@ class Athlete extends Component {
             handleDeleteSchool={this.handleDeleteSchool}
             toggleFavSchool= {this.toggleFavSchool}
             handleSaveNote={this.handleSaveNote}
-            handleInputChange={this.handleInputChange} />
+            handleInputChange={this.handleInputChange}
+            notes={this.state.notes} />
             </div>
         )}
       </div>

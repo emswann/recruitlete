@@ -14,6 +14,8 @@ import User from "./pages/User";
 import Profile from "./pages/Profile";
 import Auth from "./utils/Auth";
 
+import "./App.css";
+
 class App extends Component {
 
   state = {
@@ -33,7 +35,7 @@ class App extends Component {
   render() {
     return (
       <Router className="container">
-        <div>
+        <div id="application">
           <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 
           <PropsRoute exact path="/" component={Home} 

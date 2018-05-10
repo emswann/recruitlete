@@ -24,8 +24,40 @@ module.exports = new PassportLocalStrategy({
 
     const collection = 
       userData.role === "athlete" ? "Athletes" : "Coaches";
+ 
+    let dbObj = {};
+    if (userData.role === "athlete") {
+      dbObj = { email: userData.email,
+                contact: {},
+                name: {},
+                address: {},
+                scholastic: {},
+                club: {
+                  name: "",
+                  team: "",
+                  director: {},
+                  coach: {},
+                  address: {},
+                  contact: {}
+                },
+                highschool: {
+                  name: "",
+                  coach: {},
+                  address: {},
+                  contact: {}                  
+                },
+                statistics: {} 
+              }
+    }
+    else {
+      dbObj = { email: userData.email,
+                contact: {},
+                name: {},
+                address: {}
+              }      
+    };
 
-    db[collection].create({ email: userData.email }, (err, profile) => {
+    db[collection].create(dbObj, (err, profile) => {
       if (err) { return done(err); }
 
       const payload = {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SimpleCard from "../../components/SimpleCard";
 import API from "../../utils/API";
 import AthleteForm from "../../components/AthleteForm";
+import { Button } from "mdbreact";
 
 class AthleteProfile extends Component {
   state = {
@@ -105,112 +106,112 @@ class AthleteProfile extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.user.name.first && this.state.user.name.last) {
+    // if (this.state.user.name.first && this.state.user.name.last) {
       API.updateAthlete({
         email: this.state.email,
         contact: {
-          email: this.state.contact.email,
-          phone: this.state.contact.phone,
-          url: this.state.contact.url
+          email: this.state.user.contact.email,
+          phone: this.state.user.contact.phone,
+          url: this.state.user.contact.url
         },
         name: {
-          first: this.state.name.first,
-          middle: this.state.name.middle,
-          last: this.state.name.last
+          first: this.state.user.name.first,
+          middle: this.state.user.name.middle,
+          last: this.state.user.name.last
         },
         address: {
-          street1: this.state.address.street1,
-          street2: this.state.address.street2,
-          city: this.state.address.city,
-          state: this.state.address.state,
-          zip: this.state.address.zip,
-          zip4: this.state.address.zip4
+          street1: this.state.user.address.street1,
+          street2: this.state.user.address.street2,
+          city: this.state.user.address.city,
+          state: this.state.user.address.state,
+          zip: this.state.user.address.zip,
+          zip4: this.state.user.address.zip4
         },
-        parentNames: this.state.parentNames,
-        jerseyNum: this.state.jerseyNum,
-        gradYear: this.state.gradYear,
-        positions: this.state.positions,
-        ncaaId: this.state.ncaaId,
-        birthDate: this.state.birthDate,
+        parentNames: this.state.user.parentNames,
+        jerseyNum: this.state.user.jerseyNum,
+        gradYear: this.state.user.gradYear,
+        positions: this.state.user.positions,
+        ncaaId: this.state.user.ncaaId,
+        birthDate: this.state.user.birthDate,
         scholastic: {
-          weightGPA: this.state.scholastic.weightGPA,
-          unweightGPA: this.state.scholastic.unweightGPA,
-          classRank: this.state.scholastic.classRank,
-          classSize: this.state.scholastic.classSize,
-          scoreSAT: this.state.scholastic.scoreSAT,
-          scoreACT: this.state.scholastic.scoreACT,
-          major: this.state.scholastic.major
+          weightGPA: this.state.user.scholastic.weightGPA,
+          unweightGPA: this.state.user.scholastic.unweightGPA,
+          classRank: this.state.user.scholastic.classRank,
+          classSize: this.state.user.scholastic.classSize,
+          scoreSAT: this.state.user.scholastic.scoreSAT,
+          scoreACT: this.state.user.scholastic.scoreACT,
+          major: this.state.user.scholastic.major
         },
         club: {
-          name: this.state.club.name,
-          team: this.state.club.team,
+          name: this.state.user.club.name,
+          team: this.state.user.club.team,
           director: {
             name: {
-              first: this.state.club.director.name.first,
-              middle: this.state.club.director.name.middle,
-              last: this.state.club.director.name.last
+              first: this.state.user.club.director.first,
+              middle: this.state.user.club.director.middle,
+              last: this.state.user.club.director.last
             },
           },
           coach: {
             name: {
-              first: this.state.club.coach.name.first,
-              middle: this.state.club.coach.name.middle,
-              last: this.state.club.coach.name.last
+              first: this.state.user.club.coach.first,
+              middle: this.state.user.club.coach.middle,
+              last: this.state.user.club.coach.last
             },
           },
           address: {
-            street1: this.state.club.address.street1,
-            street2: this.state.club.address.street2,
-            city: this.state.club.address.city,
-            state: this.state.club.address.state,
-            zip: this.state.club.address.zip,
-            zip4: this.state.club.address.zip4
+            street1: this.state.user.club.address.street1,
+            street2: this.state.user.club.address.street2,
+            city: this.state.user.club.address.city,
+            state: this.state.user.club.address.state,
+            zip: this.state.user.club.address.zip,
+            zip4: this.state.user.club.address.zip4
           },
           contact: {
-            email: this.state.club.contact.email,
-            phone: this.state.club.contact.phone,
-            url: this.state.club.contact.url
+            email: this.state.user.club.contact.email,
+            phone: this.state.user.club.contact.phone,
+            url: this.state.user.club.contact.url
           },
         },
         highSchool: {
-          name: this.state.highSchool.name,
+          name: this.state.user.highSchool.name,
           coach: {
             name: {
-              first: this.state.highSchool.coach.name.first,
-              middle: this.state.highSchool.coach.name.middle,
-              last: this.state.highSchool.coach.name.last
+              first: this.state.user.highSchool.coach.first,
+              middle: this.state.user.highSchool.coach.middle,
+              last: this.state.user.highSchool.coach.last
             },
           },
           address: {
-            street1: this.state.highSchool.address.street1,
-            street2: this.state.highSchool.address.street2,
-            city: this.state.highSchool.address.city,
-            state: this.state.highSchool.address.state,
-            zip: this.state.highSchool.address.zip,
-            zip4: this.state.highSchool.address.zip4
+            street1: this.state.user.highSchool.address.street1,
+            street2: this.state.user.highSchool.address.street2,
+            city: this.state.user.highSchool.address.city,
+            state: this.state.user.highSchool.address.state,
+            zip: this.state.user.highSchool.address.zip,
+            zip4: this.state.user.highSchool.address.zip4
           },
           contact: {
-            email: this.state.highSchool.contact.email,
-            phone: this.state.highSchool.contact.phone,
-            url: this.state.highSchool.contact.url
+            email: this.state.user.highSchool.contact.email,
+            phone: this.state.user.highSchool.contact.phone,
+            url: this.state.user.highSchool.contact.url
           },
         },
         statistics: {
-          height: this.state.statistics.height,
-          weight: this.state.statistics.weight,
-          handed: this.state.statistics.handed,
-          standReach: this.state.statistics.standReach,
-          approachTouch: this.state.statistics.approachTouch,
-          blockJump: this.state.statistics.blockJump
+          height: this.state.user.statistics.height,
+          weight: this.state.user.statistics.weight,
+          handed: this.state.user.statistics.handed,
+          standReach: this.state.user.statistics.standReach,
+          approachTouch: this.state.user.statistics.approachTouch,
+          blockJump: this.state.user.statistics.blockJump
         },
-        athleteAccomps: this.state.athleteAccomps,
-        schoolAccomps: this.state.schoolAccomps,
-        videoLinks: this.state.videoLinks,
-        profileImg: this.state.profileImg
+        athleteAccomps: this.state.user.athleteAccomps,
+        schoolAccomps: this.state.user.schoolAccomps,
+        videoLinks: this.state.user.videoLinks,
+        profileImg: this.state.user.profileImg
       })
         .then(res => this.loadStateData())
         .catch(err => console.log(err));
-    }
+
   };
 
   handleInputChange = event => {
@@ -239,7 +240,6 @@ class AthleteProfile extends Component {
   };
 
 };
-
 
 export default AthleteProfile;
 

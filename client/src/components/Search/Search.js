@@ -40,6 +40,7 @@ const Search = props => (
                         type="button"
                         name="action"
                         value="saveBtn"
+                        disabled={school.saved} 
                         onClick={() =>
                           props.handleSaveSchool({
                             name: school.name,

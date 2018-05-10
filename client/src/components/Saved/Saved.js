@@ -51,7 +51,18 @@ class Saved extends React.Component {
   render() {
     return (
       <div className="container">
-        <h2> Saved Schools </h2>
+        <h2>
+          Saved Schools
+          <Button
+            color="danger"
+            type="button"
+            name="action"
+            value="scrollBtn"
+            onClick={this.props.handleScrollToggle}
+          >
+            Scroll To Search
+          </Button>
+        </h2>
         {this.props.savedSchools.length ? (
           <div className="row">
             {this.props.savedSchools.map((school, index) => (

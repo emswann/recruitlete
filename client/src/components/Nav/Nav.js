@@ -16,9 +16,8 @@ import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faComments,
-  faSearch,
-  faSave,
-  faLock
+  faLock,
+  faSearch
 } from "@fortawesome/fontawesome-free-solid";
 import Auth from "../../utils/Auth";
 
@@ -73,14 +72,8 @@ class Nav extends React.Component {
             <NavbarNav right>
               <NavItem>
                 <NavLink 
-                  to={Auth.isUserAnAthlete() ? "/athlete" : "/coach"}>
+                  to="/user">
                   <FontAwesomeIcon icon={faSearch} size={"2x"} />
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink 
-                  to={Auth.isUserAnAthlete() ?  "/athlete" : "/coach"}>
-                  <FontAwesomeIcon icon={faSave} size={"2x"} />
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -93,7 +86,7 @@ class Nav extends React.Component {
                   <DropdownToggle nav>
                     <FontAwesomeIcon icon={faUser} size={"2x"} />
                   </DropdownToggle>
-                  <DropdownMenu>
+                  <DropdownMenu right>
                     <DropdownItem>
                       <NavLink to="/profile">Profile</NavLink>
                     </DropdownItem>

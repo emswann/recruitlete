@@ -16,7 +16,8 @@ class Saved extends React.Component {
     this.toggleProgress = this.toggleProgress.bind(this);
 
     this.state = {
-      accordion: false
+      accordion: false,
+      value : ""
     };
   }
 
@@ -49,7 +50,6 @@ class Saved extends React.Component {
   }
 
   render() {
-    const School = this.props.savedSchools;
     return (
       <div className="container">
         <h2> Saved Schools </h2>
@@ -59,7 +59,6 @@ class Saved extends React.Component {
               <div
                 className="card-group col-md-12"
                 key={index}
-                School={School[school]}
                 style={{ padding: 15, justifyContent: "center" }}
               >
                 <Card
@@ -128,19 +127,23 @@ class Saved extends React.Component {
                       <Card>
                         <p>{school.info.notes}</p>
                       </Card>
-                      <Input type="textarea" label="Add a note here..." />
+                      <Input 
+                      type="textarea" 
+                      label="Add a note here..."
+                      onChange={this.props.handleInputchange}
+                      value={this.state.value}
+                       />
 
                       <Button
                         onClick={() =>
-                          this.props.handleSaveNote(school.info.notes)
+                          this.props.handleSaveNote(this.state.value)
                         }
                       >
                         Save
                       </Button>
                     </Collapse>
-
                     <Collapse isOpen={this.state.accordion === 2}>
-                      <div className="form-check">
+                      {/* <div className="form-check">
                         <input
                           className="form-check-input"
                           type="checkbox"
@@ -150,7 +153,7 @@ class Saved extends React.Component {
                           <label className="form-check-label" for="defaultCheck1">
                             <p>Contact E-Mail</p>
                           </label>
-                      </div>
+                      </div> */}
                       {/* <div class="form-check">
                         <input
                           class="form-check-input"

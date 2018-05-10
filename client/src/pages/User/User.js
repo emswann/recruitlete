@@ -28,7 +28,7 @@ class User extends Component {
 
   loadStateData = () => {
     const APIfunction = 
-      Auth.getRole() === "athlete" ? API.getAthlete : API.getCoach;
+      Auth.getRole() === "user" ? API.getAthlete : API.getCoach;
 
     APIfunction(Auth.getToken())
     .then(res => res.data)
@@ -61,7 +61,7 @@ class User extends Component {
 
   updateUser = user => {
     const APIfunction = 
-      Auth.getRole() === "athlete" ? API.updateAthlete : API.updateCoach;
+      Auth.getRole() === "user" ? API.updateAthlete : API.updateCoach;
 
     APIfunction(Auth.getToken(), user)
     .then(res => this.setState({ 
@@ -130,6 +130,47 @@ class User extends Component {
     user.colleges.push({info: school, progress: {}});
     this.updateUser(user);
   }
+
+  handleInputChange = event => {
+    const value = event.target.value;
+    let notes = this.state.notes;
+    notes = notes[value]
+  
+    this.setState({
+      notes
+    });
+  };
+
+  handleSaveNote = note => {
+    console.log("Note: "+ note)
+    let user = this.state.user;
+    user.colleges.info.push({ notes : note });
+    this.updateUser(user);
+  };
+
+  toggleFavSchool = favSchool => {
+    let user = this.state.user;
+    let position = 
+    user.colleges.findIndex(school => school.info.name === favSchool);
+    user.colleges[position].info.favorite = !user.colleges[position].info.favorite
+    this.updateUser(user);
+  };
+
+  toggleCheckProgress = checkbox => {
+    let user = this.state.user;
+    let item = 
+    user.colleges.findIndex(school => school.progress === checkbox);
+    user.colleges[item].progress = !user.colleges[item].progress
+    this.updateUser(user);
+  };
+
+  handleDeleteSchool = schoolName => {
+    let user = this.state.user;
+    user.colleges =
+    user.colleges.filter(college => college.info.name !== schoolName);
+   console.log(user.colleges)
+    this.updateUser(user);
+  };
 
   handleScrollToggle = () => {
     this.setState({ scrollActive: !this.state.scrollActive });
@@ -205,7 +246,7 @@ class User extends Component {
                 <ScrollIntoViewIfNeeded 
                   active={!this.state.scrollActive}
                   options={{
-                    block: "end",
+                    block: "center",
                     behavior: "smooth"
                   }} 
                 >
@@ -228,6 +269,12 @@ class User extends Component {
                   }} 
                 >
                   <Saved
+                    savedSchools={this.state.user.colleges}
+                    handleDeleteSchool={this.handleDeleteSchool}
+                    toggleFavSchool= {this.toggleFavSchool}
+                    handleSaveNote={this.handleSaveNote}
+                    handleInputChange={this.handleInputChange}
+                    notes={this.state.notes}
                     handleScrollToggle={this.handleScrollToggle}
                     savedSchools={this.state.user.colleges}
                     handleDeleteSchool={this.handleDeleteSchool}

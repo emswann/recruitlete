@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Collapse, Card, Input } from "mdbreact";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import {
-  faBuilding,
   faTrash,
   faStickyNote,
   faTasks,
@@ -113,7 +112,7 @@ class Saved extends React.Component {
                           datatag={index}
                           name="notes"
                           onChange={this.props.handleInputChange}
-                          value={this.props.notes}
+                          value={this.props.notes[index]}
                         />
                       </div>
                       <Button

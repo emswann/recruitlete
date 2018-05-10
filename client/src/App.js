@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+//import Background from "../public/assets/images/backgroung"
 
 import PrivateRoute from "./components/PrivateRoute";
 import PropsRoute from "./components/PropsRoute";
@@ -25,14 +26,17 @@ class App extends Component {
     this.toggleAuthenticateStatus();
   };
 
+  // backgroundImage: `url(${Background})`
+
   toggleAuthenticateStatus = () => {
     // check authenticated status and toggle state based on that
     this.setState({ authenticated: Auth.isUserAuthenticated() });
   };
 
   render() {
+    var background = {backgroundSize : 'cover', url: ("../public/assets/images/background")};
     return (
-      <Router className="container">
+      <Router className="container" style={{background}}>
         <div>
           <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 

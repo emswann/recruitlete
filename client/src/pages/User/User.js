@@ -241,47 +241,53 @@ class User extends Component {
       <div>
         { this.state.ready &&
           (
-            <div>
-              <SimpleCard>
-                <ScrollIntoViewIfNeeded 
-                  active={!this.state.scrollActive}
-                  options={{
-                    block: "center",
-                    behavior: "smooth"
-                  }} 
-                >
-                  <SearchBox
-                    searchOptionArr={this.state.searchOptionArr}
-                    handleSearchOption={this.handleSearchOption}
-                    handleSearchField={this.handleSearchField}
-                    handleScrollToggle={this.handleScrollToggle}
+            <div className="row">
+              <div className="col-md-2">
+              </div>
+              <div className="col-md-8">
+                <SimpleCard>
+                  <ScrollIntoViewIfNeeded 
+                    active={!this.state.scrollActive}
+                    options={{
+                      block: "center",
+                      behavior: "smooth"
+                    }} 
+                  >
+                    <SearchBox
+                      searchOptionArr={this.state.searchOptionArr}
+                      handleSearchOption={this.handleSearchOption}
+                      handleSearchField={this.handleSearchField}
+                      handleScrollToggle={this.handleScrollToggle}
+                    />
+                  </ScrollIntoViewIfNeeded> 
+                  <Search 
+                    searchSchools={this.state.searchSchools}
+                    handleSaveSchool={this.handleSaveSchool}
                   />
-                </ScrollIntoViewIfNeeded> 
-                <Search 
-                  searchSchools={this.state.searchSchools}
-                  handleSaveSchool={this.handleSaveSchool}
-                />
-                <ScrollIntoViewIfNeeded 
-                  active={this.state.scrollActive}
-                  options={{
-                    block: "start",
-                    behavior: "smooth"
-                  }} 
-                >
-                  <Saved
-                    savedSchools={this.state.user.colleges}
-                    handleDeleteSchool={this.handleDeleteSchool}
-                    toggleFavSchool= {this.toggleFavSchool}
-                    handleSaveNote={this.handleSaveNote}
-                    handleInputChange={this.handleInputChange}
-                    notes={this.state.notes}
-                    toggleNotes={this.toggleNotes}
-                    toggleProgress={this.toggleProgress}
-                    collapse={this.state.collapse}
-                    handleScrollToggle={this.handleScrollToggle}
-                  />
-                </ScrollIntoViewIfNeeded>   
-              </SimpleCard>
+                  <ScrollIntoViewIfNeeded 
+                    active={this.state.scrollActive}
+                    options={{
+                      block: "start",
+                      behavior: "smooth"
+                    }} 
+                  >
+                    <Saved
+                      savedSchools={this.state.user.colleges}
+                      handleDeleteSchool={this.handleDeleteSchool}
+                      toggleFavSchool= {this.toggleFavSchool}
+                      handleSaveNote={this.handleSaveNote}
+                      handleInputChange={this.handleInputChange}
+                      notes={this.state.notes}
+                      toggleNotes={this.toggleNotes}
+                      toggleProgress={this.toggleProgress}
+                      collapse={this.state.collapse}
+                      handleScrollToggle={this.handleScrollToggle}
+                    />
+                  </ScrollIntoViewIfNeeded>   
+                </SimpleCard>
+              </div>
+              <div className="col-md-2">
+              </div>
             </div>
           )
         }

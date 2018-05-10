@@ -9,7 +9,8 @@ import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
-import User from "./pages/User";
+import Athlete from "./pages/Athlete";
+import Coach from "./pages/Coach";
 import Profile from "./pages/Profile";
 import Auth from "./utils/Auth";
 
@@ -39,7 +40,9 @@ class App extends Component {
             toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
           />
 
-          <PrivateRoute path="/user" component={User} />
+          <PrivateRoute path="/athlete" component={Athlete} />
+
+          <PrivateRoute path="/coach" component={Coach} />
 
           <PrivateRoute path="/profile" component={Profile} />
 

@@ -45,8 +45,7 @@ class Login extends Component {
 
       this.props.toggleAuthenticateStatus();
 
-      this.props.history.push(
-        userObj.role === "athlete" ? "/athlete" : "/coach");
+      this.props.history.push(this.props.history.push("/user"));
     }).catch( ({ response }) => {
       const errors = response.data.errors ? response.data.errors : {};
       errors.summary = response.data.message;
@@ -57,11 +56,12 @@ class Login extends Component {
     });   
   };
 
+
   handleInputChange = event => {
     const field = event.target.name;
     const user = this.state.user;
     user[field] = event.target.value;
-
+    
     this.setState({
       user
     });

@@ -34,6 +34,9 @@ const collegeSchema = new Schema({
                       isAsync  : false
                     }
                   },
+  favorite:{ type: Boolean, default: false
+              },
+  notes    : [{ type: String, trim: true }],
   contactInfo   : {
     name        : Name.schema,
     contact     : Contact.schema,

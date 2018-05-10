@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import SimpleCard from "../../components/SimpleCard";
-import API from "../../utils/API";
 import AthleteForm from "../../components/AthleteForm";
-import { Button } from "mdbreact";
 
 class AthleteProfile extends Component {
   state = {
@@ -224,13 +222,12 @@ class AthleteProfile extends Component {
   render() {
     return (
         <div>
-            <p>This is the athlete page!</p>
-            <SimpleCard>
-              <AthleteForm
-                handleFormSubmit={this.handleFormSubmit}
-                handleInputChange={this.handleInputChange}
-                user={this.state.user}
-              />
+          <SimpleCard>
+            <AthleteForm
+              handleFormSubmit={this.handleFormSubmit}
+              handleInputChange={this.handleInputChange}
+              user={this.state.user}
+            />
           </SimpleCard>
         </div>
     )

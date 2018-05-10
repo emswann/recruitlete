@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import SimpleCard from "../../components/SimpleCard";
-import API from "../../utils/API";
 import CoachForm from "../../components/CoachForm";
 
 class CoachProfile extends Component {
@@ -33,7 +32,7 @@ class CoachProfile extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.user.name.first && this.state.user.name.last) {
-      API.updateAthlete({
+      this.props.updateCoach({
         email: this.state.email,
         contact: {
           email: this.state.contact.email,
@@ -73,19 +72,17 @@ class CoachProfile extends Component {
 
   render() {
     return (
-        <div>
-            <p>This is the coach page!</p>
-            <SimpleCard>
-              <CoachForm
-                handleFormSubmit={this.handleFormSubmit}
-                handleInputChange={this.handleInputChange}
-                user={this.state.user}
-              />
-          </SimpleCard>
-        </div>
+      <div>
+        <SimpleCard>
+          <CoachForm
+            handleFormSubmit={this.handleFormSubmit}
+            handleInputChange={this.handleInputChange}
+            user={this.state.user}
+          />
+        </SimpleCard>
+      </div>
     )
   };
-
 };
 
 export default CoachProfile;

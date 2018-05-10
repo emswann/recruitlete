@@ -5,14 +5,16 @@ import PrivateRoute from "./components/PrivateRoute";
 import PropsRoute from "./components/PropsRoute";
 import LoggedOutRoute from "./components/LoggedOutRoute";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
-import Athlete from "./pages/Athlete";
-import Coach from "./pages/Coach";
+import User from "./pages/User";
 import Profile from "./pages/Profile";
 import Auth from "./utils/Auth";
+
+import "./App.css";
 
 class App extends Component {
 
@@ -33,22 +35,22 @@ class App extends Component {
   render() {
     return (
       <Router className="container">
-        <div>
+        <div id="application">
           <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 
           <PropsRoute exact path="/" component={Home} 
             toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
           />
 
-          <PrivateRoute path="/athlete" component={Athlete} />
-
-          <PrivateRoute path="/coach" component={Coach} />
+          <PrivateRoute path="/user" component={User} />
 
           <PrivateRoute path="/profile" component={Profile} />
 
           <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 
           <Route path="/logout" component={Logout} />
+
+          <Footer />
         </div>
       </Router>
     )

@@ -17,7 +17,9 @@ class User extends Component {
     searchOptionArr: [],
     searchField: "",
     searchSchools: [],
-    scrollActive: false
+    scrollActive: false,
+    notes: [],
+    collapse: false
   };
 
   componentDidMount() {
@@ -129,9 +131,110 @@ class User extends Component {
     this.updateUser(user);
   }
 
+  handleInputChange = event => {
+    const value = event.target.value;
+    let notes = this.state.notes;
+    notes = notes[value]
+  
+    this.setState({
+      notes
+    });
+  };
+
+  handleSaveNote = note => {
+    console.log("Note: "+ note)
+    let user = this.state.user;
+    user.colleges.info.push({ notes : note });
+    this.updateUser(user);
+  };
+
+  toggleFavSchool = favSchool => {
+    let user = this.state.user;
+    let position = 
+    user.colleges.findIndex(school => school.info.name === favSchool);
+    user.colleges[position].info.favorite = !user.colleges[position].info.favorite
+    this.updateUser(user);
+  };
+
+  toggleCheckProgress = checkbox => {
+    let user = this.state.user;
+    let item = 
+    user.colleges.findIndex(school => school.progress === checkbox);
+    user.colleges[item].progress = !user.colleges[item].progress
+    this.updateUser(user);
+  };
+
+  handleDeleteSchool = schoolName => {
+    let user = this.state.user;
+    user.colleges =
+    user.colleges.filter(college => college.info.name !== schoolName);
+   console.log(user.colleges)
+    this.updateUser(user);
+  };
+
   handleScrollToggle = () => {
     this.setState({ scrollActive: !this.state.scrollActive });
   }
+
+  toggleNotes = () => {
+    this.setState({ collapse: !this.state.collapse })}
+
+  toggleProgress = () => {
+    let state = "";
+
+    if (this.state.accordion !== 1) {
+      state = 1;
+    } else {
+      state = false;
+    }
+
+    this.setState({
+      accordion: state
+    });
+  }
+
+  handleInputChange = event => {
+    console.log(event.target.dataset.datatag)
+    const field = event.target.data;
+    const notes = this.state.notes;
+    notes[field] = event.target.value;
+    console.log("Notes: " + notes)
+    console.log("Field: " + field)
+    this.setState({
+      notes
+    });
+  };
+
+  handleSaveNote = note => {
+    console.log("Note: " + note)
+    let user = this.state.user;
+    user.colleges.info.push({ notes : note });
+    this.updateUser(user);
+  };
+
+  toggleFavSchool = favSchool => {
+    let user = this.state.user;
+    let position = 
+    user.colleges.findIndex(school => school.info.name === favSchool);
+    user.colleges[position].info.favorite = !user.colleges[position].info.favorite
+    this.updateUser(user);
+  };
+
+  toggleCheckProgress = checkbox => {
+    let user = this.state.user;
+    let item = 
+    user.colleges.findIndex(school => school.progress === checkbox);
+    user.colleges[item].progress = !user.colleges[item].progress
+    this.updateUser(user);
+  };
+
+  handleDeleteSchool = schoolName => {
+    let user = this.state.user;
+    user.colleges =
+    user.colleges.filter(college => college.info.name !== schoolName);
+   console.log(user.colleges)
+    this.updateUser(user);
+  };
 
   render() {
     return ( 
@@ -143,7 +246,7 @@ class User extends Component {
                 <ScrollIntoViewIfNeeded 
                   active={!this.state.scrollActive}
                   options={{
-                    block: "end",
+                    block: "center",
                     behavior: "smooth"
                   }} 
                 >
@@ -166,6 +269,15 @@ class User extends Component {
                   }} 
                 >
                   <Saved
+                    savedSchools={this.state.user.colleges}
+                    handleDeleteSchool={this.handleDeleteSchool}
+                    toggleFavSchool= {this.toggleFavSchool}
+                    handleSaveNote={this.handleSaveNote}
+                    handleInputChange={this.handleInputChange}
+                    notes={this.state.notes}
+                    toggleNotes={this.toggleNotes}
+                    toggleProgress={this.toggleProgress}
+                    collapse={this.state.collapse}
                     handleScrollToggle={this.handleScrollToggle}
                   />
                 </ScrollIntoViewIfNeeded>   

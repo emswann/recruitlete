@@ -7,10 +7,11 @@ import Saved from "../../components/Saved";
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
-class Athlete extends Component {
+class User extends Component {
   state = {
     ready: false,
-    athlete: {},
+    role: "",
+    user: {},
     schools: [],
     searchOption: "",    
     searchOptionArr: [],
@@ -24,20 +25,24 @@ class Athlete extends Component {
   };
 
   loadStateData = () => {
-    API.getAthlete(Auth.getToken())
+    const APIfunction = 
+      Auth.getRole() === "athlete" ? API.getAthlete : API.getCoach;
+
+    APIfunction(Auth.getToken())
     .then(res => res.data)
-    .then(athlete => {
+    .then(user => {
       API.getSchools(Auth.getToken())
       .then(res => {
         const schools = res.data;
 
         this.setState({
           ready: true,
-          athlete,
+          role: Auth.getRole(),
+          user,
           schools,
           searchSchools: this.createSchoolsWithSave(
                            schools, 
-                           athlete.colleges.map(college => college.info.name))
+                           user.colleges.map(college => college.info.name))
         })
       })
     })
@@ -52,17 +57,20 @@ class Athlete extends Component {
       return school;
     });
 
-  updateAthlete = athlete => {
-    API.updateAthlete(Auth.getToken(), athlete)
+  updateUser = user => {
+    const APIfunction = 
+      Auth.getRole() === "athlete" ? API.updateAthlete : API.updateCoach;
+
+    APIfunction(Auth.getToken(), user)
     .then(res => this.setState({ 
-            athlete: res.data,
+            user: res.data,
             searchSchools: this.createSchoolsWithSave(
                              this.state.schools, 
                              res.data.colleges.map(college => college.info.name)
                            )
             }))
     .catch(err => console.log(err));
-  };
+  };    
 
   handleSearchOption = event => {
     const searchOption = event.target.value;
@@ -116,9 +124,9 @@ class Athlete extends Component {
   }
 
   handleSaveSchool = school => {
-    let athlete = this.state.athlete;
-    athlete.colleges.push({info: school, progress: {}});
-    this.updateAthlete(athlete);
+    let user = this.state.user;
+    user.colleges.push({info: school, progress: {}});
+    this.updateUser(user);
   }
 
   handleScrollToggle = () => {
@@ -135,7 +143,7 @@ class Athlete extends Component {
                 <ScrollIntoViewIfNeeded 
                   active={!this.state.scrollActive}
                   options={{
-                    block: "bottom",
+                    block: "end",
                     behavior: "smooth"
                   }} 
                 >
@@ -170,4 +178,4 @@ class Athlete extends Component {
   };
 }
 
-export default Athlete;
+export default User;

@@ -40,23 +40,31 @@ class Profile extends Component {
 
   render() {
     return ( 
-      <div>
+      <div className="container">
         { this.state.ready &&
           (
-            <SimpleCard>
-              {Auth.isUserAnAthlete() ? (
-                <AthleteProfile
-                  athlete={this.state.user}
-                  updateAthlete={this.updateUser}
-                />
-              ) :
-              (
-                <CoachProfile
-                  coach={this.state.user}
-                  updateCoach={this.updateUser}
-                />
-              )}
-            </SimpleCard>
+            <div className="row">
+              <div className="col-md-2">
+              </div>
+              <div className="col-md-8">
+                <SimpleCard>
+                  {Auth.isUserAnAthlete() ? (
+                    <AthleteProfile
+                      athlete={this.state.user}
+                      updateAthlete={this.updateUser}
+                    />
+                  ) :
+                  (
+                    <CoachProfile
+                      coach={this.state.user}
+                      updateCoach={this.updateUser}
+                    />
+                  )}
+                </SimpleCard>
+              </div>
+              <div className="col-md-2">
+              </div>
+            </div>
           )
         }
       </div>

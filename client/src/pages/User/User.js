@@ -67,7 +67,7 @@ class User extends Component {
     .then(res => this.setState({ 
             user: res.data,
             searchSchools: this.createSchoolsWithSave(
-                             this.state.schools, 
+                             this.state.searchSchools, 
                              res.data.colleges.map(college => college.info.name)
                            )
             }))
@@ -101,7 +101,7 @@ class User extends Component {
         break;
       default:
         searchOptionArr = [
-          ...new Set(this.schools.map(school => school.name))
+          ...new Set(this.state.schools.map(school => school.name))
         ];
     }
 
@@ -109,11 +109,16 @@ class User extends Component {
   };
 
   handleSearchField = event => {
-    const searchOption = this.state.searchOption;
+    const searchOption = 
+      this.state.searchOption.toLowerCase() === "all" 
+      ? "name" : this.state.searchOption;
     const searchField = event.target.value;
 
+console.log("state: " + this.state.searchOption);
+console.log("search: " + searchOption);
     let searchSchools = this.state.schools.filter(
-      school => school[searchOption] === searchField);
+      school => school[searchOption] === searchField
+    );
 
     searchSchools.sort((a,b) => {
       const nameA = a.name.toLowerCase();

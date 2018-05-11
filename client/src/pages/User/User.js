@@ -13,9 +13,9 @@ class User extends Component {
     role: "",
     user: {},
     schools: [],
-    searchOption: "",    
+    searchOption: "default",    
     searchOptionArr: [],
-    searchField: "",
+    searchField: "default",
     searchSchools: [],
     scrollActive: false,
     notes: [],
@@ -67,7 +67,7 @@ class User extends Component {
     .then(res => this.setState({ 
             user: res.data,
             searchSchools: this.createSchoolsWithSave(
-                             this.state.schools, 
+                             this.state.searchSchools, 
                              res.data.colleges.map(college => college.info.name)
                            )
             }))
@@ -75,7 +75,7 @@ class User extends Component {
   };    
 
   handleSearchOption = event => {
-    const searchOption = event.target.value;
+    let searchOption = event.target.value;
     let searchOptionArr = [];
 
     switch (searchOption) {
@@ -99,13 +99,21 @@ class User extends Component {
           ...new Set(this.state.schools.map(school => school.region))
         ];
         break;
-      default:
+      case "name":
         searchOptionArr = [
-          ...new Set(this.schools.map(school => school.name))
+          ...new Set(this.state.schools.map(school => school.name))
+        ];
+        break;
+      default:
+        searchOption = "default";
+        searchOptionArr = [
+          ...new Set(this.state.schools.map(school => school.name))
         ];
     }
 
-    this.setState({ searchOption, searchOptionArr: searchOptionArr.sort() });
+    this.setState({ searchOption, 
+                    searchOptionArr: searchOptionArr.sort(),
+                    searchField: "default" });
   };
 
   handleSearchField = event => {
@@ -113,7 +121,8 @@ class User extends Component {
     const searchField = event.target.value;
 
     let searchSchools = this.state.schools.filter(
-      school => school[searchOption] === searchField);
+      school => school[searchOption] === searchField
+    );
 
     searchSchools.sort((a,b) => {
       const nameA = a.name.toLowerCase();
@@ -254,7 +263,9 @@ class User extends Component {
                     }} 
                   >
                     <SearchBox
+                      searchOption={this.state.searchOption}
                       searchOptionArr={this.state.searchOptionArr}
+                      searchField={this.state.searchField}
                       handleSearchOption={this.handleSearchOption}
                       handleSearchField={this.handleSearchField}
                       handleScrollToggle={this.handleScrollToggle}

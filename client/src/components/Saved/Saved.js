@@ -101,7 +101,7 @@ class Saved extends React.Component {
                         <FontAwesomeIcon icon={faTrash} size={"1x"} /> Delete
                       </Button>
                     </div>
-                    <Collapse isOpen={this.props.collapse}>
+                    <Collapse isOpen={this.props.collapse[index] ? this.props.collapse[index] : false}>
                       <Card>
                         <p>{school.info.notes}</p>
                       </Card>
@@ -128,7 +128,7 @@ class Saved extends React.Component {
                       </Button>
                     </Collapse>
                     <div>
-                      <Collapse isOpen={this.props.collapse[index] ? this.props.collapse[index] : false}>
+                      <Collapse>
                       </Collapse>
                     </div>
                   </div>

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import SimpleCard from "../../components/SimpleCard";
 import CoachForm from "../../components/CoachForm";
 
 class CoachProfile extends Component {
@@ -72,15 +71,11 @@ class CoachProfile extends Component {
 
   render() {
     return (
-      <div>
-        <SimpleCard>
-          <CoachForm
-            handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange}
-            user={this.state.user}
-          />
-        </SimpleCard>
-      </div>
+      <CoachForm
+        handleFormSubmit={this.handleFormSubmit}
+        handleInputChange={this.handleInputChange}
+        user={this.state.user}
+      />
     )
   };
 };

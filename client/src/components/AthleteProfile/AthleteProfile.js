@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import SimpleCard from "../../components/SimpleCard";
 import AthleteForm from "../../components/AthleteForm";
 
 class AthleteProfile extends Component {
   state = {
     user: {
-      email: this.props.athlete.email,
+      email: this.props.user.email,
       contact: {
         email: "",
         phone: "",
@@ -221,15 +220,11 @@ class AthleteProfile extends Component {
 
   render() {
     return (
-        <div>
-          <SimpleCard>
-            <AthleteForm
-              handleFormSubmit={this.handleFormSubmit}
-              handleInputChange={this.handleInputChange}
-              user={this.state.user}
-            />
-          </SimpleCard>
-        </div>
+      <AthleteForm
+        handleFormSubmit={this.handleFormSubmit}
+        handleInputChange={this.handleInputChange}
+        user={this.state.user}
+      />
     )
   };
 

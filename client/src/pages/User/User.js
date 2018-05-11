@@ -19,7 +19,7 @@ class User extends Component {
     searchSchools: [],
     scrollActive: false,
     notes: [],
-    collapse: false
+    collapse: []
   };
 
   componentDidMount() {
@@ -142,9 +142,9 @@ class User extends Component {
   };
 
   handleSaveNote = note => {
-    console.log("Note: "+ note)
     let user = this.state.user;
     user.colleges.info.push({ notes : note });
+    
     this.updateUser(user);
   };
 
@@ -168,7 +168,7 @@ class User extends Component {
     let user = this.state.user;
     user.colleges =
     user.colleges.filter(college => college.info.name !== schoolName);
-   console.log(user.colleges)
+ 
     this.updateUser(user);
   };
 
@@ -176,8 +176,12 @@ class User extends Component {
     this.setState({ scrollActive: !this.state.scrollActive });
   }
 
-  toggleNotes = () => {
-    this.setState({ collapse: !this.state.collapse })}
+  toggleNotes = index => {
+    const collapse = this.state.collapse;
+    collapse[index] = !collapse[index];
+
+    this.setState({ collapse })
+  }
 
   toggleProgress = () => {
     let state = "";
@@ -194,19 +198,16 @@ class User extends Component {
   }
 
   handleInputChange = event => {
-    console.log(event.target.dataset.datatag)
     const field = event.target.data;
     const notes = this.state.notes;
     notes[field] = event.target.value;
-    console.log("Notes: " + notes)
-    console.log("Field: " + field)
+
     this.setState({
       notes
     });
   };
 
   handleSaveNote = note => {
-    console.log("Note: " + note)
     let user = this.state.user;
     user.colleges.info.push({ notes : note });
     this.updateUser(user);
@@ -232,7 +233,7 @@ class User extends Component {
     let user = this.state.user;
     user.colleges =
     user.colleges.filter(college => college.info.name !== schoolName);
-   console.log(user.colleges)
+ 
     this.updateUser(user);
   };
 

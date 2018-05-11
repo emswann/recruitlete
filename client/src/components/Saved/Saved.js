@@ -62,7 +62,7 @@ class Saved extends React.Component {
                         type="button"
                         name="action"
                         value="notes"
-                        onClick={this.props.toggleNotes}
+                        onClick={() => this.props.toggleNotes(index)}
                       >
                         <FontAwesomeIcon icon={faStickyNote} size={"1x"} />
                       </Button>
@@ -128,31 +128,7 @@ class Saved extends React.Component {
                       </Button>
                     </Collapse>
                     <div>
-                      <Collapse isOpen={this.props.collapse}>
-                        {/* <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          value={school.progress.contactEmail}
-                          id="defaultCheck1"
-                        />
-                          <label className="form-check-label" for="defaultCheck1">
-                            <p>Contact E-Mail</p>
-                          </label>
-                      </div> */}
-                        {/* <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id="defaultCheck2"
-                          disabled
-                        >
-                          <label class="form-check-label" for="defaultCheck2">
-                            Disabled checkbox
-                          </label>
-                        </input>
-                      </div> */}
+                      <Collapse isOpen={this.props.collapse[index] ? this.props.collapse[index] : false}>
                       </Collapse>
                     </div>
                   </div>

@@ -18,26 +18,29 @@ const SearchBox = props => (
         <div className="input-group">
           <select
             className="custom-select"
-            id="searchOption"
+            name="searchOption"
+            value={props.searchOption}
             onChange={props.handleSearchOption}
           >
-            <option defaultValue>Search By...</option>
-            <option value="state">State</option>
-            <option value="division">Division</option>
-            <option value="region">Region</option>
-            <option value="conference">Conference</option>
-            <option value="name">All</option>
+            <option name="default" value="default">Search By...</option>
+            <option name="state" value="state">State</option>
+            <option name="division" value="division">Division</option>
+            <option name="region" value="region">Region</option>
+            <option name="conference" value="conference">Conference</option>
+            <option name="name" value="name">All</option>
           </select>
 
           <div className="input-group">
             <select 
               className="custom-select" 
-              id="searchField"
+              name="searchField"
+              value={props.searchField}
               onChange={props.handleSearchField}
             >
-              <option defaultValue>Search By...</option>
+              <option name="default" value="default">Search By...</option>
               {props.searchOptionArr.map((choice, index) => (
-                <option 
+                <option
+                  name={choice} 
                   value={choice} 
                   key={index}
                 >

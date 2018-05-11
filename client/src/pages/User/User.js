@@ -13,9 +13,9 @@ class User extends Component {
     role: "",
     user: {},
     schools: [],
-    searchOption: "",    
+    searchOption: "default",    
     searchOptionArr: [],
-    searchField: "",
+    searchField: "default",
     searchSchools: [],
     scrollActive: false,
     notes: [],
@@ -99,14 +99,21 @@ class User extends Component {
           ...new Set(this.state.schools.map(school => school.region))
         ];
         break;
+      case "name":
+        searchOptionArr = [
+          ...new Set(this.state.schools.map(school => school.name))
+        ];
+        break;
       default:
-        searchOption = "name";
+        searchOption = "default";
         searchOptionArr = [
           ...new Set(this.state.schools.map(school => school.name))
         ];
     }
 
-    this.setState({ searchOption, searchOptionArr: searchOptionArr.sort() });
+    this.setState({ searchOption, 
+                    searchOptionArr: searchOptionArr.sort(),
+                    searchField: "default" });
   };
 
   handleSearchField = event => {
@@ -256,7 +263,9 @@ class User extends Component {
                     }} 
                   >
                     <SearchBox
+                      searchOption={this.state.searchOption}
                       searchOptionArr={this.state.searchOptionArr}
+                      searchField={this.state.searchField}
                       handleSearchOption={this.handleSearchOption}
                       handleSearchField={this.handleSearchField}
                       handleScrollToggle={this.handleScrollToggle}

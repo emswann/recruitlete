@@ -119,7 +119,7 @@ class Saved extends React.Component {
                         color="primary"
                         type="button"
                         name="action"
-                        value="saveNote"
+                        value="saveNote" 
                         onClick={() =>
                           this.props.handleSaveNote(this.props.notes[index])
                         }

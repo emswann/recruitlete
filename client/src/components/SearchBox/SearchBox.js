@@ -26,7 +26,7 @@ const SearchBox = props => (
             <option value="division">Division</option>
             <option value="region">Region</option>
             <option value="conference">Conference</option>
-            <option value="all">All</option>
+            <option value="name">All</option>
           </select>
 
           <div className="input-group">

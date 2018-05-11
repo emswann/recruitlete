@@ -75,7 +75,7 @@ class User extends Component {
   };    
 
   handleSearchOption = event => {
-    const searchOption = event.target.value;
+    let searchOption = event.target.value;
     let searchOptionArr = [];
 
     switch (searchOption) {
@@ -100,6 +100,7 @@ class User extends Component {
         ];
         break;
       default:
+        searchOption = "name";
         searchOptionArr = [
           ...new Set(this.state.schools.map(school => school.name))
         ];
@@ -109,13 +110,9 @@ class User extends Component {
   };
 
   handleSearchField = event => {
-    const searchOption = 
-      this.state.searchOption.toLowerCase() === "all" 
-      ? "name" : this.state.searchOption;
+    const searchOption = this.state.searchOption;
     const searchField = event.target.value;
 
-console.log("state: " + this.state.searchOption);
-console.log("search: " + searchOption);
     let searchSchools = this.state.schools.filter(
       school => school[searchOption] === searchField
     );

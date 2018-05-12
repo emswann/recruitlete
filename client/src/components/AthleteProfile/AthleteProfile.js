@@ -2,111 +2,98 @@ import React, { Component } from "react";
 import AthleteForm from "../../components/AthleteForm";
 
 class AthleteProfile extends Component {
-  state = {
-    user: {
+  constructor(props) {
+    super(props)
+
+    // During registration, the app creates empty objects for the profile 
+    // related subschemas so do not have to work about undefined values. Can do 
+    // straight assignement.
+    this.state = {
       email: this.props.user.email,
-      contact: {
-        email: "",
-        phone: "",
-        url: ""
-      },
-      name: {
-        first: "",
-        middle: "",
-        last: ""
-      },
-      address: {
-        street1: "",
-        street2: "",
-        city: "",
-        state: "",
-        zip: "",
-        zip4: ""
-      },
-      parentNames: "",
-      jerseyNum: "",
-      gradYear: "",
-      positions: "",
-      ncaaId: "",
-      birthDate: Date,
-      scholastic: {
-        weightGPA: "",
-        unweightGPA: "",
-        classRank: "",
-        classSize: "",
-        scoreSAT: "",
-        scoreACT: "",
-        major: ""
-      },
-      club: {
-        name: "",
-        team: "",
-        director: {
-          first: "",
-          middle: "",
-          last: ""
-        },
-        coach: {
-          first: "",
-          middle: "",
-          last: ""
-        },
-        address: {
-          street1: "",
-          street2: "",
-          city: "",
-          state: "",
-          zip: "",
-          zip4: ""
-        },
-        contact: {
-          email: "",
-          phone: "",
-          url: ""
-        },
-      },
-      highSchool: {
-        name: "",
-        coach: {
-          first: "",
-          middle: "",
-          last: ""
-        },
-        address: {
-          street1: "",
-          street2: "",
-          city: "",
-          state: "",
-          zip: "",
-          zip4: ""
-        },
-        contact: {
-          email: "",
-          phone: "",
-          url: ""
-        },
-      },
-      statistics: {
-        height: "",
-        weight: "",
-        handed: "",
-        standReach: "",
-        approachTouch: "",
-        blockJump: ""
-      },
-      athleteAccomps: "",
-      schoolAccomps: "",
-      videoLinks: "",
-      profileImg: "",
+      // contact email is not used for user (there because of contact.schema)
+      phone: this.props.user.contact.phone,
+      url: this.props.user.contact.url,
+      firstName: this.props.user.name.first,
+      middleName: this.props.user.name.middle,
+      lastName: this.props.user.name.last,
+      street1: this.props.user.address.street1,
+      street2: this.props.user.address.street2, 
+      city: this.props.user.address.city,
+      state: this.props.user.address.state,
+      zip: this.props.user.address.zip,
+      zip4: this.props.user.address.zip4,
+      parentNames: this.props.user.parentNames,
+      jerseyNum: this.props.user.jerseyNum,
+      gradYear: this.props.user.gradYear,
+      positions: this.props.user.positions,
+      ncaaId: this.props.user.ncaaId,
+      birthDate: this.props.user.birthDate,
+      weightGPA: this.props.user.weightGPA,
+      unweightGPA: this.props.user.unweightGPA,
+      classRank: this.props.user.classRank,
+      classSize: this.props.user.classSize,
+      scoreSAT: this.props.user.scoreSAT,
+      scoreACT: this.props.user.scoreACT,
+      major: this.props.user.major, 
+      clubName: this.props.user.club.name,
+      clubTeam: this.props.user.club.team,
+      clubDirFirst: this.props.user.club.director.first,
+      clubDirMiddle: this.props.user.club.director.middle,
+      clubDirLast: this.props.user.club.director.last,
+      clubCoachFirst: this.props.user.club.coach.first,
+      clubCoachMiddle: this.props.user.club.coach.middle,
+      clubCoachLast: this.props.user.club.coach.last,
+      clubStreet1: this.props.user.club.address.street1,
+      clubStreet2: this.props.user.club.address.street2, 
+      clubCity: this.props.user.club.address.city,
+      clubState: this.props.user.club.address.state,
+      clubZip: this.props.user.club.address.zip,
+      clubZip4: this.props.user.club.address.zip4,
+      clubEmail: this.props.user.club.contact.email,
+      clubPhone: this.props.user.club.contact.phone,
+      clubUrl: this.props.user.club.contact.url,
+      hsName: this.props.user.highSchool.name,
+      hsCoachFirst: this.props.user.highSchool.coach.first,
+      hsCoachMiddle: this.props.user.highSchool.coach.middle,
+      hsCoachLast: this.props.user.highSchool.coach.last,
+      hsStreet1: this.props.user.highSchool.address.street1,
+      hsStreet2: this.props.user.highSchool.address.street2, 
+      hsCity: this.props.user.highSchool.address.city,
+      hsState: this.props.user.highSchool.address.state,
+      hsZip: this.props.user.highSchool.address.zip,
+      hsZip4: this.props.user.highSchool.address.zip4,
+      hsEmail: this.props.user.highSchool.contact.email,
+      hsPhone: this.props.user.highSchool.contact.phone,
+      hsUrl: this.props.user.highSchool.contact.url,
+      height: this.props.user.height,
+      weight: this.props.user.weight,
+      handed: this.props.user.handed,
+      standReach: this.props.user.standReach,
+      approachTouch: this.props.user.approachTouch,
+      blockJump: this.props.user.blockJump,
+      athleteAccomps: this.props.user.athleteAccomps,
+      schoolAccomps: this.props.user.schoolAccomps,
+      videoLinks: this.props.user.videoLinks,
+      profileImg: this.props.user.profileImg
     }
+
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  };
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
       this.props.updateAthlete({
-        email: "hello@gmail.com",
+        email: this.state.user.email,
         contact: {
-          email: this.state.user.contact.email,
+          email: this.state.user.email,
           phone: this.state.user.contact.phone,
           url: this.state.user.contact.url
         },
@@ -208,22 +195,12 @@ class AthleteProfile extends Component {
 
   };
 
-  handleInputChange = event => {
-    const field = event.target.name;
-    const user = this.state.user;
-    user[field] = event.target.value;
-
-    this.setState({
-      user
-    });
-  };
-
   render() {
     return (
       <AthleteForm
         handleFormSubmit={this.handleFormSubmit}
         handleInputChange={this.handleInputChange}
-        user={this.state.user}
+        user={this.state}
       />
     )
   };

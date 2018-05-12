@@ -11,14 +11,7 @@ const contactSchema = new Schema({
                isAsync  : false
              }
            },
-  phone  : { type: String, trim: true,
-             validate: {
-               validator: v => validator.isNumeric(v) &&
-                               validator.isLength(v, { min: 10, max: 10 }),
-               message  : "{VALUE} is not a valid phone number",
-               isAsync   : false
-             } 
-           },
+  phone  : { type: String, trim: true},
   url    : { type: String, trim: true,
              validate: {
                validator: validator.isURL,

@@ -1,488 +1,370 @@
 import React from "react";
-import { Button, Input } from "mdbreact";
+import { Button } from "mdbreact";
 import SimpleCard from "../../components/SimpleCard";
+
+import "./AthleteForm.css"
 
 const AthleteInput = ({
     handleFormSubmit,
     handleInputChange,
     user,
   }) => (
-    <div className="row">
-      <div className="offset-md-4 col-md-4">
-        <SimpleCard>
-          <form>
-            <p className="h5 text-center justify-center mb-4">Create Athlete Profile</p>
-            <Input
-              label="E-mail"
-              icon="envelope"
-              group type="email"
-              name="email"
-              onChange={handleInputChange}
-              value={user.contact.email}
-            />
-            <Input
-              label="Phone"
-              icon="phone"
-              group type="phone"
-              name="phone"
-              onChange={handleInputChange}
-              value={user.contact.phone}
-            />
-            <Input
-              label="Website"
-              group type="website"
-              name="url"
-              onChange={handleInputChange}
-              value={user.contact.url}
-            />
-            <Input
-              label="First Name"
-              group type="name"
-              name="firstName"
-              onChange={handleInputChange}
-              value={user.name.first}
-            />
-            <Input
-              label="Middle Name"
-              group type="name"
-              name="middleName"
-              onChange={handleInputChange}
-              value={user.name.middle}
-            />
-            <Input
-              label="Last Name"
-              group type="name"
-              name="lastName"
-              onChange={handleInputChange}
-              value={user.name.last}
-            />
-            <Input
-              label="Street"
-              group type="address"
-              name="street1"
-              onChange={handleInputChange}
-              value={user.address.street1}
-            />
-            <Input
-              label="Street 2"
-              group type="address"
-              name="street2"
-              onChange={handleInputChange}
-              value={user.address.street2}
-            />
-            <Input
-              label="City"
-              group type="address"
-              name="city"
-              onChange={handleInputChange}
-              value={user.address.city}
-            />
-            <Input
-              label="State"
-              group type="address"
-              name="state"
-              onChange={handleInputChange}
-              value={user.address.state}
-            />
-            <Input
-              label="Zip Code"
-              group type="address"
-              name="zip"
-              onChange={handleInputChange}
-              value={user.address.zip}
-            />
-            <Input
-              label="Zip 4"
-              group type="address"
-              name="zip4"
-              onChange={handleInputChange}
-              value={user.address.zip4}
-            />
-            <Input
-              label="Parent Names"
-              group type="parentNames"
-              name="parentNames"
-              onChange={handleInputChange}
-              value={user.parentNames}
-            />
-            <Input
-              label="Jersey Number"
-              group type="jerseyNumber"
-              name="jerseyNumber"
-              onChange={handleInputChange}
-              value={user.jerseyNum}
-            />
-            <Input
-              label="Graduating Year"
-              group type="gradYear"
-              name="gradYear"
-              onChange={handleInputChange}
-              value={user.gradYear}
-            />
-            <Input
-              label="Positions"
-              group type="positions"
-              name="positions"
-              onChange={handleInputChange}
-              value={user.positions}
-            />
-            <Input
-              label="NCAA ID"
-              group type="ncaaId"
-              name="ncaaId"
-              onChange={handleInputChange}
-              value={user.ncaaId}
-            />
-            <Input
-              label="Birthdate"
-              group type="birthDate"
-              name="birthDate"
-              onChange={handleInputChange}
-              value={user.birthDate}
-            />
-            <Input
-              label="Weighted GPA"
-              group type="scholastic"
-              name="weightGPA"
-              onChange={handleInputChange}
-              value={user.scholastic.weightGPA}
-            />
-            <Input
-              label="Unweighted GPA"
-              group type="scholastic"
-              name="unweightGPA"
-              onChange={handleInputChange}
-              value={user.scholastic.unweightGPA}
-            />
-            <Input
-              label="Class Rank"
-              group type="scholastic"
-              name="classRank"
-              onChange={handleInputChange}
-              value={user.scholastic.classRank}
-            />
-            <Input
-              label="Class Size"
-              group type="scholastic"
-              name="classSize"
-              onChange={handleInputChange}
-              value={user.scholastic.classSize}
-            />
-            <Input
-              label="SAT Score"
-              group type="scholastic"
-              name="scoreSAT"
-              onChange={handleInputChange}
-              value={user.scholastic.scoreSAT}
-            />
-            <Input
-              label="ACT Score"
-              group type="scholastic"
-              name="scoreACT"
-              onChange={handleInputChange}
-              value={user.scholastic.scoreACT}
-            />
-            <Input
-              label="Major"
-              group type="scholastic"
-              name="major"
-              onChange={handleInputChange}
-              value={user.scholastic.major}
-            />
-            <Input
-              label="Club Name"
-              group type="club"
-              name="clubName"
-              onChange={handleInputChange}
-              value={user.club.name}
-            />
-            <Input
-              label="Club Team"
-              group type="club"
-              name="clubTeam"
-              onChange={handleInputChange}
-              value={user.club.team}
-            />
-            <Input
-              label="Club Director First Name"
-              group type="club"
-              name="director"
-              onChange={handleInputChange}
-              value={user.club.director.first}
-            />
-            <Input
-              label="Club Director Middle Name"
-              group type="club"
-              name="director"
-              onChange={handleInputChange}
-              value={user.club.director.middle}
-            />
-            <Input
-              label="Club Director Last Name"
-              group type="club"
-              name="director"
-              onChange={handleInputChange}
-              value={user.club.director.last}
-            />
-            <Input
-              label="Club Coach First Name"
-              group type="club"
-              name="coachClub"
-              onChange={handleInputChange}
-              value={user.club.coach.first}
-            />
-            <Input
-              label="Club Coach Middle Name"
-              group type="club"
-              name="coachClub"
-              onChange={handleInputChange}
-              value={user.club.coach.middle}
-            />            
-            <Input
-            label="Club Coach Last Name"
-            group type="club"
-            name="coachClub"
-            onChange={handleInputChange}
-            value={user.club.coach.last}
+    <SimpleCard>
+      <h5 className="text-center justify-center mb-4">Athlete Profile</h5>
+	    <form>
+        <p>
+          <label htmlFor="email">E-mail:</label>
+          <input id="email" type="text" name="email" value={user.email} onChange={handleInputChange}
           />
-            <Input
-              label="Club Street Address"
-              group type="club"
-              name="clubStreet"
-              onChange={handleInputChange}
-              value={user.club.address.street1}
-            />
-            <Input
-              label="Club Street Address 2"
-              group type="club"
-              name="clubStreet"
-              onChange={handleInputChange}
-              value={user.club.address.street2}
-            />
-            <Input
-              label="Club City"
-              group type="club"
-              name="clubCity"
-              onChange={handleInputChange}
-              value={user.club.address.city}
-            />
-            <Input
-              label="Club State"
-              group type="club"
-              name="clubState"
-              onChange={handleInputChange}
-              value={user.club.address.state}
-            />
-            <Input
-              label="Club Zip Code"
-              icon="club"
-              group type="clubZip"
-              name="clubZip"
-              onChange={handleInputChange}
-              value={user.club.address.zip}
-            />
-            <Input
-              label="Club Zip 4"
-              group type="club"
-              name="clubZip4"
-              onChange={handleInputChange}
-              value={user.club.address.zip4}
-            />
-            <Input
-              label="Club Email"
-              group type="clubContact"
-              name="clubEmail"
-              onChange={handleInputChange}
-              value={user.club.contact.email}
-            />
-            <Input
-              label="Club Phone"
-              group type="clubContact"
-              name="clubPhone"
-              onChange={handleInputChange}
-              value={user.club.contact.phone}
-            />
-            <Input
-              label="Club Website"
-              group type="clubContact"
-              name="clubURL"
-              onChange={handleInputChange}
-              value={user.club.contact.url}
-            />
-            <Input
-              label="High School Name"
-              group type="highSchool"
-              name="highSchoolName"
-              onChange={handleInputChange}
-              value={user.highSchool.name}
-            />
-            <Input
-              label="High School Coach First Name"
-              group type="highSchool"
-              name="highSchoolCoach"
-              onChange={handleInputChange}
-              value={user.highSchool.coach.first}
-            />
-            <Input
-              label="High School Coach Middle Name"
-              group type="highSchool"
-              name="highSchoolCoach"
-              onChange={handleInputChange}
-              value={user.highSchool.coach.middle}
-            />
-            <Input
-              label="High School Coach Last Name"
-              group type="highSchool"
-              name="highSchoolCoach"
-              onChange={handleInputChange}
-              value={user.highSchool.coach.last}
-            />
-            <Input
-              label="High School Street Address 1"
-              group type="highSchool"
-              name="highSchoolStreet1"
-              onChange={handleInputChange}
-              value={user.highSchool.address.street1}
-            />
-            <Input
-              label="High School Street Address 2"
-              group type="highSchool"
-              name="highSchoolStreet2"
-              onChange={handleInputChange}
-              value={user.highSchool.address.street2}
-            />
-            <Input
-              label="High School City"
-              group type="highSchool"
-              name="highSchoolCity"
-              onChange={handleInputChange}
-              value={user.highSchool.address.city}
-            />
-            <Input
-              label="High School State"
-              group type="highSchool"
-              name="highSchoolState"
-              onChange={handleInputChange}
-              value={user.highSchool.address.state}
-            />
-            <Input
-              label="High School Zip Code"
-              group type="highSchool"
-              name="highSchoolZip"
-              onChange={handleInputChange}
-              value={user.highSchool.address.zip}
-            />
-            <Input
-              label="High School Zip 4"
-              group type="highSchool"
-              name="highSchoolZip4"
-              onChange={handleInputChange}
-              value={user.highSchool.address.zip4}
-            />
-            <Input
-              label="High School Email"
-              group type="highSchool"
-              name="highSchoolEmail"
-              onChange={handleInputChange}
-              value={user.highSchool.contact.email}
-            />
-            <Input
-              label="High School Phone"
-              group type="highSchool"
-              name="highSchoolPhone"
-              onChange={handleInputChange}
-              value={user.highSchool.contact.phone}
-            />
-            <Input
-              label="High School Website"
-              group type="highSchool"
-              name="highSchoolURL"
-              onChange={handleInputChange}
-              value={user.highSchool.contact.url}
-            />
-            <Input
-              label="Height"
-              group type="statistics"
-              name="height"
-              onChange={handleInputChange}
-              value={user.statistics.height}
-            />
-            <Input
-              label="Weight"
-              group type="statistics"
-              name="weight"
-              onChange={handleInputChange}
-              value={user.statistics.weight}
-            />
-            <Input
-              label="Handed"
-              group type="statistics"
-              name="handed"
-              onChange={handleInputChange}
-              value={user.statistics.handed}
-            />
-            <Input
-              label="Standing Reach"
-              group type="statistics"
-              name="standReach"
-              onChange={handleInputChange}
-              value={user.statistics.standReach}
-            />
-            <Input
-              label="Approach Touch"
-              group type="statistics"
-              name="approachTouch"
-              onChange={handleInputChange}
-              value={user.statistics.approachTouch}
-            />
-            <Input
-              label="Block Jump"
-              group type="statistics"
-              name="blockJump"
-              onChange={handleInputChange}
-              value={user.statistics.blockJump}
-            />
-            <Input
-              label="Athlete Accomplishments"
-              group type="athleteAccomps"
-              name="athleteAccomps"
-              onChange={handleInputChange}
-              value={user.athleteAccomps}
-            />
-            <Input
-              label="School Accomplishments"
-              group type="schoolAccomps"
-              name="schoolAccomps"
-              onChange={handleInputChange}
-              value={user.schoolAccomps}
-            />
-            <Input
-              label="Video Links"
-              group type="videoLinks"
-              name="videoLinks"
-              onChange={handleInputChange}
-              value={user.videoLinks}
-            />
-            <Input
-              label="Profile Image"
-              group type="profileImg"
-              name="profileImg"
-              onChange={handleInputChange}
-              value={user.profileImg}
-            />
-            <div className="text-center">
-              <Button block color="danger"
-                type="submit" 
-                name="action"
-                value="populate" 
-                onClick={handleFormSubmit}>
-                Submit
-              </Button>
-            </div>
-          </form>
-        </SimpleCard>
+        </p>
+        <p>
+          <label htmlFor="first">First Name:</label>
+          <input id="first" type="text" name="first" value={user.first} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="middle">Middle Name:</label>
+          <input id="middle" type="text" name="middle" value={user.middle} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="last">Last Name:</label>
+          <input id="last" type="text" name="last" value={user.last} onChange={handleInputChange}
+          />
+        </p>
+
+        <h6 className="font-weight-bold mt-3 mb-0">Contact Info:</h6>
+        <p>
+          <label htmlFor="phone">Phone:</label>
+          <input id="phone" type="text" name="phone" value={user.phone} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="url">Website:</label>
+          <input id="url" type="url" name="url" value={user.url} onChange={handleInputChange}
+          />
+        </p>
+
+        <h6 className="font-weight-bold mt-3 mb-0">Address:</h6>
+        <p>
+          <label htmlFor="street1">Street1:</label>
+          <input id="street1" type="text" name="street1" value={user.street1} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="street2">Street2:</label>
+          <input id="street2" type="text" name="street2" value={user.street2} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="city">City:</label>
+          <input id="city" type="text" name="city" value={user.city} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="state">State:</label>
+          <input id="state" type="text" name="state" value={user.state} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="zip">Zip Code:</label>
+          <input id="zip" type="number" name="zip" value={user.zip} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="zip4">Zip Code+4:</label>
+          <input id="zip4" type="number" name="zip4" value={user.zip4} onChange={handleInputChange}
+          />
+        </p>
+
+        <h6 className="font-weight-bold mt-3 mb-0">Personal Info:</h6>
+        <p>
+          <label htmlFor="parentNames">Parent Names:</label>
+          <input id="parentNames" type="text" name="parentNames" value={user.parentNames} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="birthDate">Birth Date:</label>
+          <input id="birthDate" type="date" name="birthDate" value={user.birthDate} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="gradYear">Graduation Year:</label>
+          <input id="gradYear" type="number" name="gradYear" value={user.gradYear} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="jerseyNum">Jersey Number:</label>
+          <input id="jerseyNum" type="number" name="jerseyNum" value={user.jerseyNum} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="positions">Positions:</label>
+          <input id="positions" type="text" name="positions" value={user.positions} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="ncaaId">NCAA ID:</label>
+          <input id="ncaaId" type="text" name="ncaaId" value={user.ncaaId} onChange={handleInputChange}
+          />
+        </p>
+
+        <h6 className="font-weight-bold mt-3 mb-0">Academics:</h6>
+        <p>
+          <label htmlFor="weightGPA">Weighted GPA:</label>
+          <input id="weightGPA" type="number" name="weightGPA" value={user.weightGPA} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="unweightGPA">Unweighted GPA:</label>
+          <input id="unweightGPA" type="number" name="unweightGPA" value={user.unweightGPA} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="classRank">Class Rank:</label>
+          <input id="classRank" type="number" name="classRank" value={user.classRank} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="classSize">Class Size:</label>
+          <input id="classSize" type="number" name="classSize" value={user.classSize} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="scoreSAT">SAT Score:</label>
+          <input id="scoreSAT" type="text" name="scoreSAT" value={user.scoreSAT} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="scoreACT">ACT Score:</label>
+          <input id="scoreACT" type="text" name="scoreACT" value={user.scoreACT} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="major">Major:</label>
+          <input id="major" type="text" name="major" value={user.major} onChange={handleInputChange}
+          />
+        </p>
+
+        <h6 className="font-weight-bold mt-3 mb-0">Club Info:</h6>
+        <p>
+          <label htmlFor="clubName">Name:</label>
+          <input id="clubName" type="text" name="clubName" value={user.clubName} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubTeam">Team:</label>
+          <input id="clubTeam" type="text" name="clubTeam" value={user.clubTeam} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubDirFirst">Director First Name:</label>
+          <input id="clubDirFirst" type="text" name="clubDirFirst" value={user.clubDirFirst} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubDirMiddle">Director Middle Name:</label>
+          <input id="clubDirMiddle" type="text" name="clubDirMiddle" value={user.clubDirMiddle} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubDirLast">Director Last Name:</label>
+          <input id="clubDirLast" type="text" name="clubDirLast" value={user.clubDirLast} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubCoachFirst">Coach First Name:</label>
+          <input id="clubCoachFirst" type="text" name="clubCoachFirst" value={user.clubCoachFirst} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubCoachMiddle">Coach Middle Name:</label>
+          <input id="clubCoachMiddle" type="text" name="clubCoachMiddle" value={user.clubCoachMiddle} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubCoachLast">Coach Last Name:</label>
+          <input id="clubCoachLast" type="text" name="clubCoachLast" value={user.clubCoachLast} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubStreet1">Street1:</label>
+          <input id="clubStreet1" type="text" name="clubStreet1" value={user.clubStreet1} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubStreet2">Street2:</label>
+          <input id="clubStreet2" type="text" name="clubStreet2" value={user.clubStreet2} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubCity">City:</label>
+          <input id="clubCity" type="text" name="clubCity" value={user.clubCity} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubState">State:</label>
+          <input id="clubState" type="text" name="clubState" value={user.clubState} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubZip">Zip Code:</label>
+          <input id="clubZip" type="number" name="clubZip" value={user.clubZip} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubZip4">Zip Code+4:</label>
+          <input id="clubZip4" type="number" name="zip4" value={user.zip4} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubEmail">Email:</label>
+          <input id="clubEmail" type="email" name="clubEmail" value={user.clubEmail} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubPhone">Phone:</label>
+          <input id="clubPhone" type="text" name="clubPhone" value={user.clubPhone} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="clubUrl">Website:</label>
+          <input id="clubUrl" type="url" name="clubUrl" value={user.clubUrl} onChange={handleInputChange}
+          />
+        </p>
+
+        <h6 className="font-weight-bold mt-3 mb-0">High School Info:</h6>
+        <p>
+          <label htmlFor="hsName">Name:</label>
+          <input id="hsName" type="text" name="hsName" value={user.hsName} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="hsCoachFirst">Coach First Name:</label>
+          <input id="hsCoachFirst" type="text" name="hsCoachFirst" value={user.hsCoachFirst} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="hsCoachMiddle">Coach Middle Name:</label>
+          <input id="hsCoachMiddle" type="text" name="hsCoachMiddle" value={user.hsCoachMiddle} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="hsCoachLast">Coach Last Name:</label>
+          <input id="hsCoachLast" type="text" name="hsCoachLast" value={user.hsCoachLast} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="hsStreet1">Street1:</label>
+          <input id="hsStreet1" type="text" name="hsStreet1" value={user.hsStreet1} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="hsStreet2">Street2:</label>
+          <input id="hsStreet2" type="text" name="hsStreet2" value={user.hsStreet2} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="hsCity">City:</label>
+          <input id="hsCity" type="text" name="hsCity" value={user.hsCity} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="hsState">State:</label>
+          <input id="hsState" type="text" name="hsState" value={user.hsState} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="hsZip">Zip Code:</label>
+          <input id="hsZip" type="number" name="hsZip" value={user.hsZip} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="hsZip4">Zip Code+4:</label>
+          <input id="hsZip4" type="number" name="zip4" value={user.zip4} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="hsEmail">Email:</label>
+          <input id="hsEmail" type="email" name="hsEmail" value={user.hsEmail} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="hsPhone">Phone:</label>
+          <input id="hsPhone" type="text" name="hsPhone" value={user.hsPhone} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="hsUrl">Website:</label>
+          <input id="hsUrl" type="url" name="hsUrl" value={user.hsUrl} onChange={handleInputChange}
+          />
+        </p>
+
+        <h6 className="font-weight-bold mt-3 mb-0">Statistics:</h6>
+        <p>
+          <label htmlFor="height">Height:</label>
+          <input id="height" type="text" name="height" value={user.height} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="weight">Weight:</label>
+          <input id="weight" type="number" name="weight" value={user.weight} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="handed">Handed:</label>
+          <input id="handed" type="text" name="handed" value={user.handed} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="standReach">Standing Reach:</label>
+          <input id="standReach" type="text" name="standReach" value={user.standReach} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="approachTouch">Approach Touch:</label>
+          <input id="approachTouch" type="text" name="approachTouch" value={user.approachTouch} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="blockJump">Block Jump:</label>
+          <input id="blockJump" type="text" name="blockJump" value={user.blockJump} onChange={handleInputChange}
+          />
+        </p>
+
+        <h6 className="font-weight-bold mt-3 mb-0">Additional:</h6>
+        <p>
+          <label htmlFor="athleteAccomps">Athletic Accomplishments:</label>
+          <input id="athleteAccomps" type="text" name="athleteAccomps" value={user.athleteAccomps} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="schoolAccomps">Academic/Other Acomplishments:</label>
+          <input id="schoolAccomps" type="text" name="schoolAccomps" value={user.schoolAccomps} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="videoLinks">You Tube Video Links:</label>
+          <input id="videoLinks" type="url" name="videoLinks" value={user.videoLinks} onChange={handleInputChange}
+          />
+        </p>
+        <p>
+          <label htmlFor="profileImg">Profile Image File:</label>
+          <input id="profileImg" type="file" name="profileImg" value={user.profileImg} onChange={handleInputChange}
+          />
+        </p>
+      </form>
+      <div className="text-center mt-4">
+          <Button className="text-center" 
+            color="danger"
+            type="submit" 
+            name="action"
+            value="populate" 
+            onClick={handleFormSubmit}>
+            Submit
+          </Button>
       </div>
-    </div>
+    </SimpleCard>
   );
   
   export default AthleteInput;

@@ -3,11 +3,12 @@ import { withFormsy } from 'formsy-react';
 
 const styles = {
   label: {
-    display: "table-cell"
+    display: "table-cell",
+    width: "20%"
   },
   input: {
     display: "table-cell",
-    width: "500%"
+    width: "80%"
   },
   div: {
     display: "table-row"

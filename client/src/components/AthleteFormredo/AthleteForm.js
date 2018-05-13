@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Panel } from "react-bootstrap";
+import { Panel } from "react-bootstrap";
 import Formsy from 'formsy-react';
 import TextInput from '../TextInput';
 
@@ -17,13 +17,12 @@ const styles = {
     color          : "#FFFFFF"
   }
 }
-
+ 
 export default class AthleteForm extends Component {
   constructor(props) {
     super(props);
     this.disableButton = this.disableButton.bind(this);
     this.enableButton = this.enableButton.bind(this);
-    this.submit = this.submit.bind(this);
     this.state = { canSubmit: false };
   }
  
@@ -35,10 +34,6 @@ export default class AthleteForm extends Component {
     this.setState({ canSubmit: true });
   }
  
-  submit(model) {
-    this.props.handleFormSubmit();
-  }
- 
   render() {
     return (
       <Panel>
@@ -48,7 +43,7 @@ export default class AthleteForm extends Component {
           </Panel.Title>
         </Panel.Heading>
         <Panel.Body>
-          <Formsy style={styles.formsy} onValidSubmit={this.props.handleFormSubmit} onValid={this.enableButton} onInvalid={this.disableButton}>
+          <Formsy onValidSubmit={this.props.handleFormSubmit} onValid={this.enableButton} onInvalid={this.disableButton}>
             <TextInput
               name="email"
               label="Email:"
@@ -375,13 +370,9 @@ export default class AthleteForm extends Component {
               label="Profile Image:"
               value={this.props.user.profileImg}
             />
+            
             <button type="submit" disabled={!this.state.canSubmit}>Submit</button>
           </Formsy>
-          {/* <div className="text-center justify-center mt-3">
-            <Button bsSize="small" style={styles.button} disabled={!this.state.canSubmit}>
-              <h6 className="font-weight-bold mt-1 mb-1">Submit</h6>
-            </Button>
-          </div> */}
         </Panel.Body>
       </Panel>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Panel } from "react-bootstrap";
+import { Panel } from "react-bootstrap";
 import Formsy from 'formsy-react';
 import TextInput from '../TextInput';
 
@@ -375,13 +375,12 @@ export default class AthleteForm extends Component {
               label="Profile Image:"
               value={this.props.user.profileImg}
             />
-            <button type="submit" disabled={!this.state.canSubmit}>Submit</button>
+            <div className="text-center justify-center mt-3">
+              <button style={styles.button} type="submit" disabled={!this.state.canSubmit}>
+                <h6 className="font-weight-bold mt-1 mb-1">Submit</h6>
+              </button>
+            </div>
           </Formsy>
-          {/* <div className="text-center justify-center mt-3">
-            <Button bsSize="small" style={styles.button} disabled={!this.state.canSubmit}>
-              <h6 className="font-weight-bold mt-1 mb-1">Submit</h6>
-            </Button>
-          </div> */}
         </Panel.Body>
       </Panel>
     );

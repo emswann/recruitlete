@@ -33,6 +33,7 @@ module.exports = new PassportLocalStrategy({
                 contact: {},
                 name: {},
                 address: {},
+                scholastic: { major : "" },
                 club: {
                   name: "",
                   team: "",
@@ -46,7 +47,8 @@ module.exports = new PassportLocalStrategy({
                   coach: {},
                   address: {},
                   contact: {}                  
-                }
+                },
+                statistics: { height: "" }
               }
     }
     else {

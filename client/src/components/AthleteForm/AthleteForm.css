@@ -16,3 +16,8 @@ input {
   display: table-cell;
   width: 80%;
 }
+
+#email {
+  background-color: lightgray;
+}
+

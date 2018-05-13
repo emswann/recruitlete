@@ -10,26 +10,26 @@ const AthleteInput = ({
     user,
   }) => (
     <SimpleCard>
-      <h5 className="text-center justify-center mb-4">Athlete Profile</h5>
+      <h4 className="text-center justify-center mb-4">Athlete Profile</h4>
 	    <form>
         <p>
           <label htmlFor="email">E-mail:</label>
-          <input id="email" type="text" name="email" value={user.email} onChange={handleInputChange}
+          <input id="email" type="text" name="email" value={user.email} readOnly
           />
         </p>
         <p>
-          <label htmlFor="first">First Name:</label>
-          <input id="first" type="text" name="first" value={user.first} onChange={handleInputChange}
+          <label htmlFor="firstName">First Name:</label>
+          <input id="firstName" type="text" name="firstName" value={user.firstName} onChange={handleInputChange}
           />
         </p>
         <p>
-          <label htmlFor="middle">Middle Name:</label>
-          <input id="middle" type="text" name="middle" value={user.middle} onChange={handleInputChange}
+          <label htmlFor="middleName">Middle Name:</label>
+          <input id="middleName" type="text" name="middleName" value={user.middleName} onChange={handleInputChange}
           />
         </p>
         <p>
-          <label htmlFor="last">Last Name:</label>
-          <input id="last" type="text" name="last" value={user.last} onChange={handleInputChange}
+          <label htmlFor="lastName">Last Name:</label>
+          <input id="lastName" type="text" name="lastName" value={user.lastName} onChange={handleInputChange}
           />
         </p>
 
@@ -68,12 +68,7 @@ const AthleteInput = ({
         </p>
         <p>
           <label htmlFor="zip">Zip Code:</label>
-          <input id="zip" type="number" name="zip" value={user.zip} onChange={handleInputChange}
-          />
-        </p>
-        <p>
-          <label htmlFor="zip4">Zip Code+4:</label>
-          <input id="zip4" type="number" name="zip4" value={user.zip4} onChange={handleInputChange}
+          <input id="zip" type="text" name="zip" value={user.zip} onChange={handleInputChange}
           />
         </p>
 
@@ -132,12 +127,12 @@ const AthleteInput = ({
         </p>
         <p>
           <label htmlFor="scoreSAT">SAT Score:</label>
-          <input id="scoreSAT" type="text" name="scoreSAT" value={user.scoreSAT} onChange={handleInputChange}
+          <input id="scoreSAT" type="number" name="scoreSAT" value={user.scoreSAT} onChange={handleInputChange}
           />
         </p>
         <p>
           <label htmlFor="scoreACT">ACT Score:</label>
-          <input id="scoreACT" type="text" name="scoreACT" value={user.scoreACT} onChange={handleInputChange}
+          <input id="scoreACT" type="number" name="scoreACT" value={user.scoreACT} onChange={handleInputChange}
           />
         </p>
         <p>
@@ -209,12 +204,7 @@ const AthleteInput = ({
         </p>
         <p>
           <label htmlFor="clubZip">Zip Code:</label>
-          <input id="clubZip" type="number" name="clubZip" value={user.clubZip} onChange={handleInputChange}
-          />
-        </p>
-        <p>
-          <label htmlFor="clubZip4">Zip Code+4:</label>
-          <input id="clubZip4" type="number" name="zip4" value={user.zip4} onChange={handleInputChange}
+          <input id="clubZip" type="text" name="clubZip" value={user.clubZip} onChange={handleInputChange}
           />
         </p>
         <p>
@@ -276,12 +266,7 @@ const AthleteInput = ({
         </p>
         <p>
           <label htmlFor="hsZip">Zip Code:</label>
-          <input id="hsZip" type="number" name="hsZip" value={user.hsZip} onChange={handleInputChange}
-          />
-        </p>
-        <p>
-          <label htmlFor="hsZip4">Zip Code+4:</label>
-          <input id="hsZip4" type="number" name="zip4" value={user.zip4} onChange={handleInputChange}
+          <input id="hsZip" type="text" name="hsZip" value={user.hsZip} onChange={handleInputChange}
           />
         </p>
         <p>
@@ -308,7 +293,7 @@ const AthleteInput = ({
         </p>
         <p>
           <label htmlFor="weight">Weight:</label>
-          <input id="weight" type="number" name="weight" value={user.weight} onChange={handleInputChange}
+          <input id="weight" type="text" name="weight" value={user.weight} onChange={handleInputChange}
           />
         </p>
         <p>
@@ -353,17 +338,8 @@ const AthleteInput = ({
           <input id="profileImg" type="file" name="profileImg" value={user.profileImg} onChange={handleInputChange}
           />
         </p>
+        <input type="submit" value="Submit" onClick={handleFormSubmit} />
       </form>
-      <div className="text-center mt-4">
-          <Button className="text-center" 
-            color="danger"
-            type="submit" 
-            name="action"
-            value="populate" 
-            onClick={handleFormSubmit}>
-            Submit
-          </Button>
-      </div>
     </SimpleCard>
   );
   

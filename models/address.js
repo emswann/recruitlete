@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
 
-const validator = require("validator");
-
 const addressSchema = new Schema({
   street1: { type: String, trim: true },
   street2: { type: String, trim: true },
@@ -14,22 +12,7 @@ const addressSchema = new Schema({
                     "MT","NE","NV","NH","NJ","NM","NY","NC","ND","MP",
                     "OH","OK","OR","PW","PA","PR","RI","SC","SD","TN",
                     "TX","UT","VT","VI","VA","WA","WV","WI","WY" ]},
-  zip    : { type: String, trim: true,
-             validate: {
-               validator: v => validator.isNumeric(v) &&
-                               validator.isLength(v, { min: 5, max: 5 }),
-               message  : "{VALUE} is not a valid zip code",
-               isAsync   : false
-             } 
-           }, 
-  zip4   : { type: String, trim: true,
-             validate: {
-               validator: v => validator.isNumeric(v) &&
-                               validator.isLength(v, { min: 4, max: 4 }),
-               message  : "{VALUE} is not a valid + 4 zip code",
-               isAsync   : false
-             } 
-           }
+  zip    : { type: String, trim: true } 
 }, { _id: false });
 
 const Address = mongoose.model("Address", addressSchema);

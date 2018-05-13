@@ -21,20 +21,19 @@ class AthleteProfile extends Component {
       city: this.props.user.address.city,
       state: this.props.user.address.state,
       zip: this.props.user.address.zip,
-      zip4: this.props.user.address.zip4,
       parentNames: this.props.user.parentNames,
       jerseyNum: this.props.user.jerseyNum,
       gradYear: this.props.user.gradYear,
       positions: this.props.user.positions,
       ncaaId: this.props.user.ncaaId,
       birthDate: this.props.user.birthDate,
-      weightGPA: this.props.user.weightGPA,
-      unweightGPA: this.props.user.unweightGPA,
-      classRank: this.props.user.classRank,
-      classSize: this.props.user.classSize,
-      scoreSAT: this.props.user.scoreSAT,
-      scoreACT: this.props.user.scoreACT,
-      major: this.props.user.major, 
+      weightGPA: this.props.user.scholastic.weightGPA,
+      unweightGPA: this.props.user.scholastic.unweightGPA,
+      classRank: this.props.user.scholastic.classRank,
+      classSize: this.props.user.scholastic.classSize,
+      scoreSAT: this.props.user.scholastic.scoreSAT,
+      scoreACT: this.props.user.scholastic.scoreACT,
+      major: this.props.user.scholastic.major || "", // Overwrite null that came about force creating statistics object when registering user. 
       clubName: this.props.user.club.name,
       clubTeam: this.props.user.club.team,
       clubDirFirst: this.props.user.club.director.first,
@@ -48,7 +47,6 @@ class AthleteProfile extends Component {
       clubCity: this.props.user.club.address.city,
       clubState: this.props.user.club.address.state,
       clubZip: this.props.user.club.address.zip,
-      clubZip4: this.props.user.club.address.zip4,
       clubEmail: this.props.user.club.contact.email,
       clubPhone: this.props.user.club.contact.phone,
       clubUrl: this.props.user.club.contact.url,
@@ -61,16 +59,15 @@ class AthleteProfile extends Component {
       hsCity: this.props.user.highSchool.address.city,
       hsState: this.props.user.highSchool.address.state,
       hsZip: this.props.user.highSchool.address.zip,
-      hsZip4: this.props.user.highSchool.address.zip4,
       hsEmail: this.props.user.highSchool.contact.email,
       hsPhone: this.props.user.highSchool.contact.phone,
       hsUrl: this.props.user.highSchool.contact.url,
-      height: this.props.user.height,
-      weight: this.props.user.weight,
-      handed: this.props.user.handed,
-      standReach: this.props.user.standReach,
-      approachTouch: this.props.user.approachTouch,
-      blockJump: this.props.user.blockJump,
+      height: this.props.user.statistics.height || "", // Overwrite null that came about force creating statistics object when registering user.
+      weight: this.props.user.statistics.weight,
+      handed: this.props.user.statistics.handed,
+      standReach: this.props.user.statistics.standReach,
+      approachTouch: this.props.user.statistics.approachTouch,
+      blockJump: this.props.user.statistics.blockJump,
       athleteAccomps: this.props.user.athleteAccomps,
       schoolAccomps: this.props.user.schoolAccomps,
       videoLinks: this.props.user.videoLinks,
@@ -90,109 +87,104 @@ class AthleteProfile extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-      this.props.updateAthlete({
-        email: this.state.user.email,
-        contact: {
-          email: this.state.user.email,
-          phone: this.state.user.contact.phone,
-          url: this.state.user.contact.url
+        console.log(this.state);
+    this.props.updateUser({
+      email: this.state.email,
+      contact: {
+        email: this.state.email,
+        phone: this.state.phone,
+        url: this.state.url
+      },
+      name: {
+        first: this.state.firstName,
+        middle: this.state.middleName,
+        last: this.state.lastName
+      },
+      address: {
+        street1: this.state.street1,
+        street2: this.state.street2,
+        city: this.state.city,
+        state: this.state.state,     
+        zip: this.state.zip
+      },
+      parentNames: this.state.parentNames,
+      jerseyNum: this.state.jerseyNum,
+      gradYear: this.state.gradYear,
+      positions: this.state.positions,
+      ncaaId: this.state.ncaaId,
+      birthDate: this.state.birthDate,
+      scholastic: {
+        weightGPA: this.state.weightGPA,
+        unweightGPA: this.state.unweightGPA,
+        classRank: this.state.classRank,
+        classSize: this.state.classSize,
+        scoreSAT: this.state.scoreSAT,
+        scoreACT: this.state.scoreACT,
+        major: this.state.major
+      },
+      club: {
+        name: this.state.clubName,
+        team: this.state.clubTeam,
+        director: {
+          name: {
+            first: this.state.clubDirFirst,
+            middle: this.state.clubDirMiddle,
+            last: this.state.clubDirLast
+          },
         },
-        name: {
-          first: this.state.user.name.first,
-          middle: this.state.user.name.middle,
-          last: this.state.user.name.last
+        coach: {
+          name: {
+            first: this.state.clubCoachFirst,
+            middle: this.state.clubCoachMiddle,
+            last: this.state.clubCoachLast
+          },
         },
         address: {
-          street1: this.state.user.address.street1,
-          street2: this.state.user.address.street2,
-          city: this.state.user.address.city,
-          state: this.state.user.address.state,     
-          zip: this.state.user.address.zip,
-          zip4: this.state.user.address.zip4
+          street1: this.state.clubStreet1,
+          street2: this.state.clubStreet2,
+          city: this.state.clubCity,
+          state: this.state.clubState,
+          zip: this.state.clubZip
         },
-        parentNames: this.state.user.parentNames,
-        jerseyNum: 23,
-        gradYear: this.state.user.gradYear,
-        positions: this.state.user.positions,
-        ncaaId: this.state.user.ncaaId,
-        birthDate: this.state.user.birthDate,
-        scholastic: {
-          weightGPA: this.state.user.scholastic.weightGPA,
-          unweightGPA: this.state.user.scholastic.unweightGPA,
-          classRank: this.state.user.scholastic.classRank,
-          classSize: this.state.user.scholastic.classSize,
-          scoreSAT: this.state.user.scholastic.scoreSAT,
-          scoreACT: this.state.user.scholastic.scoreACT,
-          major: this.state.user.scholastic.major
+        contact: {
+          email: this.state.clubEmail,
+          phone: this.state.clubPhone,
+          url: this.state.clubUrl
         },
-        club: {
-          name: this.state.user.club.name,
-          team: this.state.user.club.team,
-          director: {
-            name: {
-              first: this.state.user.club.director.first,
-              middle: this.state.user.club.director.middle,
-              last: this.state.user.club.director.last
-            },
-          },
-          coach: {
-            name: {
-              first: this.state.user.club.coach.first,
-              middle: this.state.user.club.coach.middle,
-              last: this.state.user.club.coach.last
-            },
-          },
-          address: {
-            street1: this.state.user.club.address.street1,
-            street2: this.state.user.club.address.street2,
-            city: this.state.user.club.address.city,
-            state: this.state.user.club.address.state,
-            zip: this.state.user.club.address.zip,
-            zip4: this.state.user.club.address.zip4
-          },
-          contact: {
-            email: this.state.user.club.contact.email,
-            phone: this.state.user.club.contact.phone,
-            url: this.state.user.club.contact.url
-          },
+      },
+      highSchool: {
+        name: this.state.hsName,
+        coach: {
+          name: {
+            first: this.state.hsCoachFirst,
+            middle: this.state.hsCoachMiddle,
+            last: this.state.hsCoachLast           },
         },
-        highSchool: {
-          name: this.state.user.highSchool.name,
-          coach: {
-            name: {
-              first: this.state.user.highSchool.coach.first,
-              middle: this.state.user.highSchool.coach.middle,
-              last: this.state.user.highSchool.coach.last
-            },
-          },
-          address: {
-            street1: this.state.user.highSchool.address.street1,
-            street2: this.state.user.highSchool.address.street2,
-            city: this.state.user.highSchool.address.city,
-            state: this.state.user.highSchool.address.state,
-            zip: this.state.user.highSchool.address.zip,
-            zip4: this.state.user.highSchool.address.zip4
-          },
-          contact: {
-            email: this.state.user.highSchool.contact.email,
-            phone: this.state.user.highSchool.contact.phone,
-            url: this.state.user.highSchool.contact.url
-          },
+        address: {
+          street1: this.state.hsStreet1,
+          street2: this.state.hsStreet2,
+          city: this.state.hsCity,
+          state: this.state.hsState,
+          zip: this.state.hsZip         
         },
-        statistics: {
-          height: this.state.user.statistics.height,
-          weight: this.state.user.statistics.weight,
-          handed: this.state.user.statistics.handed,
-          standReach: this.state.user.statistics.standReach,
-          approachTouch: this.state.user.statistics.approachTouch,
-          blockJump: this.state.user.statistics.blockJump
-        },
-        athleteAccomps: this.state.user.athleteAccomps,
-        schoolAccomps: this.state.user.schoolAccomps,
-        videoLinks: this.state.user.videoLinks,
-        profileImg: this.state.user.profileImg
-      })
-
+        contact: {
+          email: this.state.hsEmail,
+          phone: this.state.hsPhone,
+          url: this.state.hsUrl          },
+      },
+      statistics: {
+        height: this.state.height,
+        weight: this.state.weight,
+        handed: this.state.handed,
+        standReach: this.state.standReach,
+        approachTouch: this.state.approachTouch,
+        blockJump: this.state.blockJump
+      },
+      athleteAccomps: this.state.athleteAccomps,
+      schoolAccomps: this.state.schoolAccomps,
+      videoLinks: this.state.videoLinks,
+      profileImg: this.state.profileImg
+    })
   };
 
   render() {

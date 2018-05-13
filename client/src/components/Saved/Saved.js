@@ -13,7 +13,7 @@ class Saved extends React.Component {
     super(props);
 
     this.state = {
-      state: ""
+      
     };
   }
 
@@ -34,10 +34,12 @@ class Saved extends React.Component {
         </h2>
         {this.props.savedSchools.length ? (
           <div className="row">
-            {this.props.savedSchools.map((school, index) => (
+            {this.props.savedSchools.map((school, schoolIndex) => (
+                         // {school.info.notes.map((note, noteIndex) => (
+                            // {school.progress.map((progress, progressIndex) => (
               <div
                 className="card-group col-md-12"
-                key={index}
+                key={schoolIndex}
                 style={{ padding: 15, justifyContent: "center" }}
               >
                 <Card
@@ -53,7 +55,7 @@ class Saved extends React.Component {
                     <div
                       style={{
                         display: "flex",
-                        margin: 10
+                        padding: 10
                       }}
                     >
                       <Button
@@ -62,7 +64,7 @@ class Saved extends React.Component {
                         type="button"
                         name="action"
                         value="notes"
-                        onClick={() => this.props.toggleNotes(index)}
+                        onClick={() => this.props.toggleNotesBtn(schoolIndex)}
                       >
                         <FontAwesomeIcon icon={faStickyNote} size={"1x"} />
                       </Button>
@@ -72,7 +74,7 @@ class Saved extends React.Component {
                         type="button"
                         name="action"
                         value="progress"
-                        onClick={this.toggleProgress}
+                        onClick={() => this.props.toggleProgressBtn(schoolIndex)}
                       >
                         <FontAwesomeIcon icon={faTasks} size={"1x"} /> Progress
                       </Button>
@@ -101,40 +103,75 @@ class Saved extends React.Component {
                         <FontAwesomeIcon icon={faTrash} size={"1x"} /> Delete
                       </Button>
                     </div>
-                    <Collapse isOpen={this.props.collapse[index] ? this.props.collapse[index] : false}>
+                    <Collapse
+                      isOpen={
+                        this.props.collapseNotes[schoolIndex]
+                          ? this.props.collapseNotes[schoolIndex]
+                          : false
+                      }
+                    >
                       <Card>
                         <p>{school.info.notes}</p>
                       </Card>
                       <div>
                         <Input
                           placeholder="notes"
-                          group type="notes"
-                          datatag={index}
+                          group
+                          type="notes"
                           name="notes"
                           onChange={this.props.handleInputChange}
-                          value={this.props.notes[index]}
+                          value={this.props.notes[schoolIndex]}
                         />
                       </div>
                       <Button
                         color="primary"
                         type="button"
                         name="action"
-                        value="saveNote" 
+                        value="saveNote"
                         onClick={() =>
-                          this.props.handleSaveNote(this.props.notes[index])
+                          this.props.handleSaveNote(this.props.notes, schoolIndex)
                         }
                       >
                         Save
                       </Button>
                     </Collapse>
-                    <div>
-                      <Collapse>
-                      </Collapse>
-                    </div>
+                    <Collapse
+                      isOpen={
+                        this.props.collapseProgress[schoolIndex]
+                          ? this.props.collapseProgress[schoolIndex]
+                          : false
+                      }
+                    >
+                      <Card>
+                        <div className="form-check">
+                          <div className="row">
+                            <div className="col-md-6">
+                            {Object.entries(school.progress).map((progress, progressIndex) => (
+                              <div
+                              key={progressIndex}>
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                value={progress}
+                                name="name"
+                                onChange={() => this.props.toggleCheckProgress(schoolIndex, progressIndex)}
+                                checked={school.progress[progressIndex]}
+                              />
+                              <label className="form-check-label">
+                                <p> {progress}</p>
+                              </label>
+                              <br />
+                              </div>
+                            ))}
+                      </div>
+                  </div>
                   </div>
                 </Card>
-              </div>
-            ))}
+                </Collapse>
+          </div>
+          </Card>
+           </div>
+        ))}
           </div>
         ) : (
           <div>

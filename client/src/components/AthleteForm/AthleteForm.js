@@ -15,8 +15,7 @@ const styles = {
   },
   button: {
     backgroundColor: "#EE5B4F",
-    color          : "#FFFFFF",
-    border         : "2px solid #515D63",
+    color          : "#FFFFFF"
   },
   scroll: {
     backgroundColor: "#FFFFFF",

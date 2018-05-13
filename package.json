@@ -24,10 +24,12 @@
     "body-parser": "^1.17.2",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.15.4",
+    "formsy-react": "^1.1.4",
     "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.0.11",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "react-bootstrap": "^0.32.1",
     "request": "^2.85.0",
     "request-promise": "^4.2.2",
     "validator": "^9.4.1"

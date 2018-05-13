@@ -15,6 +15,12 @@ const styles = {
   button: {
     backgroundColor: "#EE5B4F",
     color          : "#FFFFFF"
+  },
+  scroll: {
+    backgroundColor: "#FFFFFF",
+    color          : "#515D63",
+    borderRadius   : "50%",
+    marginBottom   : ".5rem"
   }
 }
 
@@ -23,7 +29,6 @@ export default class AthleteForm extends Component {
     super(props);
     this.disableButton = this.disableButton.bind(this);
     this.enableButton = this.enableButton.bind(this);
-    this.submit = this.submit.bind(this);
     this.state = { canSubmit: false };
   }
  
@@ -35,16 +40,15 @@ export default class AthleteForm extends Component {
     this.setState({ canSubmit: true });
   }
  
-  submit(model) {
-    this.props.handleFormSubmit();
-  }
- 
   render() {
     return (
       <Panel>
-        <Panel.Heading className="text-center" style={styles.panelHeading}>
+        <Panel.Heading className="text-center mb-4" style={styles.panelHeading}>
           <Panel.Title>
-            <h1 className="mb-4">Athlete Profile</h1>
+            <h1 className="mb-3">Athlete Profile</h1>
+            <button style={styles.scroll} type="submit">
+              <h6 className="font-weight-bold m-1">Go To Submit</h6>
+            </button>
           </Panel.Title>
         </Panel.Heading>
         <Panel.Body>
@@ -377,7 +381,7 @@ export default class AthleteForm extends Component {
             />
             <div className="text-center justify-center mt-3">
               <button style={styles.button} type="submit" disabled={!this.state.canSubmit}>
-                <h6 className="font-weight-bold mt-1 mb-1">Submit</h6>
+                <h6 className="font-weight-bold m-1">Submit</h6>
               </button>
             </div>
           </Formsy>

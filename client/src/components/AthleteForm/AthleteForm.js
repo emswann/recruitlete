@@ -47,7 +47,7 @@ export default class AthleteForm extends Component {
           <Panel.Title>
             <h1 className="mb-3">Athlete Profile</h1>
             <button style={styles.scroll} type="submit">
-              <h6 className="font-weight-bold m-1">Go To Submit</h6>
+              <h6 className="font-weight-bold m-1">To Submit</h6>
             </button>
           </Panel.Title>
         </Panel.Heading>

@@ -89,7 +89,8 @@
   "athleteAccomps" : ["All Everything", "Great Athlete Award"], 
   "schoolAccomps"  : ["National Honor Society", "FBLA"],
   "videoLinks"     : ["www.youtube1.com", "www.youtube2.com"],
-  "colleges"        : [
+  "profileImg"     : "myimage",
+  "colleges"       : [
     {
       "info": {
         "name"          : "My College USA",  

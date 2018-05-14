@@ -86,7 +86,6 @@ class AthleteProfile extends Component {
   };
 
   handleFormSubmit = user => {
-    console.log(user);
     this.props.updateUser({
       email: user.email,
       contact: {

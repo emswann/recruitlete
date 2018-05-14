@@ -78,6 +78,7 @@ export default class AthleteForm extends Component {
               <TextInput
                 name="email"
                 label="Email:"
+                readOnly="true"
                 value={this.props.user.email}
               />
               <TextInput

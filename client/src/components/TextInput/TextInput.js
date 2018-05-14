@@ -12,6 +12,11 @@ const styles = {
   },
   div: {
     display: "table-row"
+  },
+  readOnly: {
+    display: "table-cell",
+    width: "80%",
+    backgroundColor: "lightgray"
   }
 }
 
@@ -36,7 +41,7 @@ class TextInput extends Component {
     return (
       <div style={styles.div}>
           <label style={styles.label}>{this.props.label}</label>
-          <input style={styles.input}
+          <input style={this.props.readOnly ? styles.readOnly : styles.input} readOnly={this.props.readOnly}
             onChange={this.changeValue}
             type="text"
             value={this.props.getValue() || ''}

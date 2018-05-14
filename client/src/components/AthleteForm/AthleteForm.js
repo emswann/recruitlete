@@ -37,7 +37,11 @@ export default class AthleteForm extends Component {
  
   disableButton = () => this.setState({ canSubmit: false });
  
-  enableButton = () => this.setState({ canSubmit: true,  });
+  enableButton = () => this.setState({ canSubmit: true  });
+
+  submit = model => {
+    this.props.handleFormSubmit(model);
+  }
 
   handleScrollToggle = () => {
     this.setState({ scrollActive: !this.state.scrollActive });
@@ -70,7 +74,7 @@ export default class AthleteForm extends Component {
             }} 
         >
           <Panel.Body>
-            <Formsy style={styles.formsy} onValidSubmit={this.props.handleFormSubmit} onValid={this.enableButton} onInvalid={this.disableButton}>
+            <Formsy style={styles.formsy} onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}>
               <TextInput
                 name="email"
                 label="Email:"

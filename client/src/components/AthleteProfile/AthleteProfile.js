@@ -85,105 +85,104 @@ class AthleteProfile extends Component {
     });
   };
 
-  handleFormSubmit = event => {
-    console.log(this.state);
+  handleFormSubmit = user => {
     this.props.updateUser({
-      email: this.state.email,
+      email: user.email,
       contact: {
-        email: this.state.email,
-        phone: this.state.phone,
-        url: this.state.url
+        email: user.email,
+        phone: user.phone,
+        url: user.url
       },
       name: {
-        first: this.state.firstName,
-        middle: this.state.middleName,
-        last: this.state.lastName
+        first: user.firstName,
+        middle: user.middleName,
+        last: user.lastName
       },
       address: {
-        street1: this.state.street1,
-        street2: this.state.street2,
-        city: this.state.city,
-        state: this.state.state,     
-        zip: this.state.zip
+        street1: user.street1,
+        street2: user.street2,
+        city: user.city,
+        state: user.state,     
+        zip: user.zip
       },
-      parentNames: this.state.parentNames,
-      jerseyNum: this.state.jerseyNum,
-      gradYear: this.state.gradYear,
-      positions: this.state.positions,
-      ncaaId: this.state.ncaaId,
-      birthDate: this.state.birthDate,
+      parentNames: user.parentNames,
+      jerseyNum: user.jerseyNum,
+      gradYear: user.gradYear,
+      positions: user.positions,
+      ncaaId: user.ncaaId,
+      birthDate: user.birthDate,
       scholastic: {
-        weightGPA: this.state.weightGPA,
-        unweightGPA: this.state.unweightGPA,
-        classRank: this.state.classRank,
-        classSize: this.state.classSize,
-        scoreSAT: this.state.scoreSAT,
-        scoreACT: this.state.scoreACT,
-        major: this.state.major
+        weightGPA: user.weightGPA,
+        unweightGPA: user.unweightGPA,
+        classRank: user.classRank,
+        classSize: user.classSize,
+        scoreSAT: user.scoreSAT,
+        scoreACT: user.scoreACT,
+        major: user.major
       },
       club: {
-        name: this.state.clubName,
-        team: this.state.clubTeam,
+        name: user.clubName,
+        team: user.clubTeam,
         director: {
           name: {
-            first: this.state.clubDirFirst,
-            middle: this.state.clubDirMiddle,
-            last: this.state.clubDirLast
+            first: user.clubDirFirst,
+            middle: user.clubDirMiddle,
+            last: user.clubDirLast
           },
         },
         coach: {
           name: {
-            first: this.state.clubCoachFirst,
-            middle: this.state.clubCoachMiddle,
-            last: this.state.clubCoachLast
+            first: user.clubCoachFirst,
+            middle: user.clubCoachMiddle,
+            last: user.clubCoachLast
           },
         },
         address: {
-          street1: this.state.clubStreet1,
-          street2: this.state.clubStreet2,
-          city: this.state.clubCity,
-          state: this.state.clubState,
-          zip: this.state.clubZip
+          street1: user.clubStreet1,
+          street2: user.clubStreet2,
+          city: user.clubCity,
+          state: user.clubState,
+          zip: user.clubZip
         },
         contact: {
-          email: this.state.clubEmail,
-          phone: this.state.clubPhone,
-          url: this.state.clubUrl
+          email: user.clubEmail,
+          phone: user.clubPhone,
+          url: user.clubUrl
         },
       },
       highSchool: {
-        name: this.state.hsName,
+        name: user.hsName,
         coach: {
           name: {
-            first: this.state.hsCoachFirst,
-            middle: this.state.hsCoachMiddle,
-            last: this.state.hsCoachLast           },
+            first: user.hsCoachFirst,
+            middle: user.hsCoachMiddle,
+            last: user.hsCoachLast           },
         },
         address: {
-          street1: this.state.hsStreet1,
-          street2: this.state.hsStreet2,
-          city: this.state.hsCity,
-          state: this.state.hsState,
-          zip: this.state.hsZip         
+          street1: user.hsStreet1,
+          street2: user.hsStreet2,
+          city: user.hsCity,
+          state: user.hsState,
+          zip: user.hsZip         
         },
         contact: {
-          email: this.state.hsEmail,
-          phone: this.state.hsPhone,
-          url: this.state.hsUrl          
+          email: user.hsEmail,
+          phone: user.hsPhone,
+          url: user.hsUrl          
         },
       },
       statistics: {
-        height: this.state.height,
-        weight: this.state.weight,
-        handed: this.state.handed,
-        standReach: this.state.standReach,
-        approachTouch: this.state.approachTouch,
-        blockJump: this.state.blockJump
+        height: user.height,
+        weight: user.weight,
+        handed: user.handed,
+        standReach: user.standReach,
+        approachTouch: user.approachTouch,
+        blockJump: user.blockJump
       },
-      athleteAccomps: this.state.athleteAccomps,
-      schoolAccomps: this.state.schoolAccomps,
-      videoLinks: this.state.videoLinks,
-      profileImg: this.state.profileImg
+      athleteAccomps: user.athleteAccomps,
+      schoolAccomps: user.schoolAccomps,
+      videoLinks: user.videoLinks,
+      profileImg: user.profileImg
     })
   };
 

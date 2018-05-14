@@ -202,49 +202,6 @@ class User extends Component {
     });
   }
 
-  handleInputChange = event => {
-    console.log(event.target.dataset.datatag)
-    const field = event.target.data;
-    const notes = this.state.notes;
-    notes[field] = event.target.value;
-    console.log("Notes: " + notes)
-    console.log("Field: " + field)
-    this.setState({
-      notes
-    });
-  };
-
-  handleSaveNote = note => {
-    console.log("Note: " + note)
-    let user = this.state.user;
-    user.colleges.info.push({ notes : note });
-    this.updateUser(user);
-  };
-
-  toggleFavSchool = favSchool => {
-    let user = this.state.user;
-    let position = 
-    user.colleges.findIndex(school => school.info.name === favSchool);
-    user.colleges[position].info.favorite = !user.colleges[position].info.favorite
-    this.updateUser(user);
-  };
-
-  toggleCheckProgress = checkbox => {
-    let user = this.state.user;
-    let item = 
-    user.colleges.findIndex(school => school.progress === checkbox);
-    user.colleges[item].progress = !user.colleges[item].progress
-    this.updateUser(user);
-  };
-
-  handleDeleteSchool = schoolName => {
-    let user = this.state.user;
-    user.colleges =
-    user.colleges.filter(college => college.info.name !== schoolName);
-   console.log(user.colleges)
-    this.updateUser(user);
-  };
-
   render() {
     return ( 
       <div>

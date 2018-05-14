@@ -86,6 +86,7 @@ class AthleteProfile extends Component {
   };
 
   handleFormSubmit = user => {
+    console.log(user);
     this.props.updateUser({
       email: user.email,
       contact: {
@@ -124,18 +125,14 @@ class AthleteProfile extends Component {
         name: user.clubName,
         team: user.clubTeam,
         director: {
-          name: {
-            first: user.clubDirFirst,
-            middle: user.clubDirMiddle,
-            last: user.clubDirLast
-          },
+          first: user.clubDirFirst,
+          middle: user.clubDirMiddle,
+          last: user.clubDirLast
         },
         coach: {
-          name: {
-            first: user.clubCoachFirst,
-            middle: user.clubCoachMiddle,
-            last: user.clubCoachLast
-          },
+          first: user.clubCoachFirst,
+          middle: user.clubCoachMiddle,
+          last: user.clubCoachLast
         },
         address: {
           street1: user.clubStreet1,
@@ -153,10 +150,9 @@ class AthleteProfile extends Component {
       highSchool: {
         name: user.hsName,
         coach: {
-          name: {
-            first: user.hsCoachFirst,
-            middle: user.hsCoachMiddle,
-            last: user.hsCoachLast           },
+          first: user.hsCoachFirst,
+          middle: user.hsCoachMiddle,
+          last: user.hsCoachLast
         },
         address: {
           street1: user.hsStreet1,

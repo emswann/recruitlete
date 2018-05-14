@@ -3,19 +3,28 @@ import LoginForm from "../../components/LoginForm";
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
-class Login extends Component {
-  // set the initial component state
-  state = {
-    errors: {},
-    successMessage: "",
-    user: {
-      email   : "",
-      password: "",
-      role    : "athlete"
-    }
-  };
+export default class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.checkSuccessMessage = this.checkSuccessMessage.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+
+    this.state = {
+      errors: {},
+      successMessage: "",
+      user: {
+        email   : "",
+        password: "",
+        role    : "athlete"
+      }
+    };
+
+    this.checkSuccessMessage();
+  }
   
-  componentDidMount(){
+  checkSuccessMessage(){
     const storedMessage = localStorage.getItem("successMessage");
     let successMessage = "";
 
@@ -56,10 +65,9 @@ class Login extends Component {
     });   
   };
 
-
   handleInputChange = event => {
     const field = event.target.name;
-    const user = this.state.user;
+    const user = {...this.state.user} // Shallow copy is okay here.
     user[field] = event.target.value;
     
     this.setState({
@@ -81,5 +89,3 @@ class Login extends Component {
     );
   };
 }
-
-export default Login;

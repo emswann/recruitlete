@@ -1,19 +1,9 @@
 import React from "react";
-import { Button } from "mdbreact";
 
 const SearchBox = props => (
   <div className="container">
     <div className="jumbotron jumbotron-fluid">
       <div className="container">
-        <Button
-          color="danger"
-          type="button"
-          name="action"
-          value="scrollBtn"
-          onClick={props.handleScrollToggle}
-        >
-          Scroll To Saved
-        </Button>
         <h1 className="display-4">SEARCH</h1>
         <div className="input-group">
           <select

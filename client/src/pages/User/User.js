@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ScrollIntoViewIfNeeded from 'react-scroll-into-view-if-needed';
 import SimpleCard from "../../components/SimpleCard"
 import Search from "../../components/Search"
 import SearchBox from "../../components/SearchBox"
@@ -7,25 +6,41 @@ import Saved from "../../components/Saved";
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
-class User extends Component {
-  state = {
-    ready: false,
-    role: "",
-    user: {},
-    schools: [],
-    searchOption: "default",    
-    searchOptionArr: [],
-    searchField: "default",
-    searchSchools: [],
-    scrollActive: false,
-    notes: [],
-    collapseNotes: {},
-    collapseProgress: {}
-  };
+export default class User extends Component {
+  constructor(props) {
+    super(props);
+    
+    this.loadStateData = this.loadStateData.bind(this);
+    this.addSaveStatusToSchools = this.addSaveStatusToSchools.bind(this);
+    this.updateUser = this.updateUser.bind(this);
+    this.handleSearchOption = this.handleSearchOption.bind(this);
+    this.handleSearchField = this.handleSearchField.bind(this);
+    this.handleSaveSchool = this.handleSaveSchool.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSaveNote = this.handleSaveNote.bind(this);
+    this.toggleFavSchool = this.toggleFavSchool.bind(this);
+    this.toggleCheckProgress = this.toggleCheckProgress.bind(this);
+    this.handleDeleteSchool = this.handleDeleteSchool.bind(this);
+    this.handleDeleteNote = this.handleDeleteNote.bind(this);
+    this.toggleNotesBtn = this.toggleNotesBtn.bind(this);
+    this.toggleProgressBtn = this.toggleProgressBtn.bind(this);
 
-  componentDidMount() {
+    this.state = {
+      ready: false,
+      role: "",
+      user: {},
+      schools: [],
+      searchOption: "default",    
+      searchOptionArr: [],
+      searchField: "default",
+      searchSchools: [],
+      notes: [],
+      collapseNotes: {},
+      collapseProgress: {}
+    };
+
     this.loadStateData();
-  };
+  }
 
   loadStateData = () => {
     const APIfunction = Auth.isUserAnAthlete() ? API.getAthlete : API.getCoach;
@@ -42,7 +57,7 @@ class User extends Component {
           user,
           schools,
           checkboxProgress: user.colleges.map(college => college.progress),
-          searchSchools: this.createSchoolsWithSave(
+          searchSchools: this.addSaveStatusToSchools(
                            schools, 
                            user.colleges.map(college => college.info.name))
         })
@@ -51,7 +66,7 @@ class User extends Component {
     .catch(err => console.log(err));
   };
 
-  createSchoolsWithSave = (schools, savedSchoolNames) =>  
+  addSaveStatusToSchools = (schools, savedSchoolNames) =>  
     schools.map(school => {
       savedSchoolNames.includes(school.name) 
         ? school.saved = true 
@@ -67,7 +82,7 @@ class User extends Component {
     .then(res => this.setState({ 
             user: res.data,
             notes: [],
-            searchSchools: this.createSchoolsWithSave(
+            searchSchools: this.addSaveStatusToSchools(
                              this.state.searchSchools, 
                              res.data.colleges.map(college => college.info.name)
                            )
@@ -136,58 +151,58 @@ class User extends Component {
   }
 
   handleSaveSchool = school => {
-    let user = this.state.user;
-    user.colleges.push({info: school, progress: {}});
+    // This only works because the user object does not contain any functions - just data. Need a deep copy and avoiding additional library.
+    let user = JSON.parse(JSON.stringify(this.state.user));
+    user.colleges.push({ info: school, progress: {} });
     this.updateUser(user);
   }
 
   handleInputChange = event => {
-    let field = event.target.value;
-    let notes = this.state.notes.concat();
-    notes = field
     this.setState({
-      notes 
+      notes : event.target.value
     });
   };
 
-  handleSaveNote = ( note, index, event) => {
-    let user = this.state.user;
+  handleSaveNote = (note, index, event) => {
+    // This only works because the user object does not contain any functions - just data. Need a deep copy and avoiding additional library.
+    let user = JSON.parse(JSON.stringify(this.state.user));
     user.colleges[index].info.notes.push( note );
     this.updateUser(user);
   };
 
   toggleFavSchool = favSchool => {
-    let user = this.state.user;
+    // This only works because the user object does not contain any functions - just data. Need a deep copy and avoiding additional library.
+    let user = JSON.parse(JSON.stringify(this.state.user));
     let position = 
-    user.colleges.findIndex(school => school.info.name === favSchool);
-    user.colleges[position].info.favorite = !user.colleges[position].info.favorite
+      user.colleges.findIndex(school => school.info.name === favSchool);
+    user.colleges[position].info.favorite = 
+      !user.colleges[position].info.favorite
     this.updateUser(user);
   };
 
   toggleCheckProgress = (progress, schoolIndex, progressIndex) => {
-    let user = this.state.user  
-    user.colleges[schoolIndex].progress[progress[0]] = !user.colleges[schoolIndex].progress[progress[0]]
-    console.log(user)
+    // This only works because the user object does not contain any functions - just data. Need a deep copy and avoiding additional library.
+    let user = JSON.parse(JSON.stringify(this.state.user));
+    user.colleges[schoolIndex].progress[progress[0]] = 
+      !user.colleges[schoolIndex].progress[progress[0]]
     this.updateUser(user);
   };
 
   handleDeleteSchool = schoolName => {
-    let user = this.state.user;
+    // This only works because the user object does not contain any functions - just data. Need a deep copy and avoiding additional library.
+    let user = JSON.parse(JSON.stringify(this.state.user));
     user.colleges =
-    user.colleges.filter(college => college.info.name !== schoolName);
+      user.colleges.filter(college => college.info.name !== schoolName);
     this.updateUser(user);
   };
 
   handleDeleteNote = (noteDelete, index) => {
-    let user = this.state.user;
+    // This only works because the user object does not contain any functions - just data. Need a deep copy and avoiding additional library.
+    let user = JSON.parse(JSON.stringify(this.state.user));
     user.colleges[index].info.notes =
-    user.colleges[index].info.notes.filter(note => note !== noteDelete);
+      user.colleges[index].info.notes.filter(note => note !== noteDelete);
     this.updateUser(user);
   };
-
-  handleScrollToggle = () => {
-    this.setState({ scrollActive: !this.state.scrollActive });
-  }
 
   toggleNotesBtn = index => {
     this.setState({ 
@@ -211,51 +226,34 @@ class User extends Component {
               </div>
               <div className="col-md-8">
                 <SimpleCard>
-                  <ScrollIntoViewIfNeeded 
-                    active={!this.state.scrollActive}
-                    options={{
-                      block: "center",
-                      behavior: "smooth"
-                    }} 
-                  >
-                    <SearchBox
-                      searchOption={this.state.searchOption}
-                      searchOptionArr={this.state.searchOptionArr}
-                      searchField={this.state.searchField}
-                      handleSearchOption={this.handleSearchOption}
-                      handleSearchField={this.handleSearchField}
-                      handleScrollToggle={this.handleScrollToggle}
-                    />
-                  </ScrollIntoViewIfNeeded> 
+                  <SearchBox
+                    searchOption={this.state.searchOption}
+                    searchOptionArr={this.state.searchOptionArr}
+                    searchField={this.state.searchField}
+                    handleSearchOption={this.handleSearchOption}
+                    handleSearchField={this.handleSearchField}
+                  />
                   <Search 
                     searchSchools={this.state.searchSchools}
                     handleSaveSchool={this.handleSaveSchool}
                   />
-                  <ScrollIntoViewIfNeeded 
-                    active={this.state.scrollActive}
-                    options={{
-                      block: "start",
-                      behavior: "smooth"
-                    }} 
-                  >
-                    <Saved
-                      savedSchools={this.state.user.colleges}
-                      handleDeleteSchool={this.handleDeleteSchool}
-                      toggleFavSchool= {this.toggleFavSchool}
-                      handleSaveNote={this.handleSaveNote}
-                      handleDeleteNote={this.handleDeleteNote}
-                      handleInputChange={this.handleInputChange}
-                      notes={this.state.notes}
-                      toggleNotesBtn={this.toggleNotesBtn}
-                      toggleProgressBtn={this.toggleProgressBtn}
-                      collapseNotes={this.state.collapseNotes}
-                      collapseProgress={this.state.collapseProgress}
-                      handleScrollToggle={this.handleScrollToggle}
-                      toggleCheckProgress={this.toggleCheckProgress}
-                      checkboxProgress={this.checkboxProgress}
-                      user={this.state.user}
-                    />
-                  </ScrollIntoViewIfNeeded>   
+                  <Saved
+                    savedSchools={this.state.user.colleges}
+                    notes={this.state.notes}
+                    userRole={this.state.role}
+                    handleDeleteSchool={this.handleDeleteSchool}
+                    toggleFavSchool= {this.toggleFavSchool}
+                    handleSaveNote={this.handleSaveNote}
+                    handleDeleteNote={this.handleDeleteNote}
+                    handleInputChange={this.handleInputChange}
+
+                    toggleNotesBtn={this.toggleNotesBtn}
+                    toggleProgressBtn={this.toggleProgressBtn}
+                    collapseNotes={this.state.collapseNotes}
+                    collapseProgress={this.state.collapseProgress}
+                    toggleCheckProgress={this.toggleCheckProgress}
+                    checkboxProgress={this.checkboxProgress}
+                  />  
                 </SimpleCard>
               </div>
               <div className="col-md-2">
@@ -267,5 +265,3 @@ class User extends Component {
     )
   };
 }
-
-export default User;

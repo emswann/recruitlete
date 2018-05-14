@@ -1,15 +1,18 @@
-
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { ListGroup, ListGroupItem } from "mdbreact";
 
-class Newsfeed extends Component {
-  state = {
-    ready: false,
-    articles: []
-  };
+export default class Newsfeed extends Component {
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
+    this.loadArticles = this.loadArticles.bind(this);
+
+    this.state = {
+      ready: false,
+      articles: []
+    };
+
     this.loadArticles();
   }
 
@@ -50,5 +53,3 @@ class Newsfeed extends Component {
     );
   }
 }
-
-export default Newsfeed;

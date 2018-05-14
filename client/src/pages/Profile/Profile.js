@@ -8,8 +8,10 @@ import API from "../../utils/API";
 export default class Profile extends Component {
   constructor(props) {
     super(props);
+
     this.loadUser = this.loadUser.bind(this);
     this.updateUser = this.updateUser.bind(this);
+    
     this.state =  
       { ready: false, 
         user : {} 

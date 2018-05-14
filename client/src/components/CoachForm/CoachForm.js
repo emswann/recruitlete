@@ -29,9 +29,11 @@ const styles = {
 export default class CoachForm extends Component {
   constructor(props) {
     super(props);
+
     this.disableButton = this.disableButton.bind(this);
     this.enableButton = this.enableButton.bind(this);
     this.handleScrollToggle = this.handleScrollToggle.bind(this);
+    
     this.state = { canSubmit: false, scrollActive: false };
   }
  

@@ -13,7 +13,7 @@ class Saved extends React.Component {
     super(props);
 
     this.state = {
-      state: ""
+      
     };
   }
 
@@ -34,10 +34,12 @@ class Saved extends React.Component {
         </h2>
         {this.props.savedSchools.length ? (
           <div className="row">
-            {this.props.savedSchools.map((school, index) => (
+            {this.props.savedSchools.map((school, schoolIndex) => (
+                         // {school.info.notes.map((note, noteIndex) => (
+                            // {school.progress.map((progress, progressIndex) => (
               <div
                 className="card-group col-md-12"
-                key={index}
+                key={schoolIndex}
                 style={{ padding: 15, justifyContent: "center" }}
               >
                 <Card
@@ -50,34 +52,35 @@ class Saved extends React.Component {
                   <div style={{ padding: 15 }}>
                     <h4>{school.info.name}</h4>
                     <hr />
+                    <div className="row">
                     <div
-                      style={{
-                        display: "flex",
-                        margin: 10
-                      }}
-                    >
+                      className= "col-md-3">
                       <Button
-                        block
+                        size="lg"
                         color="primary"
                         type="button"
                         name="action"
                         value="notes"
-                        onClick={this.props.toggleNotes}
+                        onClick={() => this.props.toggleNotesBtn(schoolIndex)}
                       >
-                        <FontAwesomeIcon icon={faStickyNote} size={"1x"} />
+                        <FontAwesomeIcon icon={faStickyNote} size={"1x"} /> Notes
                       </Button>
+                      </div>
+                      <div className="col-md-3">
                       <Button
-                        block
+                        size="lg"
                         color="primary"
                         type="button"
                         name="action"
                         value="progress"
-                        onClick={this.toggleProgress}
+                        onClick={() => this.props.toggleProgressBtn(schoolIndex)}
                       >
                         <FontAwesomeIcon icon={faTasks} size={"1x"} /> Progress
                       </Button>
+                      </div>
+                      <div className="col-md-3">
                       <Button
-                        block
+                        size="lg"
                         color="primary"
                         type="button"
                         name="action"
@@ -88,8 +91,10 @@ class Saved extends React.Component {
                       >
                         <FontAwesomeIcon icon={faHeart} size={"1x"} /> Favorite
                       </Button>
+                      </div>
+                      <div className="col-md-3">
                       <Button
-                        block
+                        size="lg"
                         color="danger"
                         type="button"
                         name="action"
@@ -100,19 +105,49 @@ class Saved extends React.Component {
                       >
                         <FontAwesomeIcon icon={faTrash} size={"1x"} /> Delete
                       </Button>
+                      </div>
                     </div>
-                    <Collapse isOpen={this.props.collapse}>
+                    <Collapse
+                      isOpen={
+                        this.props.collapseNotes[schoolIndex]
+                          ? this.props.collapseNotes[schoolIndex]
+                          : false
+                      }
+                    >
                       <Card>
-                        <p>{school.info.notes}</p>
+                      {school.info.notes.map((note, noteIndex) => (
+                        <div key={noteIndex}>
+                        <div className = "row" style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                        <div className = "col-md-11">
+                        <p>{note}</p>
+                        </div>
+                        <div className = "col-md-1">
+                        <Button
+                        color="danger"
+                        type="button"
+                        name="action"
+                        value="deleteBtn"
+                        onClick={() =>
+                          this.props.handleDeleteNote(note, schoolIndex)
+                        }
+                      >
+                       X
+                      </Button>
+                      <hr />
+                      </div>
+                       
+                        </div>
+                        </div>
+                      ))}
                       </Card>
                       <div>
                         <Input
                           placeholder="notes"
-                          group type="notes"
-                          datatag={index}
+                          group
+                          type="notes"
                           name="notes"
                           onChange={this.props.handleInputChange}
-                          value={this.props.notes[index]}
+                          value={this.props.notes[schoolIndex]}
                         />
                       </div>
                       <Button
@@ -121,44 +156,52 @@ class Saved extends React.Component {
                         name="action"
                         value="saveNote"
                         onClick={() =>
-                          this.props.handleSaveNote(this.props.notes[index])
+                          this.props.handleSaveNote(this.props.notes, schoolIndex)
                         }
                       >
                         Save
                       </Button>
                     </Collapse>
-                    <div>
-                      <Collapse isOpen={this.props.collapse}>
-                        {/* <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          value={school.progress.contactEmail}
-                          id="defaultCheck1"
-                        />
-                          <label className="form-check-label" for="defaultCheck1">
-                            <p>Contact E-Mail</p>
-                          </label>
-                      </div> */}
-                        {/* <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id="defaultCheck2"
-                          disabled
-                        >
-                          <label class="form-check-label" for="defaultCheck2">
-                            Disabled checkbox
-                          </label>
-                        </input>
-                      </div> */}
-                      </Collapse>
-                    </div>
+                    <Collapse
+                      isOpen={
+                        this.props.collapseProgress[schoolIndex]
+                          ? this.props.collapseProgress[schoolIndex]
+                          : false
+                      }
+                    >
+                      <Card>
+                        <div className="form-check">
+                          <div className="row">
+                            {Object.entries(school.progress).map((progress, progressIndex) => (
+                              <div key={progressIndex}>
+                              <div className="container-fluid">
+                              <div className="col-md-3">
+                              <input
+                                //className="form-check-input"
+                                type="checkbox"
+                                value={progress}
+                                name="name"
+                                onChange={() => this.props.toggleCheckProgress(progress, schoolIndex, progressIndex)}
+                                checked={progress[1]}
+                              />
+                              <label>
+                                <p>                       {progress}</p>
+                              </label>
+                              <br />
+                              </div>
+                              </div>
+                              <div class="w-100"></div>
+                              </div>
+                            ))}
+                      
+                  </div>
                   </div>
                 </Card>
-              </div>
-            ))}
+                </Collapse>
+          </div>
+          </Card>
+           </div>
+        ))}
           </div>
         ) : (
           <div>

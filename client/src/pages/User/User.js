@@ -19,7 +19,8 @@ class User extends Component {
     searchSchools: [],
     scrollActive: false,
     notes: [],
-    collapse: false
+    collapseNotes: {},
+    collapseProgress: {}
   };
 
   componentDidMount() {
@@ -35,12 +36,12 @@ class User extends Component {
       API.getSchools(Auth.getToken())
       .then(res => {
         const schools = res.data;
-
         this.setState({
           ready: true,
           role: Auth.getRole(),
           user,
           schools,
+          checkboxProgress: user.colleges.map(college => college.progress),
           searchSchools: this.createSchoolsWithSave(
                            schools, 
                            user.colleges.map(college => college.info.name))
@@ -65,6 +66,7 @@ class User extends Component {
     APIfunction(Auth.getToken(), user)
     .then(res => this.setState({ 
             user: res.data,
+            notes: [],
             searchSchools: this.createSchoolsWithSave(
                              this.state.searchSchools, 
                              res.data.colleges.map(college => college.info.name)
@@ -140,19 +142,17 @@ class User extends Component {
   }
 
   handleInputChange = event => {
-    const value = event.target.value;
-    let notes = this.state.notes;
-    notes = notes[value]
-  
+    let field = event.target.value;
+    let notes = this.state.notes.concat();
+    notes = field
     this.setState({
-      notes
+      notes 
     });
   };
 
-  handleSaveNote = note => {
-    console.log("Note: "+ note)
+  handleSaveNote = ( note, index, event) => {
     let user = this.state.user;
-    user.colleges.info.push({ notes : note });
+    user.colleges[index].info.notes.push( note );
     this.updateUser(user);
   };
 
@@ -164,11 +164,10 @@ class User extends Component {
     this.updateUser(user);
   };
 
-  toggleCheckProgress = checkbox => {
-    let user = this.state.user;
-    let item = 
-    user.colleges.findIndex(school => school.progress === checkbox);
-    user.colleges[item].progress = !user.colleges[item].progress
+  toggleCheckProgress = (progress, schoolIndex, progressIndex) => {
+    let user = this.state.user  
+    user.colleges[schoolIndex].progress[progress[0]] = !user.colleges[schoolIndex].progress[progress[0]]
+    console.log(user)
     this.updateUser(user);
   };
 
@@ -176,7 +175,13 @@ class User extends Component {
     let user = this.state.user;
     user.colleges =
     user.colleges.filter(college => college.info.name !== schoolName);
-   console.log(user.colleges)
+    this.updateUser(user);
+  };
+
+  handleDeleteNote = (noteDelete, index) => {
+    let user = this.state.user;
+    user.colleges[index].info.notes =
+    user.colleges[index].info.notes.filter(note => note !== noteDelete);
     this.updateUser(user);
   };
 
@@ -184,65 +189,18 @@ class User extends Component {
     this.setState({ scrollActive: !this.state.scrollActive });
   }
 
-  toggleNotes = () => {
-    this.setState({ collapse: !this.state.collapse })}
-
-  toggleProgress = () => {
-    let state = "";
-
-    if (this.state.accordion !== 1) {
-      state = 1;
-    } else {
-      state = false;
-    }
-
-    this.setState({
-      accordion: state
-    });
+  toggleNotesBtn = index => {
+    this.setState({ 
+      collapseNotes: {[index]: !this.state.collapseNotes[index]}, 
+      collapseProgress: !this.state.collapseProgress[index] })
   }
 
-  handleInputChange = event => {
-    console.log(event.target.dataset.datatag)
-    const field = event.target.data;
-    const notes = this.state.notes;
-    notes[field] = event.target.value;
-    console.log("Notes: " + notes)
-    console.log("Field: " + field)
-    this.setState({
-      notes
-    });
-  };
+  toggleProgressBtn = index => {
+    this.setState({ 
+      collapseProgress: {[index]: !this.state.collapseProgress[index]}, 
+      collapseNotes: !this.state.collapseNotes[index]})
+  }
 
-  handleSaveNote = note => {
-    console.log("Note: " + note)
-    let user = this.state.user;
-    user.colleges.info.push({ notes : note });
-    this.updateUser(user);
-  };
-
-  toggleFavSchool = favSchool => {
-    let user = this.state.user;
-    let position = 
-    user.colleges.findIndex(school => school.info.name === favSchool);
-    user.colleges[position].info.favorite = !user.colleges[position].info.favorite
-    this.updateUser(user);
-  };
-
-  toggleCheckProgress = checkbox => {
-    let user = this.state.user;
-    let item = 
-    user.colleges.findIndex(school => school.progress === checkbox);
-    user.colleges[item].progress = !user.colleges[item].progress
-    this.updateUser(user);
-  };
-
-  handleDeleteSchool = schoolName => {
-    let user = this.state.user;
-    user.colleges =
-    user.colleges.filter(college => college.info.name !== schoolName);
-   console.log(user.colleges)
-    this.updateUser(user);
-  };
 
   render() {
     return ( 
@@ -286,12 +244,17 @@ class User extends Component {
                       handleDeleteSchool={this.handleDeleteSchool}
                       toggleFavSchool= {this.toggleFavSchool}
                       handleSaveNote={this.handleSaveNote}
+                      handleDeleteNote={this.handleDeleteNote}
                       handleInputChange={this.handleInputChange}
                       notes={this.state.notes}
-                      toggleNotes={this.toggleNotes}
-                      toggleProgress={this.toggleProgress}
-                      collapse={this.state.collapse}
+                      toggleNotesBtn={this.toggleNotesBtn}
+                      toggleProgressBtn={this.toggleProgressBtn}
+                      collapseNotes={this.state.collapseNotes}
+                      collapseProgress={this.state.collapseProgress}
                       handleScrollToggle={this.handleScrollToggle}
+                      toggleCheckProgress={this.toggleCheckProgress}
+                      checkboxProgress={this.checkboxProgress}
+                      user={this.state.user}
                     />
                   </ScrollIntoViewIfNeeded>   
                 </SimpleCard>

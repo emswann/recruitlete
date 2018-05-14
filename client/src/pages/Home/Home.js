@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import Slideshow from "../../components/Slideshow";
 import Newsfeed from "../../components/NewsFeed";
 
-class Home extends Component {
+export default class Home extends Component {
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
-    // update authenticated state on logout
     this.props.toggleAuthenticateStatus();
   }
 
@@ -22,5 +22,3 @@ class Home extends Component {
     )
   }
 };
-
-export default Home;

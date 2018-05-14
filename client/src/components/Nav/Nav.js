@@ -31,16 +31,14 @@ class Nav extends React.Component {
     };
     this.onClick = this.onClick.bind(this);
     this.toggle = this.toggle.bind(this);
+
+    this.props.toggleAuthenticateStatus();
   }
 
   onClick() {
     this.setState({
       collapse: !this.state.collapse
     });
-  }
-
-  componentDidMount() {
-    this.props.toggleAuthenticateStatus();
   }
 
   toggle() {

@@ -10,6 +10,9 @@ import {
 
 const Saved = props => (
   <div className="container">
+    <h2>
+      Saved Schools
+    </h2>
     {props.savedSchools.length ? (
       <div className="row">
         {props.savedSchools.map((school, schoolIndex) => (
@@ -41,18 +44,22 @@ const Saved = props => (
                       <FontAwesomeIcon icon={faStickyNote} size={"1x"} /> Notes
                     </Button>
                   </div>
-                  <div className="col-md-3">
-                    <Button
-                      size="lg"
-                      color="primary"
-                      type="button"
-                      name="action"
-                      value="progress"
-                      onClick={() => props.toggleProgressBtn(schoolIndex)}
-                    >
-                      <FontAwesomeIcon icon={faTasks} size={"1x"} /> Progress
-                    </Button>
-                  </div>
+                  { props.userRole === "athlete" &&
+                    (
+                      <div className="col-md-3">
+                        <Button
+                          size="lg"
+                          color="primary"
+                          type="button"
+                          name="action"
+                          value="progress"
+                          onClick={() => props.toggleProgressBtn(schoolIndex)}
+                        >
+                          <FontAwesomeIcon icon={faTasks} size={"1x"} /> Progress
+                        </Button>
+                      </div>
+                    )
+                  }
                   <div className="col-md-3">
                     <Button
                       size="lg"
@@ -136,42 +143,44 @@ const Saved = props => (
                     Save
                   </Button>
                 </Collapse>
-                { props.role === "athlete" && (
-                  <Collapse
-                    isOpen={
-                      props.collapseProgress[schoolIndex]
-                        ? props.collapseProgress[schoolIndex]
-                        : false
-                    }
-                  >
-                    <Card>
-                      <div className="form-check">
-                        <div className="row">
-                          {Object.entries(school.progress).map((progress, progressIndex) => (
-                            <div key={progressIndex}>
-                              <div className="container-fluid" key={progressIndex}>
-                                <div className="col-md-3">
-                                  <input
-                                    type="checkbox"
-                                    value={progress}
-                                    name="name"
-                                    onChange={() => props.toggleCheckProgress(progress, schoolIndex, progressIndex)}
-                                    checked={progress[1]}
-                                  />
-                                  <label>
-                                    <p>{progress}</p>
-                                  </label>
-                                  <br />
+                { props.userRole === "athlete" &&
+                  (
+                    <Collapse
+                      isOpen={
+                        props.collapseProgress[schoolIndex]
+                          ? props.collapseProgress[schoolIndex]
+                          : false
+                      }
+                    >
+                      <Card>
+                        <div className="form-check">
+                          <div className="row">
+                            {Object.entries(school.progress).map((progress, progressIndex) => (
+                              <div key={progressIndex}>
+                                <div className="container-fluid" key={progressIndex}>
+                                  <div className="col-md-3">
+                                    <input
+                                      type="checkbox"
+                                      value={progress}
+                                      name="name"
+                                      onChange={() => props.toggleCheckProgress(progress, schoolIndex, progressIndex)}
+                                      checked={progress[1]}
+                                    />
+                                    <label>
+                                      <p>{progress}</p>
+                                    </label>
+                                    <br />
+                                  </div>
                                 </div>
+                                <div className="w-100"></div>
                               </div>
-                              <div class="w-100"></div>
-                            </div>
-                          ))}                      
+                            ))}                      
+                          </div>
                         </div>
-                      </div>
-                    </Card>
-                  </Collapse>
-                )}
+                      </Card>
+                    </Collapse>
+                  )
+                }
               </div>
             </Card>
           </div>

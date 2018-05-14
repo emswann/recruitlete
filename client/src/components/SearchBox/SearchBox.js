@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "mdbreact";
 
 const SearchBox = props => (
   <div className="container">

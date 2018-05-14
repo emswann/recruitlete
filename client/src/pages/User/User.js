@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ScrollIntoViewIfNeeded from 'react-scroll-into-view-if-needed';
 import SimpleCard from "../../components/SimpleCard"
 import Search from "../../components/Search"
 import SearchBox from "../../components/SearchBox"
@@ -17,7 +16,6 @@ class User extends Component {
     searchOptionArr: [],
     searchField: "default",
     searchSchools: [],
-    scrollActive: false,
     notes: [],
     collapseNotes: {},
     collapseProgress: {}
@@ -167,7 +165,6 @@ class User extends Component {
   toggleCheckProgress = (progress, schoolIndex, progressIndex) => {
     let user = this.state.user  
     user.colleges[schoolIndex].progress[progress[0]] = !user.colleges[schoolIndex].progress[progress[0]]
-    console.log(user)
     this.updateUser(user);
   };
 
@@ -184,10 +181,6 @@ class User extends Component {
     user.colleges[index].info.notes.filter(note => note !== noteDelete);
     this.updateUser(user);
   };
-
-  handleScrollToggle = () => {
-    this.setState({ scrollActive: !this.state.scrollActive });
-  }
 
   toggleNotesBtn = index => {
     this.setState({ 
@@ -211,51 +204,34 @@ class User extends Component {
               </div>
               <div className="col-md-8">
                 <SimpleCard>
-                  <ScrollIntoViewIfNeeded 
-                    active={!this.state.scrollActive}
-                    options={{
-                      block: "center",
-                      behavior: "smooth"
-                    }} 
-                  >
-                    <SearchBox
-                      searchOption={this.state.searchOption}
-                      searchOptionArr={this.state.searchOptionArr}
-                      searchField={this.state.searchField}
-                      handleSearchOption={this.handleSearchOption}
-                      handleSearchField={this.handleSearchField}
-                      handleScrollToggle={this.handleScrollToggle}
-                    />
-                  </ScrollIntoViewIfNeeded> 
+                  <SearchBox
+                    searchOption={this.state.searchOption}
+                    searchOptionArr={this.state.searchOptionArr}
+                    searchField={this.state.searchField}
+                    handleSearchOption={this.handleSearchOption}
+                    handleSearchField={this.handleSearchField}
+                  />
                   <Search 
                     searchSchools={this.state.searchSchools}
                     handleSaveSchool={this.handleSaveSchool}
                   />
-                  <ScrollIntoViewIfNeeded 
-                    active={this.state.scrollActive}
-                    options={{
-                      block: "start",
-                      behavior: "smooth"
-                    }} 
-                  >
-                    <Saved
-                      savedSchools={this.state.user.colleges}
-                      handleDeleteSchool={this.handleDeleteSchool}
-                      toggleFavSchool= {this.toggleFavSchool}
-                      handleSaveNote={this.handleSaveNote}
-                      handleDeleteNote={this.handleDeleteNote}
-                      handleInputChange={this.handleInputChange}
-                      notes={this.state.notes}
-                      toggleNotesBtn={this.toggleNotesBtn}
-                      toggleProgressBtn={this.toggleProgressBtn}
-                      collapseNotes={this.state.collapseNotes}
-                      collapseProgress={this.state.collapseProgress}
-                      handleScrollToggle={this.handleScrollToggle}
-                      toggleCheckProgress={this.toggleCheckProgress}
-                      checkboxProgress={this.checkboxProgress}
-                      user={this.state.user}
-                    />
-                  </ScrollIntoViewIfNeeded>   
+                  <Saved
+                    savedSchools={this.state.user.colleges}
+                    notes={this.state.notes}
+                    userRole={this.state.role}
+                    handleDeleteSchool={this.handleDeleteSchool}
+                    toggleFavSchool= {this.toggleFavSchool}
+                    handleSaveNote={this.handleSaveNote}
+                    handleDeleteNote={this.handleDeleteNote}
+                    handleInputChange={this.handleInputChange}
+
+                    toggleNotesBtn={this.toggleNotesBtn}
+                    toggleProgressBtn={this.toggleProgressBtn}
+                    collapseNotes={this.state.collapseNotes}
+                    collapseProgress={this.state.collapseProgress}
+                    toggleCheckProgress={this.toggleCheckProgress}
+                    checkboxProgress={this.checkboxProgress}
+                  />  
                 </SimpleCard>
               </div>
               <div className="col-md-2">

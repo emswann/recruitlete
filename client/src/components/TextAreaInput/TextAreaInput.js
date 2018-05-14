@@ -50,7 +50,6 @@ class TextAreaInput extends Component {
             onChange={this.changeValue}
             rows="5"
           >
-            {this.props.getValue() || ''}
           </textarea>
           <span style={styles.error}>{errorMessage}</span>
       </div>

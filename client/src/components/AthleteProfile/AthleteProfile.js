@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AthleteForm from "../../components/AthleteForm";
 
-class AthleteProfile extends Component {
+export default class AthleteProfile extends Component {
   constructor(props) {
     super(props)
 
@@ -24,7 +24,7 @@ class AthleteProfile extends Component {
       parentNames: this.props.user.parentNames,
       jerseyNum: this.props.user.jerseyNum,
       gradYear: this.props.user.gradYear,
-      positions: this.props.user.positions,
+      position: this.props.user.position,
       ncaaId: this.props.user.ncaaId,
       birthDate: this.props.user.birthDate,
       weightGPA: this.props.user.scholastic.weightGPA,
@@ -108,7 +108,7 @@ class AthleteProfile extends Component {
       parentNames: user.parentNames,
       jerseyNum: user.jerseyNum,
       gradYear: user.gradYear,
-      positions: user.positions,
+      position: user.position,
       ncaaId: user.ncaaId,
       birthDate: user.birthDate,
       scholastic: {
@@ -192,5 +192,3 @@ class AthleteProfile extends Component {
   };
 
 };
-
-export default AthleteProfile;

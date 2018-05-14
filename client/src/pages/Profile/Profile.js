@@ -5,7 +5,7 @@ import CoachProfile from "../../components/CoachProfile";
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
-class Profile extends Component {
+export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.loadUser = this.loadUser.bind(this);
@@ -64,5 +64,3 @@ class Profile extends Component {
     )
   };
 }
-
-export default Profile;

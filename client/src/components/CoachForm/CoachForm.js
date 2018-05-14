@@ -1,130 +1,145 @@
-import React from "react";
-import { Button, Input } from "mdbreact";
-import SimpleCard from "../../components/SimpleCard";
+import React, { Component } from "react";
+import { Panel } from "react-bootstrap";
+import Formsy from "formsy-react";
+import TextInput from "../TextInput";
+import TextAreaInput from "../TextAreaInput"
 
-const CoachForm = ({
-    handleFormSubmit,
-    handleInputChange,
-    user,
-  }) => (
-    <div className="row">
-    <div className="offset-md-4 col-md-4">
-      <SimpleCard>
-        <form>
-          <p className="h5 text-center justify-center mb-4">Create Coach Profile</p>
-          <Input
-            label="E-mail"
-            icon="envelope"
-            group type="email"
-            name="email"
-            onChange={handleInputChange}
-            value={user.contact.email}
-          />
-          <Input
-            label="Phone"
-            icon="phone"
-            group type="phone"
-            name="phone"
-            onChange={handleInputChange}
-            value={user.contact.phone}
-          />
-          <Input
-            label="Website"
-            group type="website"
-            name="url"
-            onChange={handleInputChange}
-            value={user.contact.url}
-          />
-          <Input
-            label="First Name"
-            group type="name"
-            name="firstName"
-            onChange={handleInputChange}
-            value={user.name.first}
-          />
-          <Input
-            label="Middle Name"
-            group type="name"
-            name="middleName"
-            onChange={handleInputChange}
-            value={user.name.middle}
-          />
-          <Input
-            label="Last Name"
-            group type="name"
-            name="lastName"
-            onChange={handleInputChange}
-            value={user.name.last}
-          />
-          <Input
-            label="Street"
-            group type="address"
-            name="street1"
-            onChange={handleInputChange}
-            value={user.address.street1}
-          />
-          <Input
-            label="Street 2"
-            group type="address"
-            name="street2"
-            onChange={handleInputChange}
-            value={user.address.street2}
-          />
-          <Input
-            label="City"
-            group type="address"
-            name="city"
-            onChange={handleInputChange}
-            value={user.address.city}
-          />
-          <Input
-            label="State"
-            group type="address"
-            name="state"
-            onChange={handleInputChange}
-            value={user.address.state}
-          />
-          <Input
-            label="Zip Code"
-            group type="address"
-            name="zip"
-            onChange={handleInputChange}
-            value={user.address.zip}
-          />
-          <Input
-            label="Zip 4"
-            group type="address"
-            name="zip4"
-            onChange={handleInputChange}
-            value={user.address.zip4}
-          />
-          <Input
-            label="Position"
-            group type="position"
-            name="position"
-            onChange={handleInputChange}
-            value={user.position}
-          />
-          <Input
-            label="Accomplishments"
-            group type="accomplishments"
-            name="accomplishments"
-            onChange={handleInputChange}
-            value={user.accomplishments}
-          />
-          <div className="text-center">
-            <Button block color="danger"
-              type="submit" 
-              name="action"
-              value="populate" 
-              onClick={handleFormSubmit}>
-              Submit
-            </Button>
-          </div>
-        </form>
-      </SimpleCard>
-    </div>
-  </div>
-);
+const styles = {
+  formsy: {
+    display: "table",
+    tableLayout: "fixed"
+  },
+  panelHeading : {
+    backgroundColor: "#EE5B4F",
+    color          : "#FFFFFF"
+  },
+  button: {
+    backgroundColor: "#EE5B4F",
+    color          : "#FFFFFF"
+  },
+  scroll: {
+    backgroundColor: "#FFFFFF",
+    color          : "#515D63",
+    borderRadius   : "50%",
+    border         : "2px solid #515D63",
+    marginBottom   : ".5rem"
+  }
+}
 
-export default CoachForm;
+export default class CoachForm extends Component {
+  constructor(props) {
+    super(props);
+    this.disableButton = this.disableButton.bind(this);
+    this.enableButton = this.enableButton.bind(this);
+    this.handleScrollToggle = this.handleScrollToggle.bind(this);
+    this.state = { canSubmit: false, scrollActive: false };
+  }
+ 
+  disableButton = () => this.setState({ canSubmit: false });
+ 
+  enableButton = () => this.setState({ canSubmit: true  });
+
+  submit = model => {
+    this.props.handleFormSubmit(model);
+  }
+
+  handleScrollToggle = () => {
+    this.setState({ scrollActive: !this.state.scrollActive });
+  }
+ 
+  render() {
+    return (
+      <Panel>
+        <Panel.Heading className="text-center mb-4" style={styles.panelHeading}>
+          <Panel.Title>
+            <h1 className="mb-3">Coach Profile</h1>
+          </Panel.Title>
+        </Panel.Heading>
+        <Panel.Body>
+          <Formsy style={styles.formsy} onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}>
+            <TextInput
+              name="email"
+              label="Email:"
+              readOnly="true"
+              value={this.props.user.email}
+            />
+            <TextInput
+              name="firstName"
+              label="First Name:"
+              value={this.props.user.firstName}
+            />
+            <TextInput
+              name="middleName"
+              label="Middle Name:"
+              value={this.props.user.middleName}
+            />
+            <TextInput
+              name="lastName"
+              label="Last Name:"
+              value={this.props.user.lastName}
+            />
+              
+            <h6 className="font-weight-bold mt-3 mb-0">Contact Info:</h6>
+            <TextInput
+              name="phone"
+              label="Phone:"
+              value={this.props.user.phone}
+            />
+            <TextInput
+              name="url"
+              label="Website:"
+              value={this.props.user.url}
+              validations="isUrl"
+              validationError="This is not a valid website"
+            />
+
+            <h6 className="font-weight-bold mt-3 mb-0">Address:</h6>
+            <TextInput
+              name="street1"
+              label="Street 1:"
+              value={this.props.user.street1}
+            />
+            <TextInput
+              name="street2"
+              label="Street 2:"
+              value={this.props.user.street2}
+            />
+            <TextInput
+              name="city"
+              label="City:"
+              value={this.props.user.city}
+            />
+            <TextInput
+              name="state"
+              label="State:"
+              value={this.props.user.state}
+            />
+            <TextInput
+              name="zip"
+              label="Zip:"
+              value={this.props.user.zip}
+            />
+
+            <h6 className="font-weight-bold mt-3 mb-0">Additional:</h6>
+            <TextInput
+              name="position"
+              label="Position:"
+              value={this.props.user.position}
+            />
+            <TextAreaInput
+              name="accomplishments"
+              label="Accomplishments:"
+              value={this.props.user.accomplishments}
+            />
+
+            <div className="text-center justify-center mt-3">
+              <button style={styles.button} type="submit" disabled={!this.state.canSubmit}>
+                <h6 className="font-weight-bold m-1">Submit</h6>
+              </button>
+            </div>
+          </Formsy>
+        </Panel.Body>
+      </Panel>
+    );
+  }
+}

@@ -166,9 +166,9 @@ export default class AthleteForm extends Component {
                 validationError="This is must be a number"
               />
               <TextInput
-                name="positions"
-                label="Positions:"
-                value={this.props.user.positions}
+                name="position"
+                label="Position:"
+                value={this.props.user.position}
               />
               <TextInput
                 name="ncaaId"
@@ -434,6 +434,7 @@ export default class AthleteForm extends Component {
                 disabled="true"
                 value={this.props.user.profileImg}
               />
+              
               <div className="text-center justify-center mt-3">
                 <button style={styles.button} type="submit" disabled={!this.state.canSubmit}>
                   <h6 className="font-weight-bold m-1">Submit</h6>

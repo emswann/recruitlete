@@ -15,7 +15,7 @@ const athletesSchema = new Schema({
   parentNames     : { type: String, trim: true },
   jerseyNum       : { type: Number },
   gradYear        : { type: Number },
-  positions       : [{ type: String, trim: true }],
+  position        : { type: String, trim: true },
   ncaaId          : { type: String, trim: true },  
 	birthDate       : { type: String, trim: true }, 
   scholastic      : {

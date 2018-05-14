@@ -27,8 +27,7 @@ class User extends Component {
   };
 
   loadStateData = () => {
-    const APIfunction = 
-      Auth.getRole() === "athlete" ? API.getAthlete : API.getCoach;
+    const APIfunction = Auth.isUserAnAthlete() ? API.getAthlete : API.getCoach;
 
     APIfunction(Auth.getToken())
     .then(res => res.data)
@@ -61,7 +60,7 @@ class User extends Component {
 
   updateUser = user => {
     const APIfunction = 
-      Auth.getRole() === "athlete" ? API.updateAthlete : API.updateCoach;
+      Auth.isUserAnAthlete() ? API.updateAthlete : API.updateCoach;
 
     APIfunction(Auth.getToken(), user)
     .then(res => this.setState({ 

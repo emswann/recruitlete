@@ -17,6 +17,9 @@ const styles = {
     display: "table-cell",
     width: "80%",
     backgroundColor: "lightgray"
+  },
+  error: {
+    color: "#EE5B4F"
   }
 }
 
@@ -46,7 +49,7 @@ class TextInput extends Component {
             type="text"
             value={this.props.getValue() || ''}
           />
-          <span>{errorMessage}</span>
+          <span style={styles.error}>{errorMessage}</span>
       </div>
     );
   }

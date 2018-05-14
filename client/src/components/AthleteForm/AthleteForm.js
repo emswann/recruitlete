@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Panel } from "react-bootstrap";
 import Formsy from 'formsy-react';
 import TextInput from '../TextInput';
+import TextInput from '../FileInput';
 import ScrollIntoViewIfNeeded from 'react-scroll-into-view-if-needed';
 
 const styles = {
@@ -107,6 +108,8 @@ export default class AthleteForm extends Component {
                 name="url"
                 label="Website:"
                 value={this.props.user.url}
+                validations="isUrl"
+                validationError="This is not a valid website"
               />
 
               <h6 className="font-weight-bold mt-3 mb-0">Address:</h6>
@@ -151,11 +154,15 @@ export default class AthleteForm extends Component {
                 name="gradYear"
                 label="Graduation Year:"
                 value={this.props.user.gradYear}
+                validations="isNumeric"
+                validationError="This is must be a number"
               />
               <TextInput
                 name="jerseyNum"
                 label="Jersey Number:"
                 value={this.props.user.jerseyNum}
+                validations="isNumeric"
+                validationError="This is must be a number"
               />
               <TextInput
                 name="positions"
@@ -173,31 +180,43 @@ export default class AthleteForm extends Component {
                 name="weightGPA"
                 label="Weighted GPA:"
                 value={this.props.user.weightGPA}
+                validations="isNumeric"
+                validationError="This is must be a number"
               />
               <TextInput
                 name="unweightGPA"
                 label="Unweighted GPA:"
                 value={this.props.user.unweightGPA}
+                validations="isNumeric"
+                validationError="This is must be a number"
               />
               <TextInput
                 name="classRank"
                 label="Class Rank:"
                 value={this.props.user.classRank}
+                validations="isNumeric"
+                validationError="This is must be a number"
               />
               <TextInput
                 name="classSize"
                 label="Class Size:"
                 value={this.props.user.classSize}
+                validations="isNumeric"
+                validationError="This is must be a number"
               />
               <TextInput
                 name="scoreSAT"
                 label="SAT Score:"
                 value={this.props.user.scoreSAT}
+                validations="isNumeric"
+                validationError="This is must be a number"
               />
               <TextInput
                 name="scoreACT"
                 label="ACT Score:"
                 value={this.props.user.scoreACT}
+                validations="isNumeric"
+                validationError="This is must be a number"
               />
               <TextInput
                 name="major"
@@ -275,6 +294,8 @@ export default class AthleteForm extends Component {
                 name="clubEmail"
                 label="Email:"
                 value={this.props.user.clubEmail}
+                validations="isEmail"
+                validationError="This is not a valid email"
               />
               <TextInput
                 name="clubPhone"
@@ -285,6 +306,8 @@ export default class AthleteForm extends Component {
                 name="clubUrl"
                 label="Website:"
                 value={this.props.user.clubUrl}
+                validations="isUrl"
+                validationError="This is not a valid website"
               />
 
               <h6 className="font-weight-bold mt-3 mb-0">High School Info:</h6>
@@ -337,6 +360,8 @@ export default class AthleteForm extends Component {
                 name="hsEmail"
                 label="Email:"
                 value={this.props.user.hsEmail}
+                validations="isEmail"
+                validationError="This is not a valid email"
               />
               <TextInput
                 name="hsPhone"
@@ -347,6 +372,8 @@ export default class AthleteForm extends Component {
                 name="hsUrl"
                 label="Website:"
                 value={this.props.user.hsUrl}
+                validations="isUrl"
+                validationError="This is not a valid website"
               />
 
               <h6 className="font-weight-bold mt-3 mb-0">Statistics:</h6>
@@ -396,8 +423,10 @@ export default class AthleteForm extends Component {
                 name="videoLinks"
                 label="You Tube Video Links:"
                 value={this.props.user.videoLinks}
+                validations="isUrl"
+                validationError="This is not a valid website"
               />
-              <TextInput
+              <FileInput
                 name="profileImg"
                 label="Profile Image:"
                 value={this.props.user.profileImg}

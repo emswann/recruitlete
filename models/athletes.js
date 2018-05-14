@@ -17,7 +17,7 @@ const athletesSchema = new Schema({
   gradYear        : { type: Number },
   positions       : [{ type: String, trim: true }],
   ncaaId          : { type: String, trim: true },  
-	birthDate       : Date, 
+	birthDate       : { type: String, trim: true }, 
   scholastic      : {
     weightGPA     : { type: Number },
     unweightGPA   : { type: Number },

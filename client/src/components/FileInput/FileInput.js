@@ -44,7 +44,7 @@ class FileInput extends Component {
     return (
       <div style={styles.div}>
           <label style={styles.label}>{this.props.label}</label>
-          <input style={this.props.readOnly ? styles.readOnly : styles.input} readOnly={this.props.readOnly}
+          <input style={this.props.readOnly ? styles.readOnly : styles.input} readOnly={this.props.readOnly} disabled={this.props.disabled}
             onChange={this.changeValue}
             type="file"
             value={this.props.getValue() || ''}

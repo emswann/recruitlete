@@ -6,14 +6,17 @@ import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
 class Profile extends Component {
-  state = {
-    ready: false,
-    user: {}
-  };
+  constructor(props) {
+    super(props);
+    this.loadUser = this.loadUser.bind(this);
+    this.updateUser = this.updateUser.bind(this);
+    this.state =  
+      { ready: false, 
+        user : {} 
+      };
 
-  componentDidMount() {
     this.loadUser();
-  };
+  }
 
   loadUser = () => {
     const APIfunction = Auth.isUserAnAthlete() ? API.getAthlete : API.getCoach;

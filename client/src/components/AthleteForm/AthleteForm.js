@@ -431,6 +431,7 @@ export default class AthleteForm extends Component {
               <FileInput
                 name="profileImg"
                 label="Profile Image:"
+                disabled="true"
                 value={this.props.user.profileImg}
               />
               <div className="text-center justify-center mt-3">

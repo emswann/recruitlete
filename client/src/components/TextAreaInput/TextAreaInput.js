@@ -45,7 +45,8 @@ class TextAreaInput extends Component {
     return (
       <div style={styles.div}>
           <label style={styles.label}>{this.props.label}</label>
-          <textarea style={this.props.readOnly ? styles.readOnly : styles.textarea} readOnly={this.props.readOnly}
+          <textarea style={this.props.readOnly ? styles.readOnly : styles.textarea} readOnly={this.props.readOnly} disabled={this.props.disabled}
+            value={this.props.getValue() || ''}
             onChange={this.changeValue}
             rows="5"
           >

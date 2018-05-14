@@ -52,24 +52,23 @@ class Saved extends React.Component {
                   <div style={{ padding: 15 }}>
                     <h4>{school.info.name}</h4>
                     <hr />
+                    <div className="row">
                     <div
-                      style={{
-                        display: "flex",
-                        padding: 10
-                      }}
-                    >
+                      className= "col-md-3">
                       <Button
-                        block
+                        size="lg"
                         color="primary"
                         type="button"
                         name="action"
                         value="notes"
                         onClick={() => this.props.toggleNotesBtn(schoolIndex)}
                       >
-                        <FontAwesomeIcon icon={faStickyNote} size={"1x"} />
+                        <FontAwesomeIcon icon={faStickyNote} size={"1x"} /> Notes
                       </Button>
+                      </div>
+                      <div className="col-md-3">
                       <Button
-                        block
+                        size="lg"
                         color="primary"
                         type="button"
                         name="action"
@@ -78,8 +77,10 @@ class Saved extends React.Component {
                       >
                         <FontAwesomeIcon icon={faTasks} size={"1x"} /> Progress
                       </Button>
+                      </div>
+                      <div className="col-md-3">
                       <Button
-                        block
+                        size="lg"
                         color="primary"
                         type="button"
                         name="action"
@@ -90,8 +91,10 @@ class Saved extends React.Component {
                       >
                         <FontAwesomeIcon icon={faHeart} size={"1x"} /> Favorite
                       </Button>
+                      </div>
+                      <div className="col-md-3">
                       <Button
-                        block
+                        size="lg"
                         color="danger"
                         type="button"
                         name="action"
@@ -102,6 +105,7 @@ class Saved extends React.Component {
                       >
                         <FontAwesomeIcon icon={faTrash} size={"1x"} /> Delete
                       </Button>
+                      </div>
                     </div>
                     <Collapse
                       isOpen={
@@ -111,7 +115,30 @@ class Saved extends React.Component {
                       }
                     >
                       <Card>
-                        <p>{school.info.notes}</p>
+                      {school.info.notes.map((note, noteIndex) => (
+                        <div key={noteIndex}>
+                        <div className = "row" style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+                        <div className = "col-md-11">
+                        <p>{note}</p>
+                        </div>
+                        <div className = "col-md-1">
+                        <Button
+                        color="danger"
+                        type="button"
+                        name="action"
+                        value="deleteBtn"
+                        onClick={() =>
+                          this.props.handleDeleteNote(note, schoolIndex)
+                        }
+                      >
+                       X
+                      </Button>
+                      <hr />
+                      </div>
+                       
+                        </div>
+                        </div>
+                      ))}
                       </Card>
                       <div>
                         <Input
@@ -145,25 +172,28 @@ class Saved extends React.Component {
                       <Card>
                         <div className="form-check">
                           <div className="row">
-                            <div className="col-md-6">
                             {Object.entries(school.progress).map((progress, progressIndex) => (
-                              <div
-                              key={progressIndex}>
+                              <div key={progressIndex}>
+                              <div className="container-fluid">
+                              <div className="col-md-3">
                               <input
-                                className="form-check-input"
+                                //className="form-check-input"
                                 type="checkbox"
                                 value={progress}
                                 name="name"
-                                onChange={() => this.props.toggleCheckProgress(schoolIndex, progressIndex)}
-                                checked={school.progress[progressIndex]}
+                                onChange={() => this.props.toggleCheckProgress(progress, schoolIndex, progressIndex)}
+                                checked={progress[1]}
                               />
-                              <label className="form-check-label">
-                                <p> {progress}</p>
+                              <label>
+                                <p>                       {progress}</p>
                               </label>
                               <br />
                               </div>
+                              </div>
+                              <div class="w-100"></div>
+                              </div>
                             ))}
-                      </div>
+                      
                   </div>
                   </div>
                 </Card>

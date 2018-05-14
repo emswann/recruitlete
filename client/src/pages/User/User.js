@@ -67,6 +67,7 @@ class User extends Component {
     APIfunction(Auth.getToken(), user)
     .then(res => this.setState({ 
             user: res.data,
+            notes: [],
             searchSchools: this.createSchoolsWithSave(
                              this.state.schools, 
                              res.data.colleges.map(college => college.info.name)
@@ -133,16 +134,15 @@ class User extends Component {
   }
 
   handleInputChange = event => {
-    const value = event.target.value;
+    let field = event.target.value;
     let notes = this.state.notes.concat();
-    notes = value
-    console.log(notes)
+    notes = field
     this.setState({
       notes 
     });
   };
 
-  handleSaveNote = (note, index) => {
+  handleSaveNote = ( note, index, event) => {
     let user = this.state.user;
     user.colleges[index].info.notes.push( note );
     this.updateUser(user);
@@ -156,9 +156,10 @@ class User extends Component {
     this.updateUser(user);
   };
 
-  toggleCheckProgress = (school, progress) => {
+  toggleCheckProgress = (progress, schoolIndex, progressIndex) => {
     let user = this.state.user  
-    user.colleges[school].progress[progress] = !user.colleges[school].progress[progress]
+    user.colleges[schoolIndex].progress[progress[0]] = !user.colleges[schoolIndex].progress[progress[0]]
+    console.log(user)
     this.updateUser(user);
   };
 
@@ -166,7 +167,13 @@ class User extends Component {
     let user = this.state.user;
     user.colleges =
     user.colleges.filter(college => college.info.name !== schoolName);
- 
+    this.updateUser(user);
+  };
+
+  handleDeleteNote = (noteDelete, index) => {
+    let user = this.state.user;
+    user.colleges[index].info.notes =
+    user.colleges[index].info.notes.filter(note => note !== noteDelete);
     this.updateUser(user);
   };
 
@@ -227,6 +234,7 @@ class User extends Component {
                       handleDeleteSchool={this.handleDeleteSchool}
                       toggleFavSchool= {this.toggleFavSchool}
                       handleSaveNote={this.handleSaveNote}
+                      handleDeleteNote={this.handleDeleteNote}
                       handleInputChange={this.handleInputChange}
                       notes={this.state.notes}
                       toggleNotesBtn={this.toggleNotesBtn}

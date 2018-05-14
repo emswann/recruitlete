@@ -1,4 +1,6 @@
 #application {
   background: url("./background.jpg") no-repeat center center fixed;
   background-size: cover;
+  height: 100vh;
+  overflow-x: scroll;
 }

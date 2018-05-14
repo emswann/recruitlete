@@ -9,6 +9,7 @@ import API from "../../utils/API";
 export default class User extends Component {
   constructor(props) {
     super(props);
+    
     this.loadStateData = this.loadStateData.bind(this);
     this.addSaveStatusToSchools = this.addSaveStatusToSchools.bind(this);
     this.updateUser = this.updateUser.bind(this);

@@ -26,6 +26,7 @@ const styles = {
 class FileInput extends Component {
   constructor(props) {
     super(props);
+    
     this.changeValue = this.changeValue.bind(this);
   }
  

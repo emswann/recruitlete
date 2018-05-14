@@ -24,11 +24,13 @@ import Auth from "../../utils/Auth";
 class Nav extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       collapse: false,
       isWideEnough: false,
       dropdownOpen: false
     };
+    
     this.onClick = this.onClick.bind(this);
     this.toggle = this.toggle.bind(this);
 

@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import Auth from "../../utils/Auth";
 
-class Logout extends Component {
+export default class Logout extends Component {
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
+    this.deauthenticateUser = this.deauthenticateUser.bind(this);
+    
+    this.deauthenticateUser();
+  }
+
+  deauthenticateUser() {
     // deauthenticate user
     Auth.deauthenticateUser();
     // change the current URL to / after logout
@@ -17,5 +24,3 @@ class Logout extends Component {
     )
   }
 }
-
-export default Logout;

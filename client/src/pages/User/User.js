@@ -201,7 +201,6 @@ class User extends Component {
       collapseNotes: !this.state.collapseNotes[index]})
   }
 
-
   render() {
     return ( 
       <div>

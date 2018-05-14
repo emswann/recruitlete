@@ -1,488 +1,454 @@
-import React from "react";
-import { Button, Input } from "mdbreact";
-import SimpleCard from "../../components/SimpleCard";
+import React, { Component } from "react";
+import { Panel } from "react-bootstrap";
+import Formsy from "formsy-react";
+import TextInput from "../TextInput";
+import TextAreaInput from "../TextAreaInput"
+import FileInput from "../FileInput";
+import ScrollIntoViewIfNeeded from "react-scroll-into-view-if-needed";
 
-const AthleteInput = ({
-    handleFormSubmit,
-    handleInputChange,
-    user,
-  }) => (
-    <div className="row">
-      <div className="offset-md-4 col-md-4">
-        <SimpleCard>
-          <form>
-            <p className="h5 text-center justify-center mb-4">Create Athlete Profile</p>
-            <Input
-              label="E-mail"
-              icon="envelope"
-              group type="email"
-              name="email"
-              onChange={handleInputChange}
-              value={user.contact.email}
-            />
-            <Input
-              label="Phone"
-              icon="phone"
-              group type="phone"
-              name="phone"
-              onChange={handleInputChange}
-              value={user.contact.phone}
-            />
-            <Input
-              label="Website"
-              group type="website"
-              name="url"
-              onChange={handleInputChange}
-              value={user.contact.url}
-            />
-            <Input
-              label="First Name"
-              group type="name"
-              name="firstName"
-              onChange={handleInputChange}
-              value={user.name.first}
-            />
-            <Input
-              label="Middle Name"
-              group type="name"
-              name="middleName"
-              onChange={handleInputChange}
-              value={user.name.middle}
-            />
-            <Input
-              label="Last Name"
-              group type="name"
-              name="lastName"
-              onChange={handleInputChange}
-              value={user.name.last}
-            />
-            <Input
-              label="Street"
-              group type="address"
-              name="street1"
-              onChange={handleInputChange}
-              value={user.address.street1}
-            />
-            <Input
-              label="Street 2"
-              group type="address"
-              name="street2"
-              onChange={handleInputChange}
-              value={user.address.street2}
-            />
-            <Input
-              label="City"
-              group type="address"
-              name="city"
-              onChange={handleInputChange}
-              value={user.address.city}
-            />
-            <Input
-              label="State"
-              group type="address"
-              name="state"
-              onChange={handleInputChange}
-              value={user.address.state}
-            />
-            <Input
-              label="Zip Code"
-              group type="address"
-              name="zip"
-              onChange={handleInputChange}
-              value={user.address.zip}
-            />
-            <Input
-              label="Zip 4"
-              group type="address"
-              name="zip4"
-              onChange={handleInputChange}
-              value={user.address.zip4}
-            />
-            <Input
-              label="Parent Names"
-              group type="parentNames"
-              name="parentNames"
-              onChange={handleInputChange}
-              value={user.parentNames}
-            />
-            <Input
-              label="Jersey Number"
-              group type="jerseyNumber"
-              name="jerseyNumber"
-              onChange={handleInputChange}
-              value={user.jerseyNum}
-            />
-            <Input
-              label="Graduating Year"
-              group type="gradYear"
-              name="gradYear"
-              onChange={handleInputChange}
-              value={user.gradYear}
-            />
-            <Input
-              label="Positions"
-              group type="positions"
-              name="positions"
-              onChange={handleInputChange}
-              value={user.positions}
-            />
-            <Input
-              label="NCAA ID"
-              group type="ncaaId"
-              name="ncaaId"
-              onChange={handleInputChange}
-              value={user.ncaaId}
-            />
-            <Input
-              label="Birthdate"
-              group type="birthDate"
-              name="birthDate"
-              onChange={handleInputChange}
-              value={user.birthDate}
-            />
-            <Input
-              label="Weighted GPA"
-              group type="scholastic"
-              name="weightGPA"
-              onChange={handleInputChange}
-              value={user.scholastic.weightGPA}
-            />
-            <Input
-              label="Unweighted GPA"
-              group type="scholastic"
-              name="unweightGPA"
-              onChange={handleInputChange}
-              value={user.scholastic.unweightGPA}
-            />
-            <Input
-              label="Class Rank"
-              group type="scholastic"
-              name="classRank"
-              onChange={handleInputChange}
-              value={user.scholastic.classRank}
-            />
-            <Input
-              label="Class Size"
-              group type="scholastic"
-              name="classSize"
-              onChange={handleInputChange}
-              value={user.scholastic.classSize}
-            />
-            <Input
-              label="SAT Score"
-              group type="scholastic"
-              name="scoreSAT"
-              onChange={handleInputChange}
-              value={user.scholastic.scoreSAT}
-            />
-            <Input
-              label="ACT Score"
-              group type="scholastic"
-              name="scoreACT"
-              onChange={handleInputChange}
-              value={user.scholastic.scoreACT}
-            />
-            <Input
-              label="Major"
-              group type="scholastic"
-              name="major"
-              onChange={handleInputChange}
-              value={user.scholastic.major}
-            />
-            <Input
-              label="Club Name"
-              group type="club"
-              name="clubName"
-              onChange={handleInputChange}
-              value={user.club.name}
-            />
-            <Input
-              label="Club Team"
-              group type="club"
-              name="clubTeam"
-              onChange={handleInputChange}
-              value={user.club.team}
-            />
-            <Input
-              label="Club Director First Name"
-              group type="club"
-              name="director"
-              onChange={handleInputChange}
-              value={user.club.director.first}
-            />
-            <Input
-              label="Club Director Middle Name"
-              group type="club"
-              name="director"
-              onChange={handleInputChange}
-              value={user.club.director.middle}
-            />
-            <Input
-              label="Club Director Last Name"
-              group type="club"
-              name="director"
-              onChange={handleInputChange}
-              value={user.club.director.last}
-            />
-            <Input
-              label="Club Coach First Name"
-              group type="club"
-              name="coachClub"
-              onChange={handleInputChange}
-              value={user.club.coach.first}
-            />
-            <Input
-              label="Club Coach Middle Name"
-              group type="club"
-              name="coachClub"
-              onChange={handleInputChange}
-              value={user.club.coach.middle}
-            />            
-            <Input
-            label="Club Coach Last Name"
-            group type="club"
-            name="coachClub"
-            onChange={handleInputChange}
-            value={user.club.coach.last}
-          />
-            <Input
-              label="Club Street Address"
-              group type="club"
-              name="clubStreet"
-              onChange={handleInputChange}
-              value={user.club.address.street1}
-            />
-            <Input
-              label="Club Street Address 2"
-              group type="club"
-              name="clubStreet"
-              onChange={handleInputChange}
-              value={user.club.address.street2}
-            />
-            <Input
-              label="Club City"
-              group type="club"
-              name="clubCity"
-              onChange={handleInputChange}
-              value={user.club.address.city}
-            />
-            <Input
-              label="Club State"
-              group type="club"
-              name="clubState"
-              onChange={handleInputChange}
-              value={user.club.address.state}
-            />
-            <Input
-              label="Club Zip Code"
-              icon="club"
-              group type="clubZip"
-              name="clubZip"
-              onChange={handleInputChange}
-              value={user.club.address.zip}
-            />
-            <Input
-              label="Club Zip 4"
-              group type="club"
-              name="clubZip4"
-              onChange={handleInputChange}
-              value={user.club.address.zip4}
-            />
-            <Input
-              label="Club Email"
-              group type="clubContact"
-              name="clubEmail"
-              onChange={handleInputChange}
-              value={user.club.contact.email}
-            />
-            <Input
-              label="Club Phone"
-              group type="clubContact"
-              name="clubPhone"
-              onChange={handleInputChange}
-              value={user.club.contact.phone}
-            />
-            <Input
-              label="Club Website"
-              group type="clubContact"
-              name="clubURL"
-              onChange={handleInputChange}
-              value={user.club.contact.url}
-            />
-            <Input
-              label="High School Name"
-              group type="highSchool"
-              name="highSchoolName"
-              onChange={handleInputChange}
-              value={user.highSchool.name}
-            />
-            <Input
-              label="High School Coach First Name"
-              group type="highSchool"
-              name="highSchoolCoach"
-              onChange={handleInputChange}
-              value={user.highSchool.coach.first}
-            />
-            <Input
-              label="High School Coach Middle Name"
-              group type="highSchool"
-              name="highSchoolCoach"
-              onChange={handleInputChange}
-              value={user.highSchool.coach.middle}
-            />
-            <Input
-              label="High School Coach Last Name"
-              group type="highSchool"
-              name="highSchoolCoach"
-              onChange={handleInputChange}
-              value={user.highSchool.coach.last}
-            />
-            <Input
-              label="High School Street Address 1"
-              group type="highSchool"
-              name="highSchoolStreet1"
-              onChange={handleInputChange}
-              value={user.highSchool.address.street1}
-            />
-            <Input
-              label="High School Street Address 2"
-              group type="highSchool"
-              name="highSchoolStreet2"
-              onChange={handleInputChange}
-              value={user.highSchool.address.street2}
-            />
-            <Input
-              label="High School City"
-              group type="highSchool"
-              name="highSchoolCity"
-              onChange={handleInputChange}
-              value={user.highSchool.address.city}
-            />
-            <Input
-              label="High School State"
-              group type="highSchool"
-              name="highSchoolState"
-              onChange={handleInputChange}
-              value={user.highSchool.address.state}
-            />
-            <Input
-              label="High School Zip Code"
-              group type="highSchool"
-              name="highSchoolZip"
-              onChange={handleInputChange}
-              value={user.highSchool.address.zip}
-            />
-            <Input
-              label="High School Zip 4"
-              group type="highSchool"
-              name="highSchoolZip4"
-              onChange={handleInputChange}
-              value={user.highSchool.address.zip4}
-            />
-            <Input
-              label="High School Email"
-              group type="highSchool"
-              name="highSchoolEmail"
-              onChange={handleInputChange}
-              value={user.highSchool.contact.email}
-            />
-            <Input
-              label="High School Phone"
-              group type="highSchool"
-              name="highSchoolPhone"
-              onChange={handleInputChange}
-              value={user.highSchool.contact.phone}
-            />
-            <Input
-              label="High School Website"
-              group type="highSchool"
-              name="highSchoolURL"
-              onChange={handleInputChange}
-              value={user.highSchool.contact.url}
-            />
-            <Input
-              label="Height"
-              group type="statistics"
-              name="height"
-              onChange={handleInputChange}
-              value={user.statistics.height}
-            />
-            <Input
-              label="Weight"
-              group type="statistics"
-              name="weight"
-              onChange={handleInputChange}
-              value={user.statistics.weight}
-            />
-            <Input
-              label="Handed"
-              group type="statistics"
-              name="handed"
-              onChange={handleInputChange}
-              value={user.statistics.handed}
-            />
-            <Input
-              label="Standing Reach"
-              group type="statistics"
-              name="standReach"
-              onChange={handleInputChange}
-              value={user.statistics.standReach}
-            />
-            <Input
-              label="Approach Touch"
-              group type="statistics"
-              name="approachTouch"
-              onChange={handleInputChange}
-              value={user.statistics.approachTouch}
-            />
-            <Input
-              label="Block Jump"
-              group type="statistics"
-              name="blockJump"
-              onChange={handleInputChange}
-              value={user.statistics.blockJump}
-            />
-            <Input
-              label="Athlete Accomplishments"
-              group type="athleteAccomps"
-              name="athleteAccomps"
-              onChange={handleInputChange}
-              value={user.athleteAccomps}
-            />
-            <Input
-              label="School Accomplishments"
-              group type="schoolAccomps"
-              name="schoolAccomps"
-              onChange={handleInputChange}
-              value={user.schoolAccomps}
-            />
-            <Input
-              label="Video Links"
-              group type="videoLinks"
-              name="videoLinks"
-              onChange={handleInputChange}
-              value={user.videoLinks}
-            />
-            <Input
-              label="Profile Image"
-              group type="profileImg"
-              name="profileImg"
-              onChange={handleInputChange}
-              value={user.profileImg}
-            />
-            <div className="text-center">
-              <Button block color="danger"
-                type="submit" 
-                name="action"
-                value="populate" 
-                onClick={handleFormSubmit}>
-                Submit
-              </Button>
+const styles = {
+  formsy: {
+    display: "table",
+    tableLayout: "fixed"
+  },
+  panelHeading : {
+    backgroundColor: "#EE5B4F",
+    color          : "#FFFFFF"
+  },
+  button: {
+    backgroundColor: "#EE5B4F",
+    color          : "#FFFFFF"
+  },
+  scroll: {
+    backgroundColor: "#FFFFFF",
+    color          : "#515D63",
+    borderRadius   : "50%",
+    border         : "2px solid #515D63",
+    marginBottom   : ".5rem"
+  }
+}
+
+export default class AthleteForm extends Component {
+  constructor(props) {
+    super(props);
+    this.disableButton = this.disableButton.bind(this);
+    this.enableButton = this.enableButton.bind(this);
+    this.handleScrollToggle = this.handleScrollToggle.bind(this);
+    this.state = { canSubmit: false, scrollActive: false };
+  }
+ 
+  disableButton = () => this.setState({ canSubmit: false });
+ 
+  enableButton = () => this.setState({ canSubmit: true  });
+
+  submit = model => {
+    this.props.handleFormSubmit(model);
+  }
+
+  handleScrollToggle = () => {
+    this.setState({ scrollActive: !this.state.scrollActive });
+  }
+ 
+  render() {
+    return (
+      <Panel>
+        <ScrollIntoViewIfNeeded 
+          active={!this.state.scrollActive}
+          options={{
+            block: "center",
+            behavior: "smooth"
+          }} 
+        >
+          <Panel.Heading className="text-center mb-4" style={styles.panelHeading}>
+            <Panel.Title>
+              <h1 className="mb-3">Athlete Profile</h1>
+              <button style={styles.scroll} type="submit" onClick={this.handleScrollToggle}>
+                <h6 className="font-weight-bold m-1">To Submit</h6>
+              </button>
+            </Panel.Title>
+          </Panel.Heading>
+        </ScrollIntoViewIfNeeded>
+        <ScrollIntoViewIfNeeded 
+          active={this.state.scrollActive}
+            options={{
+              block: "end",
+              behavior: "smooth"
+            }} 
+        >
+          <Panel.Body>
+            <Formsy style={styles.formsy} onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton}>
+              <TextInput
+                name="email"
+                label="Email:"
+                readOnly="true"
+                value={this.props.user.email}
+              />
+              <TextInput
+                name="firstName"
+                label="First Name:"
+                value={this.props.user.firstName}
+              />
+              <TextInput
+                name="middleName"
+                label="Middle Name:"
+                value={this.props.user.middleName}
+              />
+              <TextInput
+                name="lastName"
+                label="Last Name:"
+                value={this.props.user.lastName}
+              />
+              
+              <h6 className="font-weight-bold mt-3 mb-0">Contact Info:</h6>
+              <TextInput
+                name="phone"
+                label="Phone:"
+                value={this.props.user.phone}
+              />
+              <TextInput
+                name="url"
+                label="Website:"
+                value={this.props.user.url}
+                validations="isUrl"
+                validationError="This is not a valid website"
+              />
+
+              <h6 className="font-weight-bold mt-3 mb-0">Address:</h6>
+              <TextInput
+                name="street1"
+                label="Street 1:"
+                value={this.props.user.street1}
+              />
+              <TextInput
+                name="street2"
+                label="Street 2:"
+                value={this.props.user.street2}
+              />
+              <TextInput
+                name="city"
+                label="City:"
+                value={this.props.user.city}
+              />
+              <TextInput
+                name="state"
+                label="State:"
+                value={this.props.user.state}
+              />
+              <TextInput
+                name="zip"
+                label="Zip:"
+                value={this.props.user.zip}
+              />
+
+              <h6 className="font-weight-bold mt-3 mb-0">Personal Info:</h6>
+              <TextInput
+                name="parentNames"
+                label="Parent Names:"
+                value={this.props.user.parentNames}
+              />
+              <TextInput
+                name="birthDate"
+                label="Birth Date:"
+                value={this.props.user.birthDate}
+              />
+              <TextInput
+                name="gradYear"
+                label="Graduation Year:"
+                value={this.props.user.gradYear}
+                validations="isNumeric"
+                validationError="This is must be a number"
+              />
+              <TextInput
+                name="jerseyNum"
+                label="Jersey Number:"
+                value={this.props.user.jerseyNum}
+                validations="isNumeric"
+                validationError="This is must be a number"
+              />
+              <TextInput
+                name="position"
+                label="Position:"
+                value={this.props.user.position}
+              />
+              <TextInput
+                name="ncaaId"
+                label="NCAA ID:"
+                value={this.props.user.ncaaId}
+              />
+
+              <h6 className="font-weight-bold mt-3 mb-0">Academics:</h6>
+              <TextInput
+                name="weightGPA"
+                label="Weighted GPA:"
+                value={this.props.user.weightGPA}
+                validations="isNumeric"
+                validationError="This is must be a number"
+              />
+              <TextInput
+                name="unweightGPA"
+                label="Unweighted GPA:"
+                value={this.props.user.unweightGPA}
+                validations="isNumeric"
+                validationError="This is must be a number"
+              />
+              <TextInput
+                name="classRank"
+                label="Class Rank:"
+                value={this.props.user.classRank}
+                validations="isNumeric"
+                validationError="This is must be a number"
+              />
+              <TextInput
+                name="classSize"
+                label="Class Size:"
+                value={this.props.user.classSize}
+                validations="isNumeric"
+                validationError="This is must be a number"
+              />
+              <TextInput
+                name="scoreSAT"
+                label="SAT Score:"
+                value={this.props.user.scoreSAT}
+                validations="isNumeric"
+                validationError="This is must be a number"
+              />
+              <TextInput
+                name="scoreACT"
+                label="ACT Score:"
+                value={this.props.user.scoreACT}
+                validations="isNumeric"
+                validationError="This is must be a number"
+              />
+              <TextInput
+                name="major"
+                label="Major:"
+                value={this.props.user.major}
+              />
+
+              <h6 className="font-weight-bold mt-3 mb-0">Club Info:</h6>
+              <TextInput
+                name="clubName"
+                label="Name:"
+                value={this.props.user.clubName}
+              />
+              <TextInput
+                name="clubTeam"
+                label="Club Team:"
+                value={this.props.user.clubTeam}
+              />
+              <TextInput
+                name="clubDirFirst"
+                label="Director First Name:"
+                value={this.props.user.clubDirFirst}
+              />
+              <TextInput
+                name="clubDirMiddle"
+                label="Director Middle Name:"
+                value={this.props.user.clubDirMiddle}
+              />
+              <TextInput
+                name="clubDirLast"
+                label="Director Last Name:"
+                value={this.props.user.clubDirLast}
+              />
+              <TextInput
+                name="clubCoachFirst"
+                label="Coach First Name:"
+                value={this.props.user.clubCoachFirst}
+              />
+              <TextInput
+                name="clubCoachMiddle"
+                label="Coach Middle Name:"
+                value={this.props.user.clubCoachMiddle}
+              />
+              <TextInput
+                name="clubCoachLast"
+                label="Coach Last Name:"
+                value={this.props.user.clubCoachLast}
+              />
+              <TextInput
+                name="clubStreet1"
+                label="Street 1:"
+                value={this.props.user.clubStreet1}
+              />
+              <TextInput
+                name="clubStreet2"
+                label="Street 2:"
+                value={this.props.user.clubStreet2}
+              />
+              <TextInput
+                name="clubCity"
+                label="City:"
+                value={this.props.user.clubCity}
+              />
+              <TextInput
+                name="clubState"
+                label="State:"
+                value={this.props.user.clubState}
+              />
+              <TextInput
+                name="clubZip"
+                label="Zip:"
+                value={this.props.user.clubZip}
+              />
+              <TextInput
+                name="clubEmail"
+                label="Email:"
+                value={this.props.user.clubEmail}
+                validations="isEmail"
+                validationError="This is not a valid email"
+              />
+              <TextInput
+                name="clubPhone"
+                label="Phone:"
+                value={this.props.user.clubPhone}
+              />
+              <TextInput
+                name="clubUrl"
+                label="Website:"
+                value={this.props.user.clubUrl}
+                validations="isUrl"
+                validationError="This is not a valid website"
+              />
+
+              <h6 className="font-weight-bold mt-3 mb-0">High School Info:</h6>
+              <TextInput
+                name="hsName"
+                label="Name:"
+                value={this.props.user.hsName}
+              />
+              <TextInput
+                name="hsCoachFirst"
+                label="Coach First Name:"
+                value={this.props.user.hsCoachFirst}
+              />
+              <TextInput
+                name="hsCoachMiddle"
+                label="Coach Middle Name:"
+                value={this.props.user.hsCoachMiddle}
+              />
+              <TextInput
+                name="hsCoachLast"
+                label="Coach Last Name:"
+                value={this.props.user.hsCoachLast}
+              />
+              <TextInput
+                name="hsStreet1"
+                label="Street 1:"
+                value={this.props.user.hsStreet1}
+              />
+              <TextInput
+                name="hsStreet2"
+                label="Street 2:"
+                value={this.props.user.hsStreet2}
+              />
+              <TextInput
+                name="hsCity"
+                label="City:"
+                value={this.props.user.hsCity}
+              />
+              <TextInput
+                name="hsState"
+                label="State:"
+                value={this.props.user.hsState}
+              />
+              <TextInput
+                name="hsZip"
+                label="Zip:"
+                value={this.props.user.hsZip}
+              />
+              <TextInput
+                name="hsEmail"
+                label="Email:"
+                value={this.props.user.hsEmail}
+                validations="isEmail"
+                validationError="This is not a valid email"
+              />
+              <TextInput
+                name="hsPhone"
+                label="Phone:"
+                value={this.props.user.hsPhone}
+              />
+              <TextInput
+                name="hsUrl"
+                label="Website:"
+                value={this.props.user.hsUrl}
+                validations="isUrl"
+                validationError="This is not a valid website"
+              />
+
+              <h6 className="font-weight-bold mt-3 mb-0">Statistics:</h6>
+              <TextInput
+                name="height"
+                label="Height:"
+                value={this.props.user.height}
+              />
+              <TextInput
+                name="weight"
+                label="Weight:"
+                value={this.props.user.weight}
+              />
+              <TextInput
+                name="handed"
+                label="Handed:"
+                value={this.props.user.handed}
+              />
+              <TextInput
+                name="standReach"
+                label="Standing Reach:"
+                value={this.props.user.standReach}
+              />
+              <TextInput
+                name="approachTouch"
+                label="Approach Touch:"
+                value={this.props.user.approachTouch}
+              />
+              <TextInput
+                name="blockJump"
+                label="Block Jump:"
+                value={this.props.user.blockJump}
+              />
+
+              <h6 className="font-weight-bold mt-3 mb-0">Additional:</h6>
+              <TextAreaInput
+                name="athleteAccomps"
+                label="Athletic Accomplishments:"
+                value={this.props.user.athleteAccomps}
+              />
+              <TextAreaInput
+                name="schoolAccomps"
+                label="Academic/Other Acomplishments:"
+                value={this.props.user.schoolAccomps}
+              />
+              <TextInput
+                name="videoLinks"
+                label="You Tube Video Links:"
+                placeholder="Separate links with a ;"
+                value={this.props.user.videoLinks}
+                validations="isUrl"
+                validationError="This is not a valid website"
+              />
+              <FileInput
+                name="profileImg"
+                label="Profile Image:"
+                disabled="true"
+                value={this.props.user.profileImg}
+              />
+              
+              <div className="text-center justify-center mt-3">
+                <button style={styles.button} type="submit" disabled={!this.state.canSubmit}>
+                  <h6 className="font-weight-bold m-1">Submit</h6>
+                </button>
+              </div>
+            </Formsy>
+            <div className="text-center justify-center mt-3">
+              <button style={styles.scroll} type="submit" onClick={this.handleScrollToggle}>
+                <h6 className="font-weight-bold m-1">To Top</h6>
+              </button>
             </div>
-          </form>
-        </SimpleCard>
-      </div>
-    </div>
-  );
-  
-  export default AthleteInput;
+          </Panel.Body>
+        </ScrollIntoViewIfNeeded>
+      </Panel>
+    );
+  }
+}

@@ -50,7 +50,7 @@ class App extends Component {
 
           <Route path="/logout" component={Logout} />
 
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
     )

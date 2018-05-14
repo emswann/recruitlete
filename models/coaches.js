@@ -12,7 +12,7 @@ const coachesSchema = new Schema({
   name            : Name.schema,
   address         : Address.schema,
   position        : { type: String, trim: true },
-  accomplishments : [{ type: String, trim: true }],
+  accomplishments : { type: String, trim: true },
   colleges        : [{
     info          : College.schema,
     saveDate      : { type: Date, default: Date.now }

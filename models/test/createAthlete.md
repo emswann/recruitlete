@@ -1,7 +1,7 @@
 {
-  "email"         : "myathleteuser@hotmail.com",   
+  "email"         : "elainaswann@hotmail.com",   
   "contact"       : {
-                      "email": "myathleteuser@hotmail.com",
+                      "email": "elainaswann@hotmail.com",
                       "phone": "1234567890",
                       "url"  : "www.youtube.com"
                     },
@@ -15,8 +15,7 @@
                       "street2": "Street 2",
                       "city"   : "My City",
                       "state"  : "Ga",
-                      "zip"    : "12345",
-                      "zip4"   : "6789"  	
+                      "zip"    : "12345" 	
                     },
   "parentNames"   : "Madge and Homer",
   "jerseyNum"     : 11,
@@ -51,8 +50,7 @@
                                           "street2": "Street 2",
                                           "city"   : "My City",
                                           "state"  : "Ga",
-                                          "zip"    : "12345",
-                                          "zip4"   : "6789"
+                                          "zip"    : "12345"
                                         },
                       "contact"       : {
                                           "email": "myaccount@hotmail.com",
@@ -72,8 +70,7 @@
                                           "street2": "Street 2",
                                           "city"   : "My City",
                                           "state"  : "Ga",
-                                          "zip"    : "12345",
-                                          "zip4"   : "6789"
+                                          "zip"    : "12345"
                                         },
                       "contact"       : {
                                           "email": "myaccount@hotmail.com",
@@ -92,7 +89,8 @@
   "athleteAccomps" : ["All Everything", "Great Athlete Award"], 
   "schoolAccomps"  : ["National Honor Society", "FBLA"],
   "videoLinks"     : ["www.youtube1.com", "www.youtube2.com"],
-  "colleges"        : [
+  "profileImg"     : "myimage",
+  "colleges"       : [
     {
       "info": {
         "name"          : "My College USA",  

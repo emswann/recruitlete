@@ -15,9 +15,7 @@
                         "street2": "Street 2",
                         "city"   : "My City",
                         "state"  : "Ga",
-                        "zip"    : "12345",
-                        "zip4"   : "6789"
-  	
+                        "zip"    : "12345"	
                       },
   "position"        : "head coach",
   "accomplishments" : ["USAV 17s Open Champions", "USAV 16s Open Runner-Up"],

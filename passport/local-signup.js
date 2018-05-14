@@ -25,13 +25,15 @@ module.exports = new PassportLocalStrategy({
     const collection = 
       userData.role === "athlete" ? "Athletes" : "Coaches";
  
+    // Create values/space for the profile related subschemas to make it easier 
+    // for profile functionality.
     let dbObj = {};
     if (userData.role === "athlete") {
       dbObj = { email: userData.email,
                 contact: {},
                 name: {},
                 address: {},
-                scholastic: {},
+                scholastic: { major : "" },
                 club: {
                   name: "",
                   team: "",
@@ -40,13 +42,13 @@ module.exports = new PassportLocalStrategy({
                   address: {},
                   contact: {}
                 },
-                highschool: {
+                highSchool: {
                   name: "",
                   coach: {},
                   address: {},
                   contact: {}                  
                 },
-                statistics: {} 
+                statistics: { height: "" }
               }
     }
     else {

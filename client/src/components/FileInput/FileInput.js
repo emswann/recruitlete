@@ -23,7 +23,7 @@ const styles = {
   }
 }
 
-class TextInput extends Component {
+class FileInput extends Component {
   constructor(props) {
     super(props);
     this.changeValue = this.changeValue.bind(this);
@@ -46,9 +46,8 @@ class TextInput extends Component {
           <label style={styles.label}>{this.props.label}</label>
           <input style={this.props.readOnly ? styles.readOnly : styles.input} readOnly={this.props.readOnly}
             onChange={this.changeValue}
-            type="text"
+            type="file"
             value={this.props.getValue() || ''}
-            placeholder={this.props.placeholder}
           />
           <span style={styles.error}>{errorMessage}</span>
       </div>
@@ -56,4 +55,4 @@ class TextInput extends Component {
   }
 }
  
-export default withFormsy(TextInput);
+export default withFormsy(FileInput);

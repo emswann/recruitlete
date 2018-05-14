@@ -49,9 +49,9 @@ const athletesSchema = new Schema({
     approachTouch : { type: String, trim: true }, 
     blockJump     : { type: String, trim: true }, 
   },
-  athleteAccomps  : [{ type: String, trim: true }], 
-  schoolAccomps   : [{ type: String, trim: true }],
-  videoLinks      : [{ type: String, trim: true }],
+  athleteAccomps  : { type: String, trim: true }, 
+  schoolAccomps   : { type: String, trim: true },
+  videoLinks      : { type: String, trim: true },
   profileImg      : { data: Buffer, contentType: String },
   colleges        : [{
     info          : College.schema,

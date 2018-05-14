@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Panel } from "react-bootstrap";
-import Formsy from 'formsy-react';
-import TextInput from '../TextInput';
-import TextInput from '../FileInput';
-import ScrollIntoViewIfNeeded from 'react-scroll-into-view-if-needed';
+import Formsy from "formsy-react";
+import TextInput from "../TextInput";
+import TextAreaInput from "../TextAreaInput"
+import FileInput from "../FileInput";
+import ScrollIntoViewIfNeeded from "react-scroll-into-view-if-needed";
 
 const styles = {
   formsy: {
@@ -409,12 +410,12 @@ export default class AthleteForm extends Component {
               />
 
               <h6 className="font-weight-bold mt-3 mb-0">Additional:</h6>
-              <TextInput
+              <TextAreaInput
                 name="athleteAccomps"
                 label="Athletic Accomplishments:"
                 value={this.props.user.athleteAccomps}
               />
-              <TextInput
+              <TextAreaInput
                 name="schoolAccomps"
                 label="Academic/Other Acomplishments:"
                 value={this.props.user.schoolAccomps}
@@ -422,6 +423,7 @@ export default class AthleteForm extends Component {
               <TextInput
                 name="videoLinks"
                 label="You Tube Video Links:"
+                placeholder="Separate links with a ;"
                 value={this.props.user.videoLinks}
                 validations="isUrl"
                 validationError="This is not a valid website"

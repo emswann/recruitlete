@@ -4,9 +4,10 @@ import { withFormsy } from 'formsy-react';
 const styles = {
   label: {
     display: "table-cell",
-    width: "20%"
+    width: "20%",
+    verticalAlign: "top"
   },
-  input: {
+  textarea: {
     display: "table-cell",
     width: "80%"
   },
@@ -23,7 +24,7 @@ const styles = {
   }
 }
 
-class TextInput extends Component {
+class TextAreaInput extends Component {
   constructor(props) {
     super(props);
     this.changeValue = this.changeValue.bind(this);
@@ -44,16 +45,16 @@ class TextInput extends Component {
     return (
       <div style={styles.div}>
           <label style={styles.label}>{this.props.label}</label>
-          <input style={this.props.readOnly ? styles.readOnly : styles.input} readOnly={this.props.readOnly}
+          <textarea style={this.props.readOnly ? styles.readOnly : styles.textarea} readOnly={this.props.readOnly}
             onChange={this.changeValue}
-            type="text"
-            value={this.props.getValue() || ''}
-            placeholder={this.props.placeholder}
-          />
+            rows="5"
+          >
+            {this.props.getValue() || ''}
+          </textarea>
           <span style={styles.error}>{errorMessage}</span>
       </div>
     );
   }
 }
  
-export default withFormsy(TextInput);
+export default withFormsy(TextAreaInput);

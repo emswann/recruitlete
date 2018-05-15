@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import PrivateRoute from "./components/PrivateRoute";
 import PropsRoute from "./components/PropsRoute";
@@ -13,6 +13,7 @@ import Logout from "./pages/Logout";
 import User from "./pages/User";
 import Profile from "./pages/Profile";
 import ProfileDoc from "./pages/ProfileDoc";
+import NoMatch from "./pages/NoMatch";
 import Auth from "./utils/Auth";
 
 import "./App.css";
@@ -38,21 +39,17 @@ class App extends Component {
       <Router className="container">
         <div id="application">
           <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
-
-          <PropsRoute exact path="/" component={Home} 
-            toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
-          />
-
-          <PrivateRoute path="/user" component={User} />
-
-          <PrivateRoute exact path="/profile" component={Profile} />
-
-          <PrivateRoute path="/profile/doc" component={ProfileDoc} />
-
-          <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
-
-          <Route path="/logout" component={Logout} />
-
+          <Switch>
+            <PropsRoute path="/" exact component={Home} 
+              toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
+            />
+            <PrivateRoute path="/user" component={User} />
+            <PrivateRoute path="/profile" exact component={Profile} />
+            <PrivateRoute path="/profile/doc" component={ProfileDoc} />
+            <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
+            <Route path="/logout" component={Logout} />
+            <Route component={NoMatch} />
+          </Switch>
           {/* <Footer /> */}
         </div>
       </Router>

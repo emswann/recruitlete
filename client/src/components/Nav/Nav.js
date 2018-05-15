@@ -20,6 +20,7 @@ import {
   faSearch
 } from "@fortawesome/fontawesome-free-solid";
 import Auth from "../../utils/Auth";
+import img from "./logo.png"
 
 class Nav extends React.Component {
   constructor(props) {
@@ -59,12 +60,14 @@ class Nav extends React.Component {
         sticky="top"
         style={{ width: "100%", backgroundColor: "#ffffff" }}
       >
-        <NavbarBrand href="/">
-          <img
-            src="assets/images/logo.png"
-            alt="Recruitlete Brand"
-            height="90px"
-          />
+        <NavbarBrand>
+          <NavLink to="/">
+            <img
+              src={img}
+              alt="Recruitlete Brand"
+              height="90px"
+            />
+          </NavLink>
         </NavbarBrand>
         {!this.state.isWideEnough && <NavbarToggler onClick={this.onClick} />}
         <Collapse isOpen={this.state.collapse} navbar>

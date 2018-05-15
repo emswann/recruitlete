@@ -49,7 +49,7 @@ export default class Profile extends Component {
           (
             <SimpleCard>
               {Auth.isUserAnAthlete() ? (
-                 <AthleteProfile
+                <AthleteProfile
                   user={this.state.user}
                   updateUser={this.updateUser}
                 />

@@ -6,6 +6,7 @@ import PropsRoute from "./components/PropsRoute";
 import LoggedOutRoute from "./components/LoggedOutRoute";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import NoMatch from "./components/NoMatch"
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -13,7 +14,6 @@ import Logout from "./pages/Logout";
 import User from "./pages/User";
 import Profile from "./pages/Profile";
 import ProfileDoc from "./pages/ProfileDoc";
-import NoMatch from "./pages/NoMatch";
 import Auth from "./utils/Auth";
 
 import "./App.css";

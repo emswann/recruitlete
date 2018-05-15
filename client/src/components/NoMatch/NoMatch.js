@@ -4,7 +4,7 @@ import "./NoMatch.css";
 
 const NoMatch = () => (
   <Jumbotron className="text-center">
-    <h1 className="error">404 Page Not Found</h1>
+    <h1 id="noMatchError">404 Page Not Found</h1>
   </Jumbotron>
 );
 

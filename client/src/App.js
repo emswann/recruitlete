@@ -45,9 +45,9 @@ class App extends Component {
 
           <PrivateRoute path="/user" component={User} />
 
-          <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute exact path="/profile" component={Profile} />
 
-          {/* <PrivateRoute path="/profile/doc" component={ProfileDoc} /> */}
+          <PrivateRoute path="/profile/doc" component={ProfileDoc} />
 
           <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 

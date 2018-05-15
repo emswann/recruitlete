@@ -142,7 +142,7 @@ export default class CoachForm extends Component {
               </button>
             </div>
 
-            <div className="text-center justify-center mt-3">
+            <div className="text-center justify-center mt-3 mb-3">
               <Link to="/profile/doc">
                 <button style={styles.button} type="button">                
                   <h6 className="font-weight-bold m-1">Launch Profile</h6>

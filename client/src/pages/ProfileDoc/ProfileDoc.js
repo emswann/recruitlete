@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SimpleCard from "../../components/SimpleCard"
-import AthleteProfile from "../../components/AthleteProfileDoc";
-import CoachProfile from "../../components/CoachProfileDoc";
+import AthleteProfileDoc from "../../components/AthleteProfileDoc";
+import CoachProfileDoc from "../../components/CoachProfileDoc";
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
@@ -23,11 +23,13 @@ export default class ProfileDoc extends Component {
     const APIfunction = Auth.isUserAnAthlete() ? API.getAthlete : API.getCoach;
 
     APIfunction(Auth.getToken())
-    .then(res =>
+    .then(res => {
+      console.log(res.data);
       this.setState({
         ready: true,
         user: res.data
       })
+    }
     )
     .catch(err => console.log(err));
   };
@@ -39,14 +41,12 @@ export default class ProfileDoc extends Component {
           (
             <SimpleCard>
               {Auth.isUserAnAthlete() ? (
-                 <AthleteProfile
+                 <AthleteProfileDoc
                   user={this.state.user}
-                  updateUser={this.updateUser}
                 />
               ) : (
-                <CoachProfile
+                <CoachProfileDoc
                   user={this.state.user}
-                  updateUser={this.updateUser}
                 />
               )}
             </SimpleCard>

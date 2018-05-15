@@ -447,13 +447,13 @@ export default class AthleteForm extends Component {
               <div className="text-center justify-center mt-3">
                 <Link to="/profile/doc">
                   <button style={styles.button} type="button">                
-                    <h6 className="font-weight-bold m-1">Launch Profile</h6>
+                    <h6 className="font-weight-bold mt-1">Launch Profile</h6>
                   </button>                
                 </Link>
               </div>
             </Formsy>
             <div className="text-center justify-center mt-3">
-              <button style={styles.scroll} type="submit" onClick={this.handleScrollToggle}>
+              <button style={styles.scroll} type="button" onClick={this.handleScrollToggle}>
                 <h6 className="font-weight-bold m-1">To Top</h6>
               </button>
             </div>

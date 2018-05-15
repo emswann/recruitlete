@@ -2,6 +2,12 @@ import React from 'react';
 import { Button, Input } from "mdbreact";
 import SimpleCard from "../../components/SimpleCard";
 
+const styles = {
+  error: {
+    color: "#EE5B4F"
+  }
+}
+
 const LoginForm = ({
   handleFormSubmit,
   handleInputChange,
@@ -16,7 +22,7 @@ const LoginForm = ({
           <p className="h5 text-center justify-center mb-4">Sign in</p>
 
           {successMessage && <p className="success-message">{successMessage}</p>}
-          {errors.summary && <p className="error-message">{errors.summary}</p>}
+          {errors.summary && <p className="error-message text-center" style={styles.error}>{errors.summary}</p>}
 
           <div className="radio">
             <label>
@@ -44,7 +50,6 @@ const LoginForm = ({
             icon="envelope"
             group type="email"
             name="email"
-            errortext={errors.email}
             onChange={handleInputChange}
             value={user.email}
           />
@@ -54,7 +59,6 @@ const LoginForm = ({
             group type="password"
             name="password"
             onChange={handleInputChange}
-            errortext={errors.password}
             value={user.password}
           />
           <div className="text-center">

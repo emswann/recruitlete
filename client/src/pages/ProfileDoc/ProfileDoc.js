@@ -23,13 +23,11 @@ export default class ProfileDoc extends Component {
     const APIfunction = Auth.isUserAnAthlete() ? API.getAthlete : API.getCoach;
 
     APIfunction(Auth.getToken())
-    .then(res => {
-      console.log(res.data);
+    .then(res =>
       this.setState({
         ready: true,
         user: res.data
       })
-    }
     )
     .catch(err => console.log(err));
   };

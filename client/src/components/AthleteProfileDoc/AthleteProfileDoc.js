@@ -21,9 +21,11 @@ const AthleteProfileDoc = props => (
                 {props.user.address.street2}
               </h6>              
             )}
-            <h6>
-              {props.user.address.city}, {props.user.address.state} {props.user.address.zip}
-            </h6>
+            {props.user.address.street2 && (
+              <h6>
+                {props.user.address.city}, {props.user.address.state} {props.user.address.zip}
+              </h6>              
+            )}
             <br />
           </div>
         </div>
@@ -125,9 +127,11 @@ const AthleteProfileDoc = props => (
                 {props.user.highSchool.address.street2}
               </h6>              
             )}
-            <h6>
-              {props.user.highSchool.address.city}, {props.user.highSchool.address.state} {props.user.highSchool.address.zip}
-            </h6>
+            {props.user.highSchool.address.city && (
+              <h6>
+                {props.user.highSchool.address.city}, {props.user.highSchool.address.state} {props.user.highSchool.address.zip}
+              </h6>              
+            )}
             <h6>
               Email: {props.user.highSchool.contact.email}
             </h6>
@@ -158,9 +162,11 @@ const AthleteProfileDoc = props => (
                 {props.user.club.address.street2}
               </h6>              
             )}
-            <h6>
-              {props.user.club.address.city}, {props.user.club.address.state} {props.user.club.address.zip}
-            </h6>
+            {props.user.club.address.street2 && (
+              <h6>
+                {props.user.club.address.city}, {props.user.club.address.state} {props.user.club.address.zip}
+              </h6>              
+            )}
             <h6>
               Email: {props.user.club.contact.email}
             </h6>
@@ -202,17 +208,30 @@ const AthleteProfileDoc = props => (
     </div>
     <div className="row">
       <div className="col-md-12">
-        <h6>Athletic Accomplishments:</h6>
-        <h6>{props.user.athleteAccomps}</h6>
+        <h6>
+          Athletic Accomplishments:
+        </h6>
+        <h6>
+          {props.user.athleteAccomps}
+        </h6>
         <br />
 
-        <h6>Academic/Community Achievements:</h6>
-        <h6>{props.user.schoolAccomps}</h6>
+        <h6>
+          Academic/Community Achievements:
+        </h6>
+        <h6>
+          {props.user.schoolAccomps}
+        </h6>
         <br />
 
-        <h6>Video Links:</h6>
-        {props.user.videoLinks.split(";").map((video, index) => (
-          <h6 key={index}>{video}</h6>
+        <h6>
+          Video Links:
+        </h6>
+        {props.user.videoLinks && 
+         props.user.videoLinks.split(";").map((video, index) => (
+          <h6 key={index}>
+            {video}
+          </h6>
         ))}
       </div>
     </div>

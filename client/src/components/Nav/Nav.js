@@ -20,6 +20,7 @@ import {
   faSearch
 } from "@fortawesome/fontawesome-free-solid";
 import Auth from "../../utils/Auth";
+import img from "./logo.png"
 
 class Nav extends React.Component {
   constructor(props) {
@@ -61,7 +62,7 @@ class Nav extends React.Component {
       >
         <NavbarBrand href="/">
           <img
-            src="assets/images/logo.png"
+            src={img}
             alt="Recruitlete Brand"
             height="90px"
           />

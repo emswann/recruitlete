@@ -187,6 +187,7 @@ export default class AthleteProfile extends Component {
         handleFormSubmit={this.handleFormSubmit}
         handleInputChange={this.handleInputChange}
         user={this.state}
+        updateStatus={this.props.updateStatus}
       />
     )
   };

@@ -34,7 +34,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router className="container">
+      <Router >
         <div id="application">
           <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 
@@ -49,9 +49,10 @@ class App extends Component {
           <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 
           <Route path="/logout" component={Logout} />
-
-          {/* <Footer /> */}
-        </div>
+         
+          <Footer />
+          
+          </div>
       </Router>
     )
   }

@@ -10,9 +10,7 @@ import {
 
 const Saved = props => (
   <div className="container">
-    <h2>
-      Saved Schools
-    </h2>
+    <h2>Saved Schools</h2>
     {props.savedSchools.length ? (
       <div className="row">
         {props.savedSchools.map((school, schoolIndex) => (
@@ -32,7 +30,7 @@ const Saved = props => (
                 <h4>{school.info.name}</h4>
                 <hr />
                 <div className="row">
-                  <div className= "col-md-3">
+                  <div className="col-md-3">
                     <Button
                       size="lg"
                       color="primary"
@@ -44,22 +42,20 @@ const Saved = props => (
                       <FontAwesomeIcon icon={faStickyNote} size={"1x"} /> Notes
                     </Button>
                   </div>
-                  { props.userRole === "athlete" &&
-                    (
-                      <div className="col-md-3">
-                        <Button
-                          size="lg"
-                          color="primary"
-                          type="button"
-                          name="action"
-                          value="progress"
-                          onClick={() => props.toggleProgressBtn(schoolIndex)}
-                        >
-                          <FontAwesomeIcon icon={faTasks} size={"1x"} /> Progress
-                        </Button>
-                      </div>
-                    )
-                  }
+                  {props.userRole === "athlete" && (
+                    <div className="col-md-3">
+                      <Button
+                        size="lg"
+                        color="primary"
+                        type="button"
+                        name="action"
+                        value="progress"
+                        onClick={() => props.toggleProgressBtn(schoolIndex)}
+                      >
+                        <FontAwesomeIcon icon={faTasks} size={"1x"} /> Progress
+                      </Button>
+                    </div>
+                  )}
                   <div className="col-md-3">
                     <Button
                       size="lg"
@@ -67,9 +63,7 @@ const Saved = props => (
                       type="button"
                       name="action"
                       value="favBtn"
-                      onClick={() =>
-                        props.toggleFavSchool(school.info.name)
-                      }
+                      onClick={() => props.toggleFavSchool(school.info.name)}
                     >
                       <FontAwesomeIcon icon={faHeart} size={"1x"} /> Favorite
                     </Button>
@@ -81,9 +75,7 @@ const Saved = props => (
                       type="button"
                       name="action"
                       value="deleteBtn"
-                      onClick={() =>
-                        props.handleDeleteSchool(school.info.name)
-                      }
+                      onClick={() => props.handleDeleteSchool(school.info.name)}
                     >
                       <FontAwesomeIcon icon={faTrash} size={"1x"} /> Delete
                     </Button>
@@ -99,11 +91,18 @@ const Saved = props => (
                   <Card>
                     {school.info.notes.map((note, noteIndex) => (
                       <div key={noteIndex}>
-                        <div className = "row" style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-                          <div className = "col-md-11">
+                        <div
+                          className="row"
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center"
+                          }}
+                        >
+                          <div className="col-md-11">
                             <p>{note}</p>
                           </div>
-                          <div className = "col-md-1">
+                          <div className="col-md-1">
                             <Button
                               color="danger"
                               type="button"
@@ -113,10 +112,10 @@ const Saved = props => (
                                 props.handleDeleteNote(note, schoolIndex)
                               }
                             >
-                            X
+                              X
                             </Button>
                             <hr />
-                          </div>                      
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -143,27 +142,33 @@ const Saved = props => (
                     Save
                   </Button>
                 </Collapse>
-                { props.userRole === "athlete" &&
-                  (
-                    <Collapse
-                      isOpen={
-                        props.collapseProgress[schoolIndex]
-                          ? props.collapseProgress[schoolIndex]
-                          : false
-                      }
-                    >
-                      <Card>
-                        <div className="form-check">
-                          <div className="row">
-                            {Object.entries(school.progress).map((progress, progressIndex) => (
+                {props.userRole === "athlete" && (
+                  <Collapse
+                    isOpen={
+                      props.collapseProgress[schoolIndex]
+                        ? props.collapseProgress[schoolIndex]
+                        : false
+                    }
+                  >
+                    <Card>
+                      <div className="form-check">
+                        <div className="row">
+                          {Object.entries(school.progress).map(
+                            (progress, progressIndex) => (
                               <div key={progressIndex}>
-                                <div className="container-fluid" key={progressIndex}>
-                                  <div className="col-md-3">
+                                <div className="container-fluid">
+                                  <div className="col-md-12">
                                     <input
                                       type="checkbox"
                                       value={progress}
                                       name="name"
-                                      onChange={() => props.toggleCheckProgress(progress, schoolIndex, progressIndex)}
+                                      onChange={() =>
+                                        props.toggleCheckProgress(
+                                          progress,
+                                          schoolIndex,
+                                          progressIndex
+                                        )
+                                      }
                                       checked={progress[1]}
                                     />
                                     <label>
@@ -171,21 +176,32 @@ const Saved = props => (
                                     </label>
                                     <br />
                                   </div>
+                                  <div className="clearfix" />
                                 </div>
-                                <div className="w-100"></div>
                               </div>
-                            ))}                      
-                          </div>
+                               ),
+                          )}
                         </div>
-                      </Card>
-                    </Collapse>
-                  )
-                }
+                        <div className="progress">
+                              <div
+                                className="progress-bar progress-bar-striped progress-bar-animated"
+                                role="progressbar"
+                                aria-valuenow={props.progressWidth}
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style={{width: props.progressWidth}}
+                               // style={{width: ` ${props.progressWidth}% `}}
+                              />
+                            </div>
+                      </div>
+                    </Card>
+                  </Collapse>
+                )}
               </div>
             </Card>
           </div>
         ))}
-          </div>
+      </div>
     ) : (
       <div>
         <h3>No Results to Display</h3>

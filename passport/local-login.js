@@ -23,15 +23,13 @@ module.exports = new PassportLocalStrategy({
     if (err) { return done(err); }
 
     if (!user) {
-      const error = new Error("Email cannot be found");
-      error.name = "IncorrectCredentialsError";
+      const error = new Error("Email cannot be found!");
 
       return done(error);
     }
 
     if (user.role !== userData.role) {
-      const error = new Error("Role does not match email");
-      error.name = "IncorrectCredentialsError";
+      const error = new Error("Role does not match email!");
 
       return done(error);
     }
@@ -41,8 +39,7 @@ module.exports = new PassportLocalStrategy({
       if (err) { return done(err); }
 
       if (!isMatch) {
-        const error = new Error("Invalid password");
-        error.name = "IncorrectCredentialsError";
+        const error = new Error("Invalid password!");
 
         return done(error);
       }

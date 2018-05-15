@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import User from "./pages/User";
 import Profile from "./pages/Profile";
+import ProfileDoc from "./pages/ProfileDoc";
 import Auth from "./utils/Auth";
 
 import "./App.css";
@@ -45,6 +46,8 @@ class App extends Component {
           <PrivateRoute path="/user" component={User} />
 
           <PrivateRoute path="/profile" component={Profile} />
+
+          {/* <PrivateRoute path="/profile/doc" component={ProfileDoc} /> */}
 
           <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
 

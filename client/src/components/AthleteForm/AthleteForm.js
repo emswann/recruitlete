@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Panel } from "react-bootstrap";
 import Formsy from "formsy-react";
 import TextInput from "../TextInput";
@@ -17,7 +18,8 @@ const styles = {
   },
   button: {
     backgroundColor: "#EE5B4F",
-    color          : "#FFFFFF"
+    color          : "#FFFFFF",
+    width          : "10rem"
   },
   scroll: {
     backgroundColor: "#FFFFFF",
@@ -64,7 +66,7 @@ export default class AthleteForm extends Component {
             <Panel.Title>
               <h1 className="mb-3">Athlete Profile</h1>
               <button style={styles.scroll} type="submit" onClick={this.handleScrollToggle}>
-                <h6 className="font-weight-bold m-1">To Submit</h6>
+                <h6 className="font-weight-bold m-1">To Bottom</h6>
               </button>
             </Panel.Title>
           </Panel.Heading>
@@ -440,6 +442,14 @@ export default class AthleteForm extends Component {
                 <button style={styles.button} type="submit" disabled={!this.state.canSubmit}>
                   <h6 className="font-weight-bold m-1">Submit</h6>
                 </button>
+              </div>
+
+              <div className="text-center justify-center mt-3">
+                <Link to="/profile/doc">
+                  <button style={styles.button} type="button">                
+                    <h6 className="font-weight-bold m-1">Launch Profile</h6>
+                  </button>                
+                </Link>
               </div>
             </Formsy>
             <div className="text-center justify-center mt-3">

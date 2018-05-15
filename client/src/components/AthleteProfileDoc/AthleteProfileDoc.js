@@ -3,7 +3,7 @@ import { Panel } from "react-bootstrap";
 
 const AthleteProfileDoc = props => (
   <Panel>
-    <Panel.Heading className="text-center mb-4">
+    <Panel.Heading className="text-center mb-3">
       <Panel.Title>
         <h4>
           {props.user.name.first} {props.user.name.middle} {props.user.name.last} #{props.user.jerseyNum}

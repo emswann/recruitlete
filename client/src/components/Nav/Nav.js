@@ -60,14 +60,12 @@ class Nav extends React.Component {
         sticky="top"
         style={{ width: "100%", backgroundColor: "#ffffff" }}
       >
-        <NavbarBrand>
-          <NavLink to="/">
-            <img
-              src={img}
-              alt="Recruitlete Brand"
-              height="90px"
-            />
-          </NavLink>
+        <NavbarBrand href="/">
+          <img
+            src={img}
+            alt="Recruitlete Brand"
+            height="90px"
+          />
         </NavbarBrand>
         {!this.state.isWideEnough && <NavbarToggler onClick={this.onClick} />}
         <Collapse isOpen={this.state.collapse} navbar>

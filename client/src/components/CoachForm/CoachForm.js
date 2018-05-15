@@ -19,6 +19,11 @@ const styles = {
     color          : "#FFFFFF",
     width          : "10rem"
   },
+  success: {
+    backgroundColor: "#5CB85C",
+    color          : "#FFFFFF",
+    width          : "10rem"    
+  },
   scroll: {
     backgroundColor: "#FFFFFF",
     color          : "#515D63",
@@ -137,7 +142,7 @@ export default class CoachForm extends Component {
             />
 
             <div className="text-center justify-center mt-3">
-              <button style={styles.button} type="submit" disabled={!this.state.canSubmit}>
+              <button style={this.props.updateStatus ? styles.success : styles.button} type="submit" disabled={!this.state.canSubmit}>
                 <h6 className="font-weight-bold m-1">Submit</h6>
               </button>
             </div>

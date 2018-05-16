@@ -77,7 +77,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container" style={{padding: 50}}>
         <LoginForm
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}

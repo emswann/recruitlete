@@ -5,6 +5,17 @@ import SimpleCard from "../../components/SimpleCard";
 const styles = {
   error: {
     color: "#EE5B4F"
+  },
+  header: {
+    backgroundColor: "#EE5B4F",
+    padding: 20,
+    margin: 0
+  },
+  h3:{
+    color: "#ffffff"
+  },
+  input: {
+    margin: 10
   }
 }
 
@@ -19,12 +30,15 @@ const LoginForm = ({
     <div className="offset-md-4 col-md-4">
       <SimpleCard>
         <form>
-          <p className="h5 text-center justify-center mb-4">Sign in</p>
-
+          <div className= "header" style={styles.header}>
+          <p className="h3 text-center justify-content" style={styles.h3}>SIGN IN</p>
+</div>
+<br />
+<br />
           {successMessage && <p className="success-message">{successMessage}</p>}
           {errors.summary && <p className="error-message text-center" style={styles.error}>{errors.summary}</p>}
 
-          <div className="radio">
+          <div className="radio text-center justify-content flex">
             <label>
               <input type="radio" 
                 name="role"
@@ -33,8 +47,6 @@ const LoginForm = ({
                 onChange={handleInputChange}/>
                 Athlete
             </label>
-          </div>
-          <div className="radio">
             <label>
               <input type="radio" 
                 name="role"

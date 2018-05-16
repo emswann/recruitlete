@@ -462,6 +462,9 @@ export default class AthleteForm extends Component {
                 <h6 className="font-weight-bold m-1">To Top</h6>
               </button>
             </div>
+            <div> {/* Doing this to get above the footer. */}
+              <br /> <br />
+            </div>
           </Panel.Body>
         </ScrollIntoViewIfNeeded>
       </Panel>

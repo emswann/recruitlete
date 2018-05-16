@@ -14,6 +14,7 @@ export default class Profile extends Component {
     
     this.state =  
       { ready: false, 
+        updateStatus: false,
         user : {} 
       };
 
@@ -27,6 +28,7 @@ export default class Profile extends Component {
     .then(res =>
       this.setState({
         ready: true,
+        updateStatus: false,
         user: res.data
       })
     )
@@ -38,8 +40,11 @@ export default class Profile extends Component {
       Auth.isUserAnAthlete() ? API.updateAthlete : API.updateCoach;
 
     APIfunction(Auth.getToken(), user)
-    .then(res => this.setState({ user: res.data }))
-    .catch(err => console.log(err));
+    .then(res => this.setState({ user: res.data, updateStatus: true }))
+    .catch(err => {
+      console.log(err);
+      this.setState({ updateStatus: false });
+    })
   };
 
   render() {
@@ -49,13 +54,15 @@ export default class Profile extends Component {
           (
             <SimpleCard>
               {Auth.isUserAnAthlete() ? (
-                 <AthleteProfile
+                <AthleteProfile
                   user={this.state.user}
+                  updateStatus={this.state.updateStatus}
                   updateUser={this.updateUser}
                 />
               ) : (
                 <CoachProfile
                   user={this.state.user}
+                  updateStatus={this.state.updateStatus}
                   updateUser={this.updateUser}
                 />
               )}

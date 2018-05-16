@@ -20,9 +20,9 @@
   "parentNames"   : "Madge and Homer",
   "jerseyNum"     : 11,
   "gradYear"      : 2018,
-  "positions"     : ["OH", "RS"],
+  "position"      : "OH,RS",
   "ncaaId"        : "12345ZZZZ",  
-	"birthDate"     : "06/19/1997", 
+  "birthDate"     : "06/19/1997", 
   "scholastic"    : {
                       "weightGPA"     : 3.75,
                       "unweightGPA"   : 3.2,
@@ -80,16 +80,15 @@
                     },
   "statistics"    : {
                       "height"        : "6'1\"",
-                      "weight"        : 155,
+                      "weight"        : "165 lbs",
                       "handed"        : "RiGht",
                       "standReach"    : "9'8\"", 
                       "approachTouch" : "10'2\"", 
                       "blockJump"     : "10'0\"" 
                     },
-  "athleteAccomps" : ["All Everything", "Great Athlete Award"], 
-  "schoolAccomps"  : ["National Honor Society", "FBLA"],
-  "videoLinks"     : ["www.youtube1.com", "www.youtube2.com"],
-  "profileImg"     : "myimage",
+  "athleteAccomps" : "All Everything Great Athlete Award", 
+  "schoolAccomps"  : "National Honor Society FBLA",
+  "videoLinks"     : "www.youtube1.com;www.youtube2.com",
   "colleges"       : [
     {
       "info": {

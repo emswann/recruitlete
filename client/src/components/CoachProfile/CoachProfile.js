@@ -67,6 +67,7 @@ export default class CoachProfile extends Component {
         handleFormSubmit={this.handleFormSubmit}
         handleInputChange={this.handleInputChange}
         user={this.state}
+        updateStatus={this.props.updateStatus}
       />
     )
   };

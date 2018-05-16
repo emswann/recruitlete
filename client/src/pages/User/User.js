@@ -24,7 +24,7 @@ export default class User extends Component {
     this.handleDeleteNote = this.handleDeleteNote.bind(this);
     this.toggleNotesBtn = this.toggleNotesBtn.bind(this);
     this.toggleProgressBtn = this.toggleProgressBtn.bind(this);
-    this.calcProgressWidth = this.calcProgressWidth.bind(this);
+    this.handleProgressWidths = this.handleProgressWidths.bind(this);
 
     this.state = {
       ready: false,
@@ -35,10 +35,11 @@ export default class User extends Component {
       searchOptionArr: [],
       searchField: "default",
       searchSchools: [],
-      notes: [],
+      note: "",
       collapseNotes: {},
       collapseProgress: {},
-      progressWidth: ""
+      collegeProgress: [],
+      progressWidths: []
     };
 
     this.loadStateData();
@@ -53,19 +54,13 @@ export default class User extends Component {
       API.getSchools(Auth.getToken())
       .then(res => {
         const schools = res.data;
-        let numTrues = 0
-        Object.entries(user.colleges.progress).map(progress => {
-          if (progress[1]){
-            numTrues++
-          }
-        })
+
         this.setState({
           ready: true,
           role: Auth.getRole(),
           user,
           schools,
-          progressWidth,
-          checkboxProgress: user.colleges.map(college => college.progress),
+          progressWidths: this.handleProgressWidths(user),
           searchSchools: this.addSaveStatusToSchools(
                            schools, 
                            user.colleges.map(college => college.info.name))
@@ -73,6 +68,22 @@ export default class User extends Component {
       })
     })
     .catch(err => console.log(err));
+  };
+
+  handleProgressWidths = user => {
+    const collegeProgress = 
+      user.colleges.map(college => Object.entries(college.progress));
+
+    let progressWidths = [];
+    collegeProgress.forEach(college => {
+      let numTrues = 0;
+      college.forEach(status => {
+        numTrues = status[1] === true ? ++numTrues : numTrues; // must use prefix operator.
+      })
+      progressWidths.push(`${(numTrues/college.length) * 100}%`);
+    });
+
+    return progressWidths;
   };
 
   addSaveStatusToSchools = (schools, savedSchoolNames) =>  
@@ -88,14 +99,19 @@ export default class User extends Component {
       Auth.isUserAnAthlete() ? API.updateAthlete : API.updateCoach;
 
     APIfunction(Auth.getToken(), user)
-    .then(res => 
+    .then(res => {
+      const user = res.data;
+      const checkboxProgress = user.colleges.map(college => college.progress);
+      console.log(checkboxProgress);      
       this.setState({ 
-            user: res.data,
+            user,
+            progressWidths: this.handleProgressWidths(user),
             searchSchools: this.addSaveStatusToSchools(
                              this.state.searchSchools, 
                              res.data.colleges.map(college => college.info.name)
                            )
-            }))
+            })
+    })
     .catch(err => console.log(err));
   };    
 
@@ -168,11 +184,11 @@ export default class User extends Component {
 
   handleInputChange = event => {
     this.setState({
-      notes : event.target.value
+      note : event.target.value
     });
   };
 
-  handleSaveNote = (note, index, event) => {
+  handleSaveNote = (note, index) => {
     // This only works because the user object does not contain any functions - just data. Need a deep copy and avoiding additional library.
     let user = JSON.parse(JSON.stringify(this.state.user));
     user.colleges[index].info.notes.push( note );
@@ -189,34 +205,11 @@ export default class User extends Component {
     this.updateUser(user);
   };
 
-  handleProgressBar = (schoolIndex, progressIndex) => {
-    let user = JSON.parse(JSON.stringify(this.state.user));
-    let progress = {...user.colleges[schoolIndex].progress}
-    //Setting numTrues based off previous value
-    let numTrues = progress[progressIndex] ? -1 : 1
-    for (let key in progress) {
-      if (key !== progress[progressIndex] && progress[key]){
-        numTrues++
-      }
-    }
-    let progressWidth = `${(numTrues/Object.keys(progress).length) * 100}%`
-    console.log(progress)
-    console.log(numTrues)
-    console.log(Object.keys(progress).length)
-    console.log(progressWidth)
-    this.setState({progressWidth})
-  }
-
-  calcProgressWidth = () => {
-    
-  };
-
   toggleCheckProgress = (progress, schoolIndex, progressIndex) => {
     // This only works because the user object does not contain any functions - just data. Need a deep copy and avoiding additional library.
     let user = JSON.parse(JSON.stringify(this.state.user));
     user.colleges[schoolIndex].progress[progress[0]] = 
       !user.colleges[schoolIndex].progress[progress[0]]
-    this.handleProgressBar(schoolIndex, progressIndex)
     this.updateUser(user);
   };
 
@@ -271,7 +264,7 @@ export default class User extends Component {
                   />
                   <Saved
                     savedSchools={this.state.user.colleges}
-                    notes={this.state.notes}
+                    note={this.state.note}
                     userRole={this.state.role}
                     handleDeleteSchool={this.handleDeleteSchool}
                     toggleFavSchool= {this.toggleFavSchool}
@@ -284,7 +277,7 @@ export default class User extends Component {
                     collapseNotes={this.state.collapseNotes}
                     collapseProgress={this.state.collapseProgress}
                     toggleCheckProgress={this.toggleCheckProgress}
-                    checkboxProgress={this.checkboxProgress}
+                    progressWidths={this.state.progressWidths}
                   />  
                 </SimpleCard>
               </div>

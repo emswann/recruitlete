@@ -122,12 +122,12 @@ const Saved = props => (
                   </Card>
                   <div>
                     <Input
-                      placeholder="notes"
+                      placeholder="note"
                       group
-                      type="notes"
-                      name="notes"
+                      type="note"
+                      name="note"
                       onChange={props.handleInputChange}
-                      value={props.notes[schoolIndex]}
+                      value={props.note}
                     />
                   </div>
                   <Button
@@ -136,7 +136,7 @@ const Saved = props => (
                     name="action"
                     value="saveNote"
                     onClick={() =>
-                      props.handleSaveNote(props.notes, schoolIndex)
+                      props.handleSaveNote(props.note, schoolIndex)
                     }
                   >
                     Save
@@ -183,16 +183,15 @@ const Saved = props => (
                           )}
                         </div>
                         <div className="progress">
-                              <div
-                                className="progress-bar progress-bar-striped progress-bar-animated"
-                                role="progressbar"
-                                aria-valuenow={props.progressWidth}
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                                style={{width: props.progressWidth}}
-                               // style={{width: ` ${props.progressWidth}% `}}
-                              />
-                            </div>
+                          <div
+                            className="progress-bar progress-bar-striped progress-bar-animated"
+                            role="progressbar"
+                            aria-valuenow={props.progressWidths[schoolIndex]}
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            style={{width: props.progressWidths[schoolIndex]}}
+                          />
+                        </div>
                       </div>
                     </Card>
                   </Collapse>

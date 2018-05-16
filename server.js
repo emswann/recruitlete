@@ -40,47 +40,23 @@ const server = app.listen(PORT, function() {
 // Chatroom functionality.
 const io = require("socket.io")(server);
 
-const ClientManager = require("./ClientManager");
-const ChatroomManager = require("./ChatroomManager");
-const makeHandlers = require("./handlers");
+io.on("connection", socket => {
+  console.log(`User connected: ${socket.id}`);
 
-const clientManager = ClientManager();
-const chatroomManager = ChatroomManager();
-
-io.on("connection", client => {
-  const {
-    handleRegister,
-    handleJoin,
-    handleLeave,
-    handleMessage,
-    handleGetChatrooms,
-    handleGetAvailableUsers,
-    handleDisconnect
-  } = makeHandlers(client, clientManager, chatroomManager)
-
-  console.log(`Client connected: ${client.id}`);
-
-  clientManager.addClient(client);
-
-  client.on("register", handleRegister);
-
-  client.on("join", handleJoin);
-
-  client.on("leave", handleLeave);
-
-  client.on("message", handleMessage);
-
-  client.on("chatrooms", handleGetChatrooms);
-
-  client.on("availableUsers", handleGetAvailableUsers);
-
-  client.on("disconnect", () => {
-    console.log(`Client disconnected: ${client.id}`);
-    handleDisconnect();
+  socket.on("disconnect", () => {
+    console.log(`User disconnected: ${socket.id}`);
   });
 
-  client.on("error", err => {
-    console.log(`Received error from client: ${client.id}`);
+  socket.on("ENTER_ROOM", data => socket.join(data.room));
+
+  socket.on("LEAVE_ROOM", data => socket.leave(data.room));
+
+  socket.on("SEND_MESSAGE", data => {
+    io.in(data.room).emit("RECEIVE_MESSAGE", data);
+  });
+      
+  socket.on("error", err => {
+    console.log(`Received error from user: ${socket.id}`);
     console.log(err);
   });
 })

@@ -22,7 +22,24 @@ import "./App.css";
 class App extends Component {
 
   state = {
-    authenticated: false
+    authenticated: false,
+    rooms: [
+      { id  : 1,
+        name: "Room 1"
+      },
+      { id  : 2,
+        name: "Room 2"
+      },
+      { id  : 3,
+        name: "Room 3"
+      },
+      { id  : 4,
+        name: "Room 4"
+      },
+      { id  : 5,
+        name: "Room 5"
+      }
+    ]
   };
 
   componentDidMount() {
@@ -39,13 +56,16 @@ class App extends Component {
     return (
       <Router >
         <div id="application">
-          <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
+          <Nav 
+            rooms={this.state.rooms}
+            toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
+          />
           <Switch>
             <PropsRoute path="/" exact component={Home} 
               toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
             />
             <PrivateRoute path="/user" component={User} />
-            <PrivateRoute path="/chatroom" component={Chatroom} />
+            <PrivateRoute path="/room/:id" component={Chatroom} />
             <PrivateRoute path="/profile" exact component={Profile} />
             <PrivateRoute path="/profile/doc" component={ProfileDoc} />
             <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />

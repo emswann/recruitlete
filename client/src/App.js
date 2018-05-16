@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import User from "./pages/User";
+import Chatroom from "./pages/Chatroom";
 import Profile from "./pages/Profile";
 import ProfileDoc from "./pages/ProfileDoc";
 import Auth from "./utils/Auth";
@@ -44,6 +45,7 @@ class App extends Component {
               toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
             />
             <PrivateRoute path="/user" component={User} />
+            <PrivateRoute path="/chatroom" component={Chatroom} />
             <PrivateRoute path="/profile" exact component={Profile} />
             <PrivateRoute path="/profile/doc" component={ProfileDoc} />
             <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />

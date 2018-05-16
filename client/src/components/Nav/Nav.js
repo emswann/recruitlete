@@ -78,7 +78,7 @@ class Nav extends React.Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="#">
+                <NavLink to="/chatroom">
                   <FontAwesomeIcon icon={faComments} size={"2x"} />
                 </NavLink>
               </NavItem>

@@ -1,13 +1,22 @@
 import React from "react";
 import { Panel } from "react-bootstrap";
 
+const styles = {
+  panelHeading : {
+    backgroundColor: "#EE5B4F",
+    color          : "#FFFFFF",
+    padding        : 20
+  },
+
+}
+
 const CoachProfileDoc = props => (
   <Panel>
-    <Panel.Heading className="mb-3">
+    <Panel.Heading className="mb-3" style={styles.panelHeading}>
       <Panel.Title>
-        <h4>
+        <h1>
           {props.user.name.first} {props.user.name.middle} {props.user.name.last}
-        </h4>
+        </h1>
       </Panel.Title>
     </Panel.Heading>
     <Panel.Body>

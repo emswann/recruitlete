@@ -50,7 +50,7 @@ class App extends Component {
             <Route path="/logout" component={Logout} />
             <Route component={NoMatch} />
           </Switch>
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </Router>
     )

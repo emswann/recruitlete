@@ -28,7 +28,7 @@ export default class User extends Component {
 
     this.state = {
       ready: false,
-      role: "",
+      role: Auth.getRole(),
       user: {},
       schools: [],
       searchOption: "default",    
@@ -57,7 +57,6 @@ export default class User extends Component {
 
         this.setState({
           ready: true,
-          role: Auth.getRole(),
           user,
           schools,
           progressWidths: this.handleProgressWidths(user),
@@ -71,17 +70,20 @@ export default class User extends Component {
   };
 
   handleProgressWidths = user => {
-    const collegeProgress = 
-      user.colleges.map(college => Object.entries(college.progress));
-
     let progressWidths = [];
-    collegeProgress.forEach(college => {
-      let numTrues = 0;
-      college.forEach(status => {
-        numTrues = status[1] === true ? ++numTrues : numTrues; // must use prefix operator.
-      })
-      progressWidths.push(`${(numTrues/college.length) * 100}%`);
-    });
+
+    if (this.state.role === "athlete") {
+      const collegeProgress = 
+        user.colleges.map(college => Object.entries(college.progress));
+
+      collegeProgress.forEach(college => {
+        let numTrues = 0;
+        college.forEach(status => {
+          numTrues = status[1] === true ? ++numTrues : numTrues; // must use prefix operator.
+        })
+        progressWidths.push(`${(numTrues/college.length) * 100}%`);
+      });
+    }
 
     return progressWidths;
   };
@@ -101,8 +103,7 @@ export default class User extends Component {
     APIfunction(Auth.getToken(), user)
     .then(res => {
       const user = res.data;
-      const checkboxProgress = user.colleges.map(college => college.progress);
-      console.log(checkboxProgress);      
+    
       this.setState({ 
             user,
             progressWidths: this.handleProgressWidths(user),

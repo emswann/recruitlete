@@ -21,7 +21,7 @@ passport.use("local-signup", localSignupStrategy);
 passport.use("local-login", localLoginStrategy);
 
 // pass the authentication checker middleware
-const authCheckMiddleware = require('./middleware/auth-check');
+const authCheckMiddleware = require("./middleware/auth-check");
 app.use(/^\/api\/((?!(articles)).)*$/, authCheckMiddleware);
 
 // Serve up static assets
@@ -33,6 +33,30 @@ app.use(routes);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/recruitlete");
 
 // Start the API server
-app.listen(PORT, function() {
+const server = app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
+
+// Chatroom functionality.
+const io = require("socket.io")(server);
+
+io.on("connection", socket => {
+  console.log(`User connected: ${socket.id}`);
+
+  socket.on("disconnect", () => {
+    console.log(`User disconnected: ${socket.id}`);
+  });
+
+  socket.on("ENTER_ROOM", data => socket.join(data.room));
+
+  socket.on("LEAVE_ROOM", data => socket.leave(data.room));
+
+  socket.on("SEND_MESSAGE", data => {
+    io.in(data.room).emit("RECEIVE_MESSAGE", data);
+  });
+      
+  socket.on("error", err => {
+    console.log(`Received error from user: ${socket.id}`);
+    console.log(err);
+  });
+})

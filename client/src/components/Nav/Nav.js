@@ -22,7 +22,7 @@ import {
 import Auth from "../../utils/Auth";
 import img from "./logo.png"
 
-class Nav extends React.Component {
+export default class Nav extends React.Component {
   constructor(props) {
     super(props);
 
@@ -78,7 +78,7 @@ class Nav extends React.Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="#">
+                <NavLink to="/chat">
                   <FontAwesomeIcon icon={faComments} size={"2x"} />
                 </NavLink>
               </NavItem>
@@ -115,4 +115,3 @@ class Nav extends React.Component {
     );
   }
 }
-export default Nav;

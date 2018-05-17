@@ -6,6 +6,8 @@ import {
   FormControl, 
   Panel 
 } from "react-bootstrap";
+import Auth from "../../utils/Auth";
+import API from "../../utils/API";
 
 const styles = {
   container: {
@@ -26,10 +28,16 @@ export default class Chatroom extends Component {
     this.handleLeaveRoom = this.handleLeaveRoom.bind(this);
     this.handleSendMessage = this.handleSendMessage.bind(this);
     this.handleAddMessage = this.handleAddMessage.bind(this);
+    this.loadChatroomData = this.loadChatroomData.bind(this);
     
     this.state =  {
       message: "",
-      messages: []
+      messages: [],
+      chatroom: {
+        room: this.props.room.id,
+        name: this.props.room.name,
+        users: []
+      }
     };
 
     this.props.socket.emit("ENTER_ROOM", 
@@ -37,7 +45,24 @@ export default class Chatroom extends Component {
         username: this.props.username }); 
 
     this.props.socket.on("RECEIVE_MESSAGE", data => this.handleAddMessage(data));
-  }
+  };
+
+  componentDidMount = () => this.loadChatroomData();
+
+  loadChatroomData = () => {
+    API.getChatroom(Auth.getToken())
+    .then(res =>
+      this.setState({
+        chatroom: res.data
+      }))
+    .catch(err => console.log(err));
+  };
+
+  updateChatroom = chatroom => {
+    API.updateChatroom(Auth.getToken(), chatroom)
+    .then(res => this.setState({ chatroom }))
+    .catch(err => console.log(err));
+  };    
 
   handleInputChange = event => {
     const name = event.target.name;
@@ -66,8 +91,22 @@ export default class Chatroom extends Component {
     this.setState({ message: "" });
   }
 
-  handleAddMessage = data => 
-    this.setState({ messages: [...this.state.messages, data] });
+  handleAddMessage = data => {
+    let chatroom = JSON.parse(JSON.stringify(this.state.chatroom));
+console.log(data);
+console.log(chatroom);
+    if (data.message.includes("join")) {
+      chatroom.users.push(this.props.username);
+    }
+    else if (data.message.includes("left")) {
+      chatroom.users.splice(chatroom.users.indexOf(this.props.username), 1);
+    }
+
+    this.setState({ 
+      chatroom,
+      messages: [...this.state.messages, data] 
+    });
+  }
 
   render() {
     return (

@@ -89,7 +89,10 @@ class Nav extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>
-                      <NavLink to="/profile">Profile</NavLink>
+                      <NavLink to="/profile">Edit Profile</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink to="/profile/doc">View Profile</NavLink>
                     </DropdownItem>
                     <DropdownItem>
                       <NavLink to="/logout">Log out</NavLink>

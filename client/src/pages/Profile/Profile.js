@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import SimpleCard from "../../components/SimpleCard"
 import AthleteProfile from "../../components/AthleteProfile";
 import CoachProfile from "../../components/CoachProfile";
+import Spinner from "../../components/Spinner";
+
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
@@ -50,7 +52,7 @@ export default class Profile extends Component {
   render() {
     return ( 
       <div className="container">
-        { this.state.ready &&
+        { this.state.ready ?
           (
             <SimpleCard>
               {Auth.isUserAnAthlete() ? (
@@ -67,6 +69,21 @@ export default class Profile extends Component {
                 />
               )}
             </SimpleCard>
+          ):(
+            <div
+              className="container justify-content-center"
+              style={{
+                position: "absolute",
+                height: 100,
+                width: 100,
+                top: "50%",
+                left: "50%",
+                marginLeft: -50,
+                marginTop: -50
+              }}
+            >
+              <Spinner />
+            </div>
           )
         }
       </div>

@@ -18,6 +18,7 @@
     "react-scripts": "1.0.14",
     "react-scroll-into-view-if-needed": "^2.0.0",
     "react-slideshow-image": "^0.2.2",
+    "react-spinners": "^0.3.2",
     "react-tap-event-plugin": "^3.0.2"
   },
   "scripts": {

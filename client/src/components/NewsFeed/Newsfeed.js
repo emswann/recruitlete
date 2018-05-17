@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { ListGroup, ListGroupItem } from "mdbreact";
+import Spinner from "../../components/Spinner";
+
 
 export default class Newsfeed extends Component {
   constructor(props) {
@@ -46,7 +48,7 @@ export default class Newsfeed extends Component {
           </div>
         ) : (
           <div>
-            { this.state.ready && <h3>No Results to Display</h3> }
+            { this.state.ready && <Spinner /> }
           </div>
         )}
       </div>

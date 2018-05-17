@@ -32,7 +32,9 @@ export default class Chatroom extends Component {
       messages: []
     };
 
-    this.props.socket.emit("ENTER_ROOM", { room: this.props.room.id }); 
+    this.props.socket.emit("ENTER_ROOM", 
+      { room: this.props.room.id,
+        username: this.props.username }); 
 
     this.props.socket.on("RECEIVE_MESSAGE", data => this.handleAddMessage(data));
   }
@@ -47,7 +49,10 @@ export default class Chatroom extends Component {
   };
 
   handleLeaveRoom = () => {
-    this.props.socket.emit("LEAVE_ROOM", { room: this.props.room.id });
+    this.props.socket.emit("LEAVE_ROOM", 
+      { room: this.props.room.id,
+        username: this.props.username
+      });
     this.props.toggleEnterRoom();
   }
 
@@ -55,7 +60,7 @@ export default class Chatroom extends Component {
     event.preventDefault(); 
     this.props.socket.emit("SEND_MESSAGE", {
       room: this.props.room.id,
-      author: this.props.username,
+      username: this.props.username,
       message: this.state.message
     });
     this.setState({ message: "" });
@@ -76,7 +81,7 @@ export default class Chatroom extends Component {
           <Panel.Body>
             <div className="messages">
               {this.state.messages.map((message, index) => (
-                <div key={index}>{message.author}: {message.message}</div>
+                <div key={index}>{message.username}: {message.message}</div>
               ))}
             </div>
             <form>

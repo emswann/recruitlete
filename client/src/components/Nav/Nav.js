@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -22,20 +22,18 @@ import {
 import Auth from "../../utils/Auth";
 import img from "./logo.png"
 
-export default class Nav extends Component {
+export default class Nav extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       collapse: false,
       isWideEnough: false,
-      userDropdownOpen: false,
-      chatDropdownOpen: false
+      dropdownOpen: false
     };
     
     this.onClick = this.onClick.bind(this);
-    this.toggleUser = this.toggleUser.bind(this);
-    this.toggleChat = this.toggleChat.bind(this);
+    this.toggle = this.toggle.bind(this);
 
     this.props.toggleAuthenticateStatus();
   }
@@ -46,15 +44,9 @@ export default class Nav extends Component {
     });
   }
 
-  toggleUser() {
+  toggle() {
     this.setState({
-      userDropdownOpen: !this.state.userDropdownOpen
-    });
-  }
-
-  toggleChat() {
-    this.setState({
-      chatDropdownOpen: !this.state.chatDropdownOpen
+      dropdownOpen: !this.state.dropdownOpen
     });
   }
 
@@ -86,23 +78,12 @@ export default class Nav extends Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <Dropdown isOpen={this.state.chatDropdownOpen} toggle={this.toggleChat}>
-                  <DropdownToggle nav>
-                    <FontAwesomeIcon icon={faComments} size={"2x"} />
-                  </DropdownToggle>
-                  <DropdownMenu right>
-                    {this.props.rooms.map((room, index) => (
-                      <DropdownItem key={index}>
-                        <NavLink to={`/room/${room.id}`}>
-                            {room.name}
-                        </NavLink>
-                      </DropdownItem>
-                    ))}
-                  </DropdownMenu>
-                </Dropdown>
+                <NavLink to="/chat">
+                  <FontAwesomeIcon icon={faComments} size={"2x"} />
+                </NavLink>
               </NavItem>
               <NavItem>
-                <Dropdown isOpen={this.state.userDropdownOpen} toggle={this.toggleUser}>
+                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                   <DropdownToggle nav>
                     <FontAwesomeIcon icon={faUser} size={"2x"} />
                   </DropdownToggle>
@@ -131,4 +112,3 @@ export default class Nav extends Component {
     );
   }
 }
-

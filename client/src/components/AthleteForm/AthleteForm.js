@@ -10,7 +10,8 @@ import ScrollIntoViewIfNeeded from "react-scroll-into-view-if-needed";
 const styles = {
   formsy: {
     display: "table",
-    tableLayout: "fixed"
+    tableLayout: "fixed",
+    padding: 20
   },
   panelHeading : {
     backgroundColor: "#EE5B4F",

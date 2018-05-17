@@ -47,9 +47,17 @@ io.on("connection", socket => {
     console.log(`User disconnected: ${socket.id}`);
   });
 
-  socket.on("ENTER_ROOM", data => socket.join(data.room));
+  socket.on("ENTER_ROOM", data => {
+    socket.join(data.room);
+    data.message = `${data.username} has joined.`;
+    io.in(data.room).emit("RECEIVE_MESSAGE", data);
+  });
 
-  socket.on("LEAVE_ROOM", data => socket.leave(data.room));
+  socket.on("LEAVE_ROOM", data => {
+    socket.leave(data.room);
+    data.message = `${data.username} has left.`;
+    socket.to(data.room).emit("RECEIVE_MESSAGE", data);
+  });
 
   socket.on("SEND_MESSAGE", data => {
     io.in(data.room).emit("RECEIVE_MESSAGE", data);

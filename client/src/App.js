@@ -12,22 +12,23 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import User from "./pages/User";
+import Chat from "./pages/Chat";
 import Profile from "./pages/Profile";
 import ProfileDoc from "./pages/ProfileDoc";
 import Auth from "./utils/Auth";
 
 import "./App.css";
 
-class App extends Component {
+export default class App extends Component {
+  constructor(props) {
+    super(props);
 
-  state = {
-    authenticated: false
-  };
+    this.state = {
+      authenticated: false
+    };
 
-  componentDidMount() {
-    // check if user is logged in on refresh
-    this.toggleAuthenticateStatus();
-  };
+    this.toggleAuthenticateStatus = this.toggleAuthenticateStatus.bind(this);
+  }
 
   toggleAuthenticateStatus = () => {
     // check authenticated status and toggle state based on that
@@ -38,12 +39,16 @@ class App extends Component {
     return (
       <Router >
         <div id="application">
-          <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
+          <Nav 
+            rooms={this.state.rooms}
+            toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
+          />
           <Switch>
             <PropsRoute path="/" exact component={Home} 
               toggleAuthenticateStatus={this.toggleAuthenticateStatus} 
             />
             <PrivateRoute path="/user" component={User} />
+            <PrivateRoute path="/chat" component={Chat} />
             <PrivateRoute path="/profile" exact component={Profile} />
             <PrivateRoute path="/profile/doc" component={ProfileDoc} />
             <LoggedOutRoute path="/login" component={Login} toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
@@ -56,5 +61,3 @@ class App extends Component {
     )
   }
 }
-
-export default App;

@@ -11,10 +11,10 @@ export default class ProfileDoc extends Component {
 
     this.loadUser = this.loadUser.bind(this);
     
-    this.state =  
-      { ready: false, 
-        user : {} 
-      };
+    this.state =  {
+      ready: false, 
+      user : {} 
+    };
 
     this.loadUser();
   }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Collapse, Card, Input } from "mdbreact";
+import { Button, Collapse, Card, Input, FormInline } from "mdbreact";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import {
   faTrash,
@@ -8,9 +8,20 @@ import {
   faHeart
 } from "@fortawesome/fontawesome-free-solid";
 
+const styles = {
+  row: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  col: {
+    flexBasis: 0,
+    flexGrow: 1,
+  }
+};
+
 const Saved = props => (
-  <div className="container">
-    <h2>Saved Schools</h2>
+  <div className="container" style={{ padding: 10 }}>
+    <h2><strong>Saved Schools</strong></h2>
     {props.savedSchools.length ? (
       <div className="row">
         {props.savedSchools.map((school, schoolIndex) => (
@@ -26,58 +37,58 @@ const Saved = props => (
                   : { backgroundColor: "#ffffff" }
               }
             >
-              <div style={{ padding: 15 }}>
+              <div style={{ padding: 10 }}>
                 <h4>{school.info.name}</h4>
                 <hr />
                 <div className="row">
-                  <div className="col-md-3">
+                  <div className="col">
                     <Button
                       size="lg"
-                      color="primary"
+                      className="blue lighten-1"
                       type="button"
                       name="action"
                       value="notes"
                       onClick={() => props.toggleNotesBtn(schoolIndex)}
                     >
-                      <FontAwesomeIcon icon={faStickyNote} size={"1x"} /> Notes
+                      <FontAwesomeIcon icon={faStickyNote} size={"1x"} /><small> Notes</small>
                     </Button>
                   </div>
                   {props.userRole === "athlete" && (
-                    <div className="col-md-3">
+                    <div className="col">
                       <Button
                         size="lg"
-                        color="primary"
+                        className="blue lighten-1"
                         type="button"
                         name="action"
                         value="progress"
                         onClick={() => props.toggleProgressBtn(schoolIndex)}
                       >
-                        <FontAwesomeIcon icon={faTasks} size={"1x"} /> Progress
+                        <FontAwesomeIcon icon={faTasks} size={"1x"} /><small> Progress</small>
                       </Button>
                     </div>
                   )}
-                  <div className="col-md-3">
+                  <div className="col">
                     <Button
                       size="lg"
-                      color="primary"
+                      className="blue lighten-1"
                       type="button"
                       name="action"
                       value="favBtn"
                       onClick={() => props.toggleFavSchool(school.info.name)}
                     >
-                      <FontAwesomeIcon icon={faHeart} size={"1x"} /> Favorite
+                      <FontAwesomeIcon icon={faHeart} size={"1x"} /><small> Favorite</small>
                     </Button>
                   </div>
-                  <div className="col-md-3">
+                  <div className="col">
                     <Button
                       size="lg"
-                      color="danger"
+                      className="red lighten-1"
                       type="button"
                       name="action"
                       value="deleteBtn"
                       onClick={() => props.handleDeleteSchool(school.info.name)}
                     >
-                      <FontAwesomeIcon icon={faTrash} size={"1x"} /> Delete
+                      <FontAwesomeIcon icon={faTrash} size={"1x"} /><small> Delete</small>
                     </Button>
                   </div>
                 </div>
@@ -99,10 +110,10 @@ const Saved = props => (
                             justifyContent: "center"
                           }}
                         >
-                          <div className="col-md-11">
+                          <div className="col-md-10">
                             <p>{note}</p>
                           </div>
-                          <div className="col-md-1">
+                          <div className="col-md-2">
                             <Button
                               color="danger"
                               type="button"
@@ -114,9 +125,9 @@ const Saved = props => (
                             >
                               X
                             </Button>
-                            <hr />
                           </div>
                         </div>
+                        <hr />
                       </div>
                     ))}
                   </Card>
@@ -151,14 +162,28 @@ const Saved = props => (
                     }
                   >
                     <Card>
-                      <div className="form-check">
-                        <div className="row">
-                          {Object.entries(school.progress).map(
-                            (progress, progressIndex) => (
-                              <div key={progressIndex}>
-                                <div className="container-fluid">
-                                  <div className="col-md-12">
+                      <FormInline>
+                        <div className="container">
+                          <div className="row flex-fill">
+                            {Object.entries(school.progress).map(
+                              (progress, progressIndex) => (
+                                <div key={progressIndex}>
+                                  <div className="col-md-12" styles={styles.col}>
                                     <input
+                                      type="checkbox"
+                                      checked={progress[1]}
+                                      onChange={() =>
+                                        props.toggleCheckProgress(
+                                          progress,
+                                          schoolIndex,
+                                          progressIndex
+                                        )
+                                      }
+                                    />
+                                    <label>
+                                      <p>{progress}</p>
+                                    </label>
+                                    {/* <input
                                       type="checkbox"
                                       value={progress}
                                       name="name"
@@ -173,25 +198,25 @@ const Saved = props => (
                                     />
                                     <label>
                                       <p>{progress}</p>
-                                    </label>
-                                    <br />
+                                    </label> */}
                                   </div>
-                                  <div className="clearfix" />
+                                  <br />
+                                  {/* <div className="w-100" /> */}
                                 </div>
-                              </div>
-                               ),
-                          )}
+                              )
+                            )}
+                          </div>
                         </div>
-                        <div className="progress">
-                          <div
-                            className="progress-bar progress-bar-striped progress-bar-animated"
-                            role="progressbar"
-                            aria-valuenow={props.progressWidths[schoolIndex]}
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                            style={{width: props.progressWidths[schoolIndex]}}
-                          />
-                        </div>
+                      </FormInline>
+                      <div className="progress">
+                        <div
+                          className="progress-bar progress-bar-striped progress-bar-animated"
+                          role="progressbar"
+                          aria-valuenow={props.progressWidths[schoolIndex]}
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                          style={{ width: props.progressWidths[schoolIndex] }}
+                        />
                       </div>
                     </Card>
                   </Collapse>

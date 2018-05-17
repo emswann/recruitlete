@@ -9,7 +9,8 @@ import {
 
 const styles = {
   container: {
-    backgroundColor: "#FFFFFF"
+    backgroundColor: "#FFFFFF",
+    padding: 20
   },
   button: {
     backgroundColor: "#EE5B4F",
@@ -108,19 +109,21 @@ export default class Chatroom extends Component {
                 >
                 </FormControl>              
               </FormGroup>
-              <Button className="m-2"
+              <Button 
+                className="blue lighten-1"
                 style={styles.button} 
                 type="button"
                 onClick={this.handleSendMessage}              
               >                
-                <h6 className="font-weight-bold mt-1">Send Message</h6>
+                <h6 className="font-weight-bold mt-1"><small>Send Message</small></h6>
               </Button>
-              <Button className="m-2"
+              <Button 
+                className="red lighten-1"
                 style={styles.button} 
                 type="button"
                 onClick={this.handleLeaveRoom}              
               >                
-                <h6 className="font-weight-bold mt-1">Leave Room</h6>
+                <h6 className="font-weight-bold mt-1"><small>Leave Room</small></h6>
               </Button>
             </form>
           </Panel.Body>

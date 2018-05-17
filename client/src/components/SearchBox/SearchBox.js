@@ -1,9 +1,9 @@
 import React from "react";
 
 const SearchBox = props => (
-  <div className="container">
+  <div className="container" style={{ padding: 20 }}>
     <div className="jumbotron jumbotron-fluid">
-      <div className="container">
+      <div className="container" >
         <h1 className="display-4">SEARCH</h1>
         <div className="input-group">
           <select

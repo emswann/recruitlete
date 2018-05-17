@@ -188,6 +188,7 @@ export default class AthleteProfile extends Component {
         handleInputChange={this.handleInputChange}
         user={this.state}
         updateStatus={this.props.updateStatus}
+        style={{padding: 20}}
       />
     )
   };

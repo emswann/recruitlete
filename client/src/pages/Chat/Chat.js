@@ -11,7 +11,8 @@ import Chatroom from "../../components/Chatroom"
 
 const styles = {
   container: {
-    backgroundColor: "#FFFFFF"
+    backgroundColor: "#FFFFFF",
+    padding: 20
   },
   button: {
     backgroundColor: "#EE5B4F",
@@ -128,20 +129,22 @@ export default class Chat extends Component {
                   <option name="Room 5" value="4">Room 5</option>
                 </FormControl>
               </FormGroup>
-              <Button className="m-2"
+              <Button 
+                className="blue lighten-1"
                 style={styles.button} 
                 type="button"
                 onClick={this.handleEnterRoom}              
               >                
-                <h6 className="font-weight-bold mt-1">Enter Room</h6>
+                <h6 className="font-weight-bold mt-1"><small>Enter Room </small></h6>
               </Button>
               {!this.state.enterRoom && (
-                <Button className="m-2"
+                <Button 
+                  className="red lighten-1"
                   style={styles.button} 
                   type="button"
                   onClick={this.handleLeaveRoom}              
                 >                
-                  <h6 className="font-weight-bold mt-1">Leave Chatroom</h6>
+                  <h6 className="font-weight-bold mt-1"><small>Exit Chatroom</small></h6>
                 </Button>
               )}
             </form>

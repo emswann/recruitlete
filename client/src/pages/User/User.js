@@ -7,6 +7,13 @@ import Saved from "../../components/Saved";
 import Auth from "../../utils/Auth";
 import API from "../../utils/API";
 
+const styles = {
+  styling: {
+    margin: 20,
+    padding: 20
+  }
+};
+
 export default class User extends Component {
   constructor(props) {
     super(props);
@@ -50,47 +57,49 @@ export default class User extends Component {
     const APIfunction = Auth.isUserAnAthlete() ? API.getAthlete : API.getCoach;
 
     APIfunction(Auth.getToken())
-    .then(res => res.data)
-    .then(user => {
-      API.getSchools(Auth.getToken())
-      .then(res => {
-        const schools = res.data;
+      .then(res => res.data)
+      .then(user => {
+        API.getSchools(Auth.getToken())
+          .then(res => {
+            const schools = res.data;
 
-        this.setState({
-          ready: true,
-          role: Auth.getRole(),
-          user,
-          schools,
-          progressWidths: this.handleProgressWidths(user),
-          searchSchools: this.addSaveStatusToSchools(
-                           schools, 
-                           user.colleges.map(college => college.info.name))
-        })
-      })
-      .catch(err => console.log(err));
-    })
+            this.setState({
+              ready: true,
+              role: Auth.getRole(),
+              user,
+              schools,
+              progressWidths: this.handleProgressWidths(user),
+              searchSchools: this.addSaveStatusToSchools(
+                schools,
+                user.colleges.map(college => college.info.name)
+              )
+            });
+          })
+          .catch(err => console.log(err));
+      });
   };
 
   handleProgressWidths = user => {
     let progressWidths = [];
 
     if (this.state.role === "athlete") {
-      const collegeProgress = 
-        user.colleges.map(college => Object.entries(college.progress));
+      const collegeProgress = user.colleges.map(college =>
+        Object.entries(college.progress)
+      );
 
       collegeProgress.forEach(college => {
         let numTrues = 0;
         college.forEach(status => {
           numTrues = status[1] === true ? ++numTrues : numTrues; // must use prefix operator.
-        })
-        progressWidths.push(`${(numTrues/college.length) * 100}%`);
+        });
+        progressWidths.push(`${numTrues / college.length * 100}%`);
       });
     }
 
     return progressWidths;
   };
 
-  addSaveStatusToSchools = (schools, savedSchoolNames) =>  
+  addSaveStatusToSchools = (schools, savedSchoolNames) =>
     schools.map(school => {
       savedSchoolNames.includes(school.name)
         ? (school.saved = true)
@@ -99,24 +108,25 @@ export default class User extends Component {
     });
     
   updateUser = (user, index) => {
-    const APIfunction = 
-      Auth.isUserAnAthlete() ? API.updateAthlete : API.updateCoach;
+    const APIfunction = Auth.isUserAnAthlete()
+      ? API.updateAthlete
+      : API.updateCoach;
 
     APIfunction(Auth.getToken(), user)
-    .then(res => {
-      const user = res.data;
-    
-      this.setState({ 
-            user,
-            progressWidths: this.handleProgressWidths(user),
-            searchSchools: this.addSaveStatusToSchools(
-                             this.state.searchSchools, 
-                             res.data.colleges.map(college => college.info.name)
-                           )
-            })
-    })
-    .catch(err => console.log(err));
-  };    
+      .then(res => {
+        const user = res.data;
+
+        this.setState({
+          user,
+          progressWidths: this.handleProgressWidths(user),
+          searchSchools: this.addSaveStatusToSchools(
+            this.state.searchSchools,
+            res.data.colleges.map(college => college.info.name)
+          )
+        });
+      })
+      .catch(err => console.log(err));
+  };
 
   handleSearchOption = event => {
     let searchOption = event.target.value;
@@ -189,7 +199,7 @@ export default class User extends Component {
 
   handleInputChange = event => {
     this.setState({
-      note : event.target.value
+      note: event.target.value
     });
   };
 
@@ -256,40 +266,50 @@ export default class User extends Component {
     return (
       <div>
         {this.state.ready ? (
-            <div className="row">
-              <div className="col-md-2">
-              </div>
-              <div className="col-md-8">
-                <SimpleCard>
-                  <SearchBox
-                    searchOption={this.state.searchOption}
-                    searchOptionArr={this.state.searchOptionArr}
-                    searchField={this.state.searchField}
-                    handleSearchOption={this.handleSearchOption}
-                    handleSearchField={this.handleSearchField}
-                  />
-                  <Search 
-                    searchSchools={this.state.searchSchools}
-                    handleSaveSchool={this.handleSaveSchool}
-                  />
-                  <Saved
-                    savedSchools={this.state.user.colleges}
-                    note={this.state.note}
-                    userRole={this.state.role}
-                    handleDeleteSchool={this.handleDeleteSchool}
-                    toggleFavSchool= {this.toggleFavSchool}
-                    handleSaveNote={this.handleSaveNote}
-                    handleDeleteNote={this.handleDeleteNote}
-                    handleInputChange={this.handleInputChange}
-                    progressWidth={this.state.progressWidth}
-                    toggleNotesBtn={this.toggleNotesBtn}
-                    toggleProgressBtn={this.toggleProgressBtn}
-                    collapseNotes={this.state.collapseNotes}
-                    collapseProgress={this.state.collapseProgress}
-                    toggleCheckProgress={this.toggleCheckProgress}
-                    progressWidths={this.state.progressWidths}
-                  />  
+          <div className="row">
+            <div className="col-md-2" />
+            <div className="col-md-8">
+            <div className = "styling" style={styles.styling}>
+              <SimpleCard>
+                <SearchBox
+                  searchOption={this.state.searchOption}
+                  searchOptionArr={this.state.searchOptionArr}
+                  searchField={this.state.searchField}
+                  handleSearchOption={this.handleSearchOption}
+                  handleSearchField={this.handleSearchField}
+                />
                 </SimpleCard>
+                </div>
+                <div className = "styling" style={styles.styling}>
+                <SimpleCard>
+                <Search
+                  searchSchools={this.state.searchSchools}
+                  handleSaveSchool={this.handleSaveSchool}
+                />
+                </SimpleCard>
+
+                </div>
+                <div className="styling" style={styles.styling}>
+                <SimpleCard>
+                <Saved
+                  savedSchools={this.state.user.colleges}
+                  note={this.state.note}
+                  userRole={this.state.role}
+                  handleDeleteSchool={this.handleDeleteSchool}
+                  toggleFavSchool={this.toggleFavSchool}
+                  handleSaveNote={this.handleSaveNote}
+                  handleDeleteNote={this.handleDeleteNote}
+                  handleInputChange={this.handleInputChange}
+                  progressWidth={this.state.progressWidth}
+                  toggleNotesBtn={this.toggleNotesBtn}
+                  toggleProgressBtn={this.toggleProgressBtn}
+                  collapseNotes={this.state.collapseNotes}
+                  collapseProgress={this.state.collapseProgress}
+                  toggleCheckProgress={this.toggleCheckProgress}
+                  progressWidths={this.state.progressWidths}
+                />
+              </SimpleCard>
+              </div>
             </div>
             <div className="col-md-2" />
           </div>

@@ -2,13 +2,9 @@ import React from "react";
 import {
   Button,
   Card,
-  CardBody,
   CardImage,
-  CardTitle,
-  CardText,
   Input
 } from "mdbreact";
-import SimpleCard from "../../components/SimpleCard";
 
 const styles = {
   error: {
@@ -28,6 +24,11 @@ const styles = {
   },
   body:{
     padding: 20
+  },
+  success: {
+    backgroundColor: "#5CB85C",
+    color          : "#FFFFFF",
+    width          : "10rem"    
   }
 };
 
@@ -87,7 +88,6 @@ const LoginForm = ({
               </div>
             </div>
           </div>
-          <br />
           <Input
             label="E-mail"
             icon="envelope"
@@ -107,13 +107,13 @@ const LoginForm = ({
             value={user.password}
           />
           <div className="text-center">
-          Password must be 8 chars and contain lowercase letter, uppercase letter, numeric char, special char.
+          <p className="grey-text font-italic"><small>Password must meet the following requirements: <br /> 1. Minimum of 8 Characters <br /> 2. Contain a lowercase letter<br /> 3. Contain a uppercase letter<br /> 4. Contain a numeric character <br /> 5. Contain a special character</small></p>
           </div>
           <br />
           <div className="text-center">
             <Button 
               block 
-              color="#EE5B4F"
+              className="red lighten-1"
               type="submit" 
               name="action"
               value="login"
@@ -123,7 +123,7 @@ const LoginForm = ({
             </Button>
             <Button
               block
-              color="secondary"
+              className="blue lighten-1"
               type="submit"
               name="action"
               value="signup"

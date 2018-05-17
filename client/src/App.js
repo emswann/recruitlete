@@ -36,7 +36,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router className="container">
+      <Router >
         <div id="application">
           <Nav toggleAuthenticateStatus={this.toggleAuthenticateStatus} />
           <Switch>
@@ -50,7 +50,7 @@ class App extends Component {
             <Route path="/logout" component={Logout} />
             <Route component={NoMatch} />
           </Switch>
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </Router>
     )

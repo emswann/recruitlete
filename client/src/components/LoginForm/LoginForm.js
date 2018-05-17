@@ -107,10 +107,14 @@ const LoginForm = ({
             value={user.password}
           />
           <div className="text-center">
-            <Button
-              block
+          Password must be 8 chars and contain lowercase letter, uppercase letter, numeric char, special char.
+          </div>
+          <br />
+          <div className="text-center">
+            <Button 
+              block 
               color="#EE5B4F"
-              type="submit"
+              type="submit" 
               name="action"
               value="login"
               onClick={handleFormSubmit}

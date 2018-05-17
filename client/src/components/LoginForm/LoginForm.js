@@ -62,6 +62,10 @@ const LoginForm = ({
             value={user.password}
           />
           <div className="text-center">
+          Password must be 8 chars and contain lowercase letter, uppercase letter, numeric char, special char.
+          </div>
+          <br />
+          <div className="text-center">
             <Button block color="danger"
               type="submit" 
               name="action"

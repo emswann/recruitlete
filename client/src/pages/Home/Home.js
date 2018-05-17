@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import Slideshow from "../../components/Slideshow";
 import Newsfeed from "../../components/NewsFeed";
 
+
 export default class Home extends Component {
   constructor(props) {
     super(props);
-
+    this.state = { ready: false,}
     this.props.toggleAuthenticateStatus();
   }
 

@@ -70,7 +70,7 @@ const AthleteProfileDoc = props => (
           <div className="row">
             <div className="col-md-12 text-center">
               <img
-                src="http://via.placeholder.com/200x150" alt="profile"
+                src="https://via.placeholder.com/200x150" alt="profile"
               />
               <div style={{ fontWeight: "bold" }}>
                 <h4>

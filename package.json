@@ -24,6 +24,7 @@
     "body-parser": "^1.17.2",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.15.4",
+    "heroku-ssl-redirect": "^0.0.4",
     "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.0.11",
     "passport": "^0.4.0",

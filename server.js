@@ -1,4 +1,5 @@
 const express = require("express");
+const sslRedirect = require('heroku-ssl-redirect');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
@@ -10,6 +11,9 @@ const PORT = process.env.PORT || 3001;
 // Configure body parser for AJAX requests
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// enable ssl redirect
+app.use(sslRedirect());
 
 // pass the passport middleware
 app.use(passport.initialize());

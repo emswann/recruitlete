@@ -20,9 +20,9 @@ export default class Login extends Component {
         role    : "athlete"
       }
     };
-
-    this.checkSuccessMessage();
   }
+
+  componentDidMount = () => this.checkSuccessMessage();
   
   checkSuccessMessage(){
     const storedMessage = localStorage.getItem("successMessage");

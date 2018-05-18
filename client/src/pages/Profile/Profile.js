@@ -19,9 +19,9 @@ export default class Profile extends Component {
         updateStatus: false,
         user : {} 
       };
-
-    this.loadUser();
   }
+
+  componentDidMount = () => this.loadUser();
 
   loadUser = () => {
     const APIfunction = Auth.isUserAnAthlete() ? API.getAthlete : API.getCoach;

@@ -6,9 +6,11 @@ import Newsfeed from "../../components/NewsFeed";
 export default class Home extends Component {
   constructor(props) {
     super(props);
+    
     this.state = { ready: false,}
-    this.props.toggleAuthenticateStatus();
   }
+
+  componentDidMount = () => this.props.toggleAuthenticateStatus();
 
   render() {
     return (

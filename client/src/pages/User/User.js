@@ -49,9 +49,9 @@ export default class User extends Component {
       collegeProgress: [],
       progressWidths: []
     };
-
-    this.loadStateData();
   }
+
+  componentDidMount = () => this.loadStateData();
 
   loadStateData = () => {
     const APIfunction = Auth.isUserAnAthlete() ? API.getAthlete : API.getCoach;

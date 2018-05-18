@@ -33,10 +33,10 @@ export default class Nav extends React.Component {
     };
     
     this.onClick = this.onClick.bind(this);
-    this.toggle = this.toggle.bind(this);
-
-    this.props.toggleAuthenticateStatus();
+    this.toggle = this.toggle.bind(this);   
   }
+
+  componentDidMount = () => this.props.toggleAuthenticateStatus();
 
   onClick() {
     this.setState({

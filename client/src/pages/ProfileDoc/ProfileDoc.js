@@ -15,9 +15,9 @@ export default class ProfileDoc extends Component {
       ready: false, 
       user : {} 
     };
-
-    this.loadUser();
   }
+
+  componentDidMount = () => this.loadUser();
 
   loadUser = () => {
     const APIfunction = Auth.isUserAnAthlete() ? API.getAthlete : API.getCoach;

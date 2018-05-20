@@ -10,6 +10,6 @@ router.use("/articles", articlesRoutes);
 router.use("/coach", coachesRoutes);
 router.use("/athlete", athletesRoutes);
 router.use("/schools", schoolsRoutes);
-router.use("/chatrooms", chatroomsRoutes);
+router.use("/chatroom", chatroomsRoutes);
 
 module.exports = router;

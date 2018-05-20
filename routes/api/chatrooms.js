@@ -3,7 +3,7 @@ const chatroomsController = require("../../controllers/chatroomsController");
 
 // Matches with "/api/chatroom/"
 router
-  .route("/")
+  .route("/:room")
   .get(chatroomsController.find)
   .put(chatroomsController.update)
   .delete(chatroomsController.remove);

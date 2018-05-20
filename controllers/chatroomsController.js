@@ -4,20 +4,23 @@ const db = require("../models");
 module.exports = {
   find: (req, res) => {
     db.Chatrooms
-      .findOne({ room: req.body.room })
+      .findOne({ room: req.params.room })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   update: (req, res) => {
     db.Chatrooms
-      .findOneAndUpdate({ room: req.body.room }, req.body,
+      .findOneAndUpdate({ room: req.params.room }, 
+                        { $push: { users: req.body.username } },
                         { new: true, runValidators: true })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   remove: (req, res) => {
     db.Chatrooms
-      .findOneAndRemove({ room: req.body.room })
+      .findOneAndUpdate({ room: req.params.room },
+                        { $pull: { users: req.body.username } },
+                        { new: true, runValidators: true })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }

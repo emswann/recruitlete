@@ -7,7 +7,9 @@ import {
   Panel 
 } from "react-bootstrap";
 import io from "socket.io-client"; 
-import Chatroom from "../../components/Chatroom" 
+import Chatroom from "../../components/Chatroom";
+import Auth from "../../utils/Auth";
+import API from "../../utils/API";
 
 const styles = {
   container: {
@@ -31,17 +33,12 @@ export default class Chat extends Component {
     this.state = {
       username: "",
       chatRoomChoice: "",
-      rooms: [
-        { id: 1, name: "Room 1" },
-        { id: 2, name: "Room 2" },
-        { id: 3, name: "Room 3" },
-        { id: 4, name: "Room 4" },
-        { id: 5, name: "Room 5" }
-      ],
+      chatrooms: [],
       enterRoom: false,
       error: ""
     }
 
+    this.loadChatrooms = this.loadChatrooms.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleRoomChoice = this.handleRoomChoice.bind(this);
     this.handleEnterRoom = this.handleEnterRoom.bind(this);
@@ -50,6 +47,13 @@ export default class Chat extends Component {
 
     this.socket = io();
   }
+
+  componentDidMount = () => this.loadChatrooms();
+
+  loadChatrooms = () => {
+    API.getChatrooms(Auth.getToken())
+      .then(res => this.setState({ chatrooms: res.data }))
+      .catch(err => console.log(err))};
 
   handleInputChange = event => {
     const name = event.target.name;
@@ -122,11 +126,15 @@ export default class Chat extends Component {
                   onChange={this.handleRoomChoice}
                 >
                   <option name="Select..." value="">Choose a room...</option>
-                  <option name="Room 1" value="0">Room 1</option>
-                  <option name="Room 2" value="1">Room 2</option>
-                  <option name="Room 3" value="2">Room 3</option>
-                  <option name="Room 4" value="3">Room 4</option>
-                  <option name="Room 5" value="4">Room 5</option>
+                  {this.state.chatrooms.map((chatroom, index) => (
+                    <option 
+                      key={index}
+                      name={chatroom.name}
+                      value={index-1}
+                    >
+                      {chatroom.name}
+                    </option>
+                  ))}
                 </FormControl>
               </FormGroup>
               <Button 

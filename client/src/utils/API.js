@@ -17,7 +17,9 @@ export default {
 
   updateCoach: (token, coachDoc) => axios.put(`/api/coach`, coachDoc, {headers: {Authorization: `bearer ${token}`}}),
 
-  getChatroom: token => axios.get("/api/chatroom", {headers: {Authorization: `bearer ${token}`}}),
+  getChatroom: token => axios.get("/api/chatroom/:room", {headers: {Authorization: `bearer ${token}`}}),
 
-  updateChatroom: (token, chatroomDoc) => axios.put(`/api/chatroom`, chatroomDoc, {headers: {Authorization: `bearer ${token}`}})
+  addChatroomUser: (token, chatroomDoc) => axios.put(`/api/chatroom/:room`, chatroomDoc, {headers: {Authorization: `bearer ${token}`}}),
+
+  deleteChatroomUser: (token, chatroomDoc) => axios.delete(`/api/chatroom/:room`, chatroomDoc, {headers: {Authorization: `bearer ${token}`}})
 };

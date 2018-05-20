@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // enable ssl redirect
-app.use(sslRedirect());
+// app.use(sslRedirect());
 
 // pass the passport middleware
 app.use(passport.initialize());

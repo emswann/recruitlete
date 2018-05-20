@@ -4,21 +4,22 @@ const db = require("../models");
 module.exports = {
   find: (req, res) => {
     db.Coaches
-      .findOne(req.body.email)
+      .findOne({ email: req.user.email })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   update: (req, res) => {
     db.Coaches
-      .findOneAndUpdate({ email: req.body.email }, req.body,
+      .findOneAndUpdate({ email: req.user.email }, req.body,
                         { new: true, runValidators: true })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   remove: (req, res) => {
     db.Coaches
-      .findOneAndRemove({ email: req.body.email })
+      .findOneAndRemove({ email: req.user.email })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
 };
+

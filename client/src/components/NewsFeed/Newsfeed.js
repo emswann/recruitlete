@@ -14,9 +14,9 @@ export default class Newsfeed extends Component {
       ready: false,
       articles: []
     };
-
-    this.loadArticles();
   }
+
+  componentDidMount = () => this.loadArticles();
 
   loadArticles = () => {
     API.getArticles()

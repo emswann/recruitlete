@@ -54,7 +54,7 @@ io.on("connection", socket => {
   socket.on("ENTER_ROOM", data => {
     socket.join(data.room);
     data.message = `${data.username} has joined.`;
-    io.in(data.room).emit("RECEIVE_MESSAGE", data);
+    socket.to(data.room).emit("RECEIVE_MESSAGE", data);
   });
 
   socket.on("LEAVE_ROOM", data => {

@@ -106,6 +106,7 @@ export default class User extends Component {
         : (school.saved = false);
       return school;
     });
+    
   updateUser = (user, index) => {
     const APIfunction = Auth.isUserAnAthlete()
       ? API.updateAthlete

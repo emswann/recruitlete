@@ -94,13 +94,15 @@ export default class Chatroom extends Component {
   };
 
   handleSendMessage = event => { 
-    event.preventDefault(); 
-    this.props.socket.emit("SEND_MESSAGE", {
-      room: this.props.room,
-      username: this.props.username,
-      message: this.state.message
-    });
-    this.setState({ message: "" });
+    event.preventDefault();
+    if (this.state.message) { 
+      this.props.socket.emit("SEND_MESSAGE", {
+        room: this.props.room,
+        username: this.props.username,
+        message: this.state.message
+      });
+      this.setState({ message: "" });
+    }
   }
 
   handleAddMessage = data => {
@@ -135,7 +137,7 @@ export default class Chatroom extends Component {
                       <div key={index}>{message.username}: {message.message}</div>
                     ))}
                   </div>
-                  <form>
+                  <form onSubmit={this.handleSendMessage}>
                     <FormGroup controlId="username">
                       <ControlLabel></ControlLabel>
                       <FormControl
@@ -162,8 +164,7 @@ export default class Chatroom extends Component {
                     <Button 
                       className="blue lighten-1"
                       style={styles.button} 
-                      type="button"
-                      onClick={this.handleSendMessage}              
+                      type="submit"             
                     >                
                       <h6 className="font-weight-bold mt-1"><small>Send Message</small></h6>
                     </Button>

@@ -52,21 +52,18 @@ io.on("connection", socket => {
   });
 
   socket.on("ENTER_ROOM", data => {
-    console.log(data);
     socket.join(data.room);
     data.message = `${data.username} has joined.`;
     io.in(data.room).emit("RECEIVE_MESSAGE", data);
   });
 
   socket.on("LEAVE_ROOM", data => {
-    console.log(data);
     socket.leave(data.room);
     data.message = `${data.username} has left.`;
     socket.to(data.room).emit("RECEIVE_MESSAGE", data);
   });
 
   socket.on("SEND_MESSAGE", data => {
-    console.log(data);
     io.in(data.room).emit("RECEIVE_MESSAGE", data);
   });
       

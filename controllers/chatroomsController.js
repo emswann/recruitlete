@@ -2,6 +2,12 @@ const db = require("../models");
 
 // Defining methods for the chatroomsController
 module.exports = {
+  findAll: (req, res) => {
+    db.Chatrooms
+      .find({ })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));    
+  },
   find: (req, res) => {
     db.Chatrooms
       .findOne({ room: req.params.room })
@@ -19,7 +25,7 @@ module.exports = {
   remove: (req, res) => {
     db.Chatrooms
       .findOneAndUpdate({ room: req.params.room },
-                        { $pull: { users: req.body.username } },
+                        { $pull: { users: req.params.username } },
                         { new: true, runValidators: true })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

@@ -69,7 +69,7 @@ export default class Chat extends Component {
   handleRoomChoice = event => 
     this.setState({ chatRoomChoice: event.target.value });
   
-  toggleEnterRoom = () => {; 
+  toggleEnterRoom = () => {
     this.setState({ enterRoom: !this.state.enterRoom });
   }
 

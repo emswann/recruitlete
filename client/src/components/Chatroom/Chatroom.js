@@ -55,8 +55,10 @@ export default class Chatroom extends Component {
     };
 
     API.addChatroomUser(Auth.getToken(), chatroomDoc)
-      .then(() => this.props.socket.emit("ENTER_ROOM", chatroomDoc))
-      .catch(err => console.log(err))
+      .then(() => this.loadChatroom([]))
+      .catch(err => console.log(err));
+
+    this.props.socket.emit("ENTER_ROOM", chatroomDoc);
   };
 
   loadChatroom = messages => {
@@ -83,10 +85,11 @@ export default class Chatroom extends Component {
     };
 
     API.deleteChatroomUser(Auth.getToken(), chatroomDoc)
-      .then(() => {
-        this.props.socket.emit("LEAVE_ROOM", chatroomDoc);
-        this.props.toggleEnterRoom();
-      })
+      .then(() =>
+        this.props.socket.emit("LEAVE_ROOM", 
+                               chatroomDoc, 
+                               this.props.toggleEnterRoom())
+      )
       .catch(err => console.log(err))
   };
 
@@ -103,11 +106,12 @@ export default class Chatroom extends Component {
   handleAddMessage = data => {
     const messages = [...this.state.messages, data];
 
+    // This user does not receive own join/left messages.
     if (data.message.includes("join") ||
-       (data.message.includes("left") && 
-        !(data.message.includes(this.props.username)))) {
+        data.message.includes("left")) {
       this.loadChatroom(messages);
     }
+    // For a regular message.
     else {
       this.setState({ messages });
     }
@@ -185,7 +189,7 @@ export default class Chatroom extends Component {
                         {user}
                       </ListGroupItem>
                     ))}
-                  </ListGroup>;
+                  </ListGroup>
                 </div>
               </div>
             </Panel.Body>

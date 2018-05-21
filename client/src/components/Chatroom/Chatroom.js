@@ -4,7 +4,9 @@ import {
   FormGroup, 
   ControlLabel, 
   FormControl, 
-  Panel 
+  Panel,
+  ListGroup,
+  ListGroupItem
 } from "react-bootstrap";
 import Spinner from "../../components/Spinner";
 import Auth from "../../utils/Auth";
@@ -20,6 +22,10 @@ const styles = {
     color          : "#FFFFFF",
     width          : "10rem"
   },
+  listHeader: {
+    color          : "#FFFFFF",
+    textAlign      : "center"
+  }
 }
 
 export default class Chatroom extends Component {
@@ -118,52 +124,70 @@ export default class Chatroom extends Component {
               </Panel.Title>
             </Panel.Heading>
             <Panel.Body>
-              <div className="messages">
-                {this.state.messages.map((message, index) => (
-                  <div key={index}>{message.username}: {message.message}</div>
-                ))}
+              <div className="row">
+                <div className="col-md-8">
+                  <div className="messages">
+                    {this.state.messages.map((message, index) => (
+                      <div key={index}>{message.username}: {message.message}</div>
+                    ))}
+                  </div>
+                  <form>
+                    <FormGroup controlId="username">
+                      <ControlLabel></ControlLabel>
+                      <FormControl
+                        id="username"
+                        type="text"
+                        name="username"
+                        value={this.props.username}
+                        disabled="true"
+                      >
+                      </FormControl>              
+                    </FormGroup>
+                    <FormGroup controlId="message">
+                      <ControlLabel></ControlLabel>
+                      <FormControl
+                        id="message"
+                        type="text"
+                        name="message"
+                        value={this.state.message}
+                        placeholder="Type message"
+                        onChange={this.handleInputChange}
+                      >
+                      </FormControl>              
+                    </FormGroup>
+                    <Button 
+                      className="blue lighten-1"
+                      style={styles.button} 
+                      type="button"
+                      onClick={this.handleSendMessage}              
+                    >                
+                      <h6 className="font-weight-bold mt-1"><small>Send Message</small></h6>
+                    </Button>
+                    <Button 
+                      className="red lighten-1"
+                      style={styles.button} 
+                      type="button"
+                      onClick={this.handleLeaveRoom}              
+                    >                
+                      <h6 className="font-weight-bold mt-1"><small>Leave Room</small></h6>
+                    </Button>
+                  </form>
+                </div>
+                <div className="col-md-4">
+                  <ListGroup>
+                    <ListGroupItem 
+                      style={styles.listHeader}
+                      className="blue lighten-1"
+                      header="Active Users">
+                    </ListGroupItem>
+                    {this.state.chatroom.users.sort().map((user, index) => (
+                      <ListGroupItem key={index}>
+                        {user}
+                      </ListGroupItem>
+                    ))}
+                  </ListGroup>;
+                </div>
               </div>
-              <form>
-                <FormGroup controlId="username">
-                  <ControlLabel></ControlLabel>
-                  <FormControl
-                    id="username"
-                    type="text"
-                    name="username"
-                    value={this.props.username}
-                    disabled="true"
-                  >
-                  </FormControl>              
-                </FormGroup>
-                <FormGroup controlId="message">
-                  <ControlLabel></ControlLabel>
-                  <FormControl
-                    id="message"
-                    type="text"
-                    name="message"
-                    value={this.state.message}
-                    placeholder="Type message"
-                    onChange={this.handleInputChange}
-                  >
-                  </FormControl>              
-                </FormGroup>
-                <Button 
-                  className="blue lighten-1"
-                  style={styles.button} 
-                  type="button"
-                  onClick={this.handleSendMessage}              
-                >                
-                  <h6 className="font-weight-bold mt-1"><small>Send Message</small></h6>
-                </Button>
-                <Button 
-                  className="red lighten-1"
-                  style={styles.button} 
-                  type="button"
-                  onClick={this.handleLeaveRoom}              
-                >                
-                  <h6 className="font-weight-bold mt-1"><small>Leave Room</small></h6>
-                </Button>
-              </form>
             </Panel.Body>
           </Panel>
         ) : (

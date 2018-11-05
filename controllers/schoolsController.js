@@ -3,35 +3,43 @@ const rp = require("request-promise");
 
 module.exports = {
 
-    findAll: (req, res) => {
+  findAll: (req, res) => {
 
-        const options = {
-            uri: 'http://web1.ncaa.org/onlineDir/exec2/sponsorship?sortOrder=0&division=All&sport=WVB',
-            transform: (body) => cheerio.load(body)
-        }
-
-        rp(options)
-            .then($ => {
-
-                let schools = [];
-
-                $("tr").each(function (i, elem) {
-                    let name = $(this).children().children().first().text().trim();
-                    let conference = $(this).children().children().children().eq(1).text().trim();
-                    let division = $(this).children().children().eq(2).text().trim();
-                    let state = $(this).children().children().eq(4).text().trim();
-                    let region = $(this).children().children().eq(5).text().trim();
-                    let collegeLink = $(this).children().children().children().attr("href");
-                    let conferenceLink = $(this).children().children().children().eq(1).attr("href");
-
-                    if (!(i === 0 || i === 1 || name.includes("Test"))) {
-                        schools.push({ name, conference, division, state, region, collegeLink, conferenceLink });
-                    };
-
-                });
-
-                res.json(schools);
-            })
-            .catch(err => res.status(422).json(err));
+    const options = {
+      uri: 'https://www.ncsasports.org/womens-volleyball/division-1-colleges',
+      transform: (body) => cheerio.load(body)
     }
+
+    rp(options)
+    .then($ => {
+      let collegeList = $('div.college-list-container');
+      let schools = [];
+
+      $('div.college-list-container div.college-list[id^=school]')
+      .each((i, college) => {                    
+        schoolData = {};
+                    
+        schoolData.name = 
+          $(college).find('.college-list-college a').text().trim();
+        schoolData.collegeLink = 
+          $(college).find('.college-list-college a').attr('href');
+        schoolData.city =   
+          $(college).find('.college-list-city-state').children().eq(0).text().trim(); 
+        schoolData.state = 
+          $(college).find('.college-list-city-state').children().eq(1).text().trim();
+        schoolData.region = 
+          $(college).find('.college-list-region').text().trim();
+        schoolData.conference = 
+          $(college).find('.college-list-conference').text().trim();
+        schoolData.conferenceLink = ' ';
+        schoolData.division = 
+          $(college).find('.college-list-division').text().trim();
+
+        schools.push(schoolData);
+      });
+
+      res.json(schools);
+    })
+    .catch(err => res.status(422).json(err));
+  }
 };

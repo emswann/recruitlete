@@ -1,37 +1,69 @@
 const cheerio = require("cheerio");
 const rp = require("request-promise");
 
+// Promise function to scrape webpage. Returns results for single division.
+const getCollegeByDivision = uri => 
+  new Promise((resolve, reject) => {
+    const options = {
+      uri,
+      transform: (body) => cheerio.load(body)
+    }
+
+    rp(options)
+    .then($ => {
+      let collegeList = $('div.college-list-container');
+      let colleges = [];
+
+      // Include id so header is ignored.
+      $('div.college-list-container div.college-list[id^=school]')
+      .each((i, college) => {                    
+        collegeData = {};
+                        
+        collegeData.name = 
+          $(college).find('.college-list-college a').text().trim();
+        collegeData.collegeLink = 
+          $(college).find('.college-list-college a').attr('href');
+        collegeData.city =   
+          $(college).find('.college-list-city-state').children().eq(0).text().trim(); 
+        collegeData.state = 
+          $(college).find('.college-list-city-state').children().eq(1).text().trim();
+        collegeData.region = 
+          $(college).find('.college-list-region').text().trim();
+        collegeData.conference = 
+          $(college).find('.college-list-conference').text().trim();
+        collegeData.conferenceLink = ' ';
+        collegeData.division = 
+          $(college).find('.college-list-division').text().trim();
+
+        colleges.push(collegeData);
+      })
+      return colleges;
+    })
+    .then(colleges => resolve(colleges))
+    .catch(error => reject(error));
+  });
+
+// Promise All function which returns an array containing division results.
+const getColleges = uris => 
+  Promise.all(uris.map(uri => getCollegeByDivision(uri)));
+
 module.exports = {
 
-    findAll: (req, res) => {
+  findAll: (req, res) => {
+    let uris = [
+      'https://www.ncsasports.org/womens-volleyball/division-1-colleges',
+      'https://www.ncsasports.org/womens-volleyball/division-2-colleges',
+      'https://www.ncsasports.org/womens-volleyball/division-3-colleges',
+      'https://www.ncsasports.org/womens-volleyball/naia-colleges',
+      'https://www.ncsasports.org/womens-volleyball/junior-colleges'
+    ];
 
-        const options = {
-            uri: 'http://web1.ncaa.org/onlineDir/exec2/sponsorship?sortOrder=0&division=All&sport=WVB',
-            transform: (body) => cheerio.load(body)
-        }
-
-        rp(options)
-            .then($ => {
-
-                let schools = [];
-
-                $("tr").each(function (i, elem) {
-                    let name = $(this).children().children().first().text().trim();
-                    let conference = $(this).children().children().children().eq(1).text().trim();
-                    let division = $(this).children().children().eq(2).text().trim();
-                    let state = $(this).children().children().eq(4).text().trim();
-                    let region = $(this).children().children().eq(5).text().trim();
-                    let collegeLink = $(this).children().children().children().attr("href");
-                    let conferenceLink = $(this).children().children().children().eq(1).attr("href");
-
-                    if (!(i === 0 || i === 1 || name.includes("Test"))) {
-                        schools.push({ name, conference, division, state, region, collegeLink, conferenceLink });
-                    };
-
-                });
-
-                res.json(schools);
-            })
-            .catch(err => res.status(422).json(err));
-    }
+    getColleges(uris)
+    .then(collegeByDivisionArray => {
+      // Combine college by division results into one array.
+      let allColleges = collegeByDivisionArray.reduce((a, b) => [...a, ...b])
+      res.json(allColleges);
+    })
+    .catch(err => res.status(422).json(err));
+  }
 };
